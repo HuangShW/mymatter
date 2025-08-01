@@ -6,7 +6,7 @@ dependencies:
   espressif/esp_diag_data_store:
     version: 1.0.2
   espressif/esp_diagnostics:
-    version: '>=1.2.3'
+    version: 1.2.1
   espressif/rmaker_common:
     version: ~1.4.0
   idf:
@@ -16,7 +16,7 @@ description: Firmware agent for ESP Insights, which is a remote diagnostics solu
 issues: https://github.com/espressif/esp-insights/issues
 repository: git://github.com/espressif/esp-insights.git
 repository_info:
-  commit_sha: de283a76dddc7bff94a774582452dcb419dd7d56
+  commit_sha: 36c8bfc71268559b50db3e6741a19ba97af769a4
   path: components/esp_insights
 url: https://github.com/espressif/esp-insights/tree/main/components/esp_insights
-version: 1.2.7
+version: 1.2.2

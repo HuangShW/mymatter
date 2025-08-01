@@ -3,12 +3,6 @@ menu "ESP Insights"
     config ESP_INSIGHTS_ENABLED
         bool "Enable ESP Insights"
         default n
-        select DIAG_ENABLE_WRAP_LOG_FUNCTIONS
-        help
-            Enable ESP Insights functionality.
-
-            This automatically selects log wrapping (DIAG_ENABLE_WRAP_LOG_FUNCTIONS) which is
-            required for ESP Insights to capture log messages.
 
     config ESP_INSIGHTS_DEBUG_ENABLED
         depends on ESP_INSIGHTS_ENABLED
@@ -30,7 +24,6 @@ menu "ESP Insights"
         help
             This option enables core dump summary functionality in insights.
             In case of crash, insights sends the core dump summary to cloud on next boot.
-            Once the core dump summary is sent to cloud, it is erased from flash partition of the device.
 
     choice ESP_INSIGHTS_TRANSPORT
         prompt "Insights default transport"

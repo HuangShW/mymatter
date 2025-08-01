@@ -9,7 +9,6 @@
 #include <esp_idf_version.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/timers.h>
-#include "sdkconfig.h"
 
 #include <esp_rmaker_work_queue.h>
 #include <esp_diagnostics.h>
@@ -33,12 +32,7 @@
 #define PATH_HEAP_INTERNAL "heap.internal"
 #define PATH_HEAP_EXTERNAL "heap.external"
 
-/* Use configurable polling interval with default fallback */
-#ifdef CONFIG_DIAG_HEAP_POLLING_INTERVAL
-#define DEFAULT_POLLING_INTERVAL CONFIG_DIAG_HEAP_POLLING_INTERVAL
-#else
 #define DEFAULT_POLLING_INTERVAL 30 /* 30 seconds */
-#endif
 
 typedef struct {
     bool init;

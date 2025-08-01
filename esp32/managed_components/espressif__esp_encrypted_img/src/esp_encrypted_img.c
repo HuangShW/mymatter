@@ -125,7 +125,7 @@ esp_decrypt_handle_t esp_encrypted_img_decrypt_start(const esp_decrypt_cfg_t *cf
         ESP_LOGE(TAG, "esp_encrypted_img_decrypt_start : Invalid argument");
         return NULL;
     }
-    ESP_LOGI(TAG, "Initializing Decryption Handle");
+    ESP_LOGI(TAG, "Starting Decryption Process");
 
     esp_encrypted_img_t *handle = calloc(1, sizeof(esp_encrypted_img_t));
     if (!handle) {
@@ -473,9 +473,4 @@ esp_err_t esp_encrypted_img_decrypt_abort(esp_decrypt_handle_t ctx)
     free(handle->rsa_pem);
     free(handle);
     return ESP_OK;
-}
-
-uint16_t esp_encrypted_img_get_header_size(void)
-{
-    return HEADER_DATA_SIZE;
 }
