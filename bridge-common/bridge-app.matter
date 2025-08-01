@@ -54,7 +54,7 @@ enum AreaTypeTag : enum8 {
   kLibrary = 51;
   kLivingRoom = 52;
   kLounge = 53;
-  kMediaTVRoom = 54 [spec_name = "Media/TV Room"];
+  kMediaTVRoom = 54;
   kMudRoom = 55;
   kMusicRoom = 56;
   kNursery = 57;
@@ -632,8 +632,8 @@ cluster AccessControl = 31 {
   revision 2;
 
   enum AccessControlEntryAuthModeEnum : enum8 {
-    kPASE = 1 [spec_name = "PASE"];
-    kCASE = 2 [spec_name = "CASE"];
+    kPASE = 1;
+    kCASE = 2;
     kGroup = 3;
   }
 
@@ -1111,7 +1111,7 @@ cluster GeneralCommissioning = 48 {
   revision 2;
 
   enum CommissioningErrorEnum : enum8 {
-    kOK = 0 [spec_name = "OK"];
+    kOK = 0;
     kValueOutsideRange = 1;
     kInvalidAuthentication = 2;
     kNoFailSafe = 3;
@@ -1228,12 +1228,12 @@ cluster NetworkCommissioning = 49 {
   }
 
   enum WiFiBandEnum : enum8 {
-    k2G4 = 0 [spec_name = "2G4"];
-    k3G65 = 1 [spec_name = "3G65"];
-    k5G = 2 [spec_name = "5G"];
-    k6G = 3 [spec_name = "6G"];
-    k60G = 4 [spec_name = "60G"];
-    k1G = 5 [spec_name = "1G"];
+    k2G4 = 0;
+    k3G65 = 1;
+    k5G = 2;
+    k6G = 3;
+    k60G = 4;
+    k1G = 5;
   }
 
   bitmap Feature : bitmap32 {
@@ -1253,11 +1253,11 @@ cluster NetworkCommissioning = 49 {
 
   bitmap WiFiSecurityBitmap : bitmap8 {
     kUnencrypted = 0x1;
-    kWEP = 0x2 [spec_name = "WEP"];
-    kWPAPersonal = 0x4 [spec_name = "WPA-PERSONAL"];
-    kWPA2Personal = 0x8 [spec_name = "WPA2-PERSONAL"];
-    kWPA3Personal = 0x10 [spec_name = "WPA3-PERSONAL"];
-    kWPA3MatterPDC = 0x20 [spec_name = "WPA3-Matter-PDC"];
+    kWEP = 0x2;
+    kWPAPersonal = 0x4;
+    kWPA2Personal = 0x8;
+    kWPA3Personal = 0x10;
+    kWPA3MatterPDC = 0x20;
   }
 
   struct NetworkInfoStruct {
@@ -1406,7 +1406,7 @@ cluster DiagnosticLogs = 50 {
 
   enum TransferProtocolEnum : enum8 {
     kResponsePayload = 0;
-    kBDX = 1 [spec_name = "BDX"];
+    kBDX = 1;
   }
 
   readonly attribute command_id generatedCommandList[] = 65528;
@@ -1619,7 +1619,7 @@ cluster ThreadNetworkDiagnostics = 53 {
     kUnassigned = 1;
     kSleepyEndDevice = 2;
     kEndDevice = 3;
-    kREED = 4 [spec_name = "REED"];
+    kREED = 4;
     kRouter = 5;
     kLeader = 6;
   }
@@ -1784,10 +1784,10 @@ cluster WiFiNetworkDiagnostics = 54 {
   enum SecurityTypeEnum : enum8 {
     kUnspecified = 0;
     kNone = 1;
-    kWEP = 2 [spec_name = "WEP"];
-    kWPA = 3 [spec_name = "WPA"];
-    kWPA2 = 4 [spec_name = "WPA2"];
-    kWPA3 = 5 [spec_name = "WPA3"];
+    kWEP = 2;
+    kWPA = 3;
+    kWPA2 = 4;
+    kWPA3 = 5;
   }
 
   enum WiFiVersionEnum : enum8 {
@@ -1849,7 +1849,7 @@ cluster EthernetNetworkDiagnostics = 55 {
     kRate10M = 0;
     kRate100M = 1;
     kRate1G = 2;
-    kRate25G = 3 [spec_name = "Rate2_5G"];
+    kRate25G = 3;
     kRate5G = 4;
     kRate10G = 5;
     kRate40G = 6;
@@ -1996,7 +1996,7 @@ cluster OperationalCredentials = 62 {
   }
 
   enum NodeOperationalCertStatusEnum : enum8 {
-    kOK = 0 [spec_name = "OK"];
+    kOK = 0;
     kInvalidPublicKey = 1;
     kInvalidNodeOpId = 2;
     kInvalidNOC = 3;

@@ -89,6 +89,8 @@ static Device gLight1("Light 1", "Office");
 static Device gLight2("Light 2", "Office");
 static Device gLight3("Light 3", "Kitchen");
 static Device gLight4("Light 4", "Den");
+// 新增: 创建一个全局的 Device 对象实例，代表我们的可调光灯。
+static Device gDimmableLight("Dimmable Light 1", "Living Room");
 
 // 新增
 // static Device gThermostat("Thermostat", "Office");
@@ -97,6 +99,9 @@ static Device gLight4("Light 4", "Den");
 #define DEVICE_TYPE_BRIDGED_NODE 0x0013
 // (taken from lo-devices.xml)
 #define DEVICE_TYPE_LO_ON_OFF_LIGHT 0x0100
+// 新增: 这是 Matter "Luminance-only" (LO) 设备类型规范中为"可调光灯"定义的设备类型ID。
+// 我们用这个ID来告诉Matter网络，我们桥接的是一个什么样的设备。
+#define DEVICE_TYPE_LO_DIMMABLE_LIGHT 0x0101
 
 // (taken from chip-devices.xml)
 #define DEVICE_TYPE_ROOT_NODE 0x0016
@@ -117,6 +122,18 @@ static Device gLight4("Light 4", "Den");
 DECLARE_DYNAMIC_ATTRIBUTE_LIST_BEGIN(onOffAttrs)
 DECLARE_DYNAMIC_ATTRIBUTE(OnOff::Attributes::OnOff::Id, BOOLEAN, 1, 0), /* on/off */
     DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
+
+// 新增: 声明 LevelControl Cluster (亮度控制集群) 包含的属性。
+DECLARE_DYNAMIC_ATTRIBUTE_LIST_BEGIN(levelControlAttrs)
+    // 声明 CurrentLevel 属性，类型为 uint8_t (INT8U)，只读。
+    // 当控制器需要读取当前亮度时，会读取这个属性。
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::CurrentLevel::Id, INT8U, 1, 0), /* Level */
+    // 声明 MinLevel 属性，代表最小亮度。
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::MinLevel::Id, INT8U, 1, 0),   /* MinLevel */
+    // 声明 MaxLevel 属性，代表最大亮度。
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::MaxLevel::Id, INT8U, 1, 0),   /* MaxLevel */
+    DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
+
 // Declare On/Off cluster attributes
 // 新增
 // DECLARE_DYNAMIC_ATTRIBUTE_LIST_BEGIN(ThermostatAttrs)
@@ -157,6 +174,20 @@ constexpr CommandId onOffIncomingCommands[] = {
     kInvalidCommandId,
 };
 
+// 新增: 声明 LevelControl Cluster 支持的命令列表。
+// 控制器 (如手机App) 可以发送这些命令来控制灯的亮度。
+constexpr CommandId levelControlIncomingCommands[] = {
+    app::Clusters::LevelControl::Commands::MoveToLevel::Id, // 移动到指定亮度
+    app::Clusters::LevelControl::Commands::Move::Id,        // 朝某个方向增/减亮度
+    app::Clusters::LevelControl::Commands::Step::Id,        // 步进增/减亮度
+    app::Clusters::LevelControl::Commands::Stop::Id,        // 停止移动
+    app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Id, // 移动到指定亮度并同时开关灯
+    app::Clusters::LevelControl::Commands::MoveWithOnOff::Id,        // 朝某个方向增/减亮度并同时开关灯
+    app::Clusters::LevelControl::Commands::StepWithOnOff::Id,        // 步进增/减亮度并同时开关灯
+    app::Clusters::LevelControl::Commands::StopWithOnOff::Id,        // 停止移动并同时开关灯
+    kInvalidCommandId, // 列表结束符
+};
+
 // constexpr CommandId thermostatIncomingCommands[] = {
 //     app::Clusters::Thermostat::Commands::AtomicRequest::Id,
 //     app::Clusters::Thermostat::Commands::AtomicResponse::Id,
@@ -176,14 +207,35 @@ DECLARE_DYNAMIC_CLUSTER(OnOff::Id, onOffAttrs, ZAP_CLUSTER_MASK(SERVER), onOffIn
     DECLARE_DYNAMIC_CLUSTER(BridgedDeviceBasicInformation::Id, bridgedDeviceBasicAttrs, ZAP_CLUSTER_MASK(SERVER), nullptr,
                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
 
+// 新增: 为"可调光灯"声明一个新的 Cluster 列表。
+// 这个列表定义了我们的新设备具备的所有功能。
+DECLARE_DYNAMIC_CLUSTER_LIST_BEGIN(bridgedDimmableLightClusters)
+    // 包含 OnOff Cluster，使其具备开关功能。
+    DECLARE_DYNAMIC_CLUSTER(OnOff::Id, onOffAttrs, ZAP_CLUSTER_MASK(SERVER), onOffIncomingCommands, nullptr),
+    // 包含 LevelControl Cluster，使其具备调光功能。
+    DECLARE_DYNAMIC_CLUSTER(LevelControl::Id, levelControlAttrs, ZAP_CLUSTER_MASK(SERVER), levelControlIncomingCommands, nullptr),
+    // 包含 Descriptor Cluster，这是所有端点都必须有的，用于描述自身。
+    DECLARE_DYNAMIC_CLUSTER(Descriptor::Id, descriptorAttrs, ZAP_CLUSTER_MASK(SERVER), nullptr, nullptr),
+    // 包含 BridgedDeviceBasicInformation Cluster，用于报告被桥接设备的基本信息。
+    DECLARE_DYNAMIC_CLUSTER(BridgedDeviceBasicInformation::Id, bridgedDeviceBasicAttrs, ZAP_CLUSTER_MASK(SERVER), nullptr,
+                            nullptr)
+DECLARE_DYNAMIC_CLUSTER_LIST_END;
+
 // Declare Bridged Light endpoint
 DECLARE_DYNAMIC_ENDPOINT(bridgedLightEndpoint, bridgedLightClusters);
+
+// 新增: 使用上面定义的 Cluster 列表，声明一个新的"端点模板"。
+// 这个模板可以被复用，快速创建多个可调光灯设备。
+DECLARE_DYNAMIC_ENDPOINT(bridgedDimmableLightEndpoint, bridgedDimmableLightClusters);
 
 // 删除
 DataVersion gLight1DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
 DataVersion gLight2DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
 DataVersion gLight3DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
 DataVersion gLight4DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
+// 新增: 定义可调光灯设备的DataVersion存储数组。
+// Matter用它来追踪每个Cluster属性的版本，实现可靠的数据同步。
+DataVersion gDimmableLightDataVersions[MATTER_ARRAY_SIZE(bridgedDimmableLightClusters)];
 
 // 新增
 // DataVersion gThermostatDataVersions[MATTER_ARRAY_SIZE(bridgedThermostatClusters)];
@@ -201,6 +253,8 @@ DataVersion gLight4DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
 #define ZCL_BRIDGED_DEVICE_BASIC_INFORMATION_CLUSTER_REVISION (2u)
 #define ZCL_FIXED_LABEL_CLUSTER_REVISION (1u)
 #define ZCL_ON_OFF_CLUSTER_REVISION (4u)
+// 新增: 定义 LevelControl Cluster 的协议版本号。
+#define ZCL_LEVEL_CONTROL_CLUSTER_REVISION (5u)
 
 int AddDeviceEndpoint(Device * dev, EmberAfEndpointType * ep, const Span<const EmberAfDeviceType> & deviceTypeList,
                       const Span<DataVersion> & dataVersionStorage, chip::EndpointId parentEndpointId)
@@ -309,6 +363,43 @@ Protocols::InteractionModel::Status HandleReadOnOffAttribute(Device * dev, chip:
     return Protocols::InteractionModel::Status::Success;
 }
 
+// 新增: LevelControl 属性读取处理函数。
+// 当Matter SDK收到读取亮度相关属性的请求时，会最终调用到这里。
+Protocols::InteractionModel::Status HandleReadLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer,
+                                                                  uint16_t maxReadLength)
+{
+    ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: attrId=%" PRIu32 ", maxReadLength=%u", attributeId,
+                    maxReadLength);
+
+    if ((attributeId == LevelControl::Attributes::CurrentLevel::Id) && (maxReadLength == 1))
+    {
+        // 如果请求的是 CurrentLevel，就从我们的 Device 对象中获取亮度值并填充到缓冲区。
+        *buffer = dev->GetLevel();
+    }
+    else if ((attributeId == LevelControl::Attributes::MinLevel::Id) && (maxReadLength == 1))
+    {
+        // 返回最小亮度值 (0)
+        *buffer = 0;
+    }
+    else if ((attributeId == LevelControl::Attributes::MaxLevel::Id) && (maxReadLength == 1))
+    {
+        // 返回最大亮度值 (254)
+        *buffer = 254;
+    }
+    else if ((attributeId == LevelControl::Attributes::ClusterRevision::Id) && (maxReadLength == 2))
+    {
+        // 返回 LevelControl Cluster 的版本号
+        uint16_t rev = ZCL_LEVEL_CONTROL_CLUSTER_REVISION;
+        memcpy(buffer, &rev, sizeof(rev));
+    }
+    else
+    {
+        return Protocols::InteractionModel::Status::Failure;
+    }
+
+    return Protocols::InteractionModel::Status::Success;
+}
+
 // 删除
 Protocols::InteractionModel::Status HandleWriteOnOffAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer)
 {
@@ -319,6 +410,23 @@ Protocols::InteractionModel::Status HandleWriteOnOffAttribute(Device * dev, chip
     dev->SetOnOff(*buffer == 1);
     return Protocols::InteractionModel::Status::Success;
 }
+
+// 新增: LevelControl 属性写入处理函数。
+// 当Matter SDK收到写入亮度属性的请求时 (例如，用户在App上拖动了亮度条)，会调用此函数。
+Protocols::InteractionModel::Status HandleWriteLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer)
+{
+    ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: attrId=%" PRIu32, attributeId);
+
+    // 验证请求是否合法 (写入的是CurrentLevel，且设备在线)。
+    VerifyOrReturnError((attributeId == LevelControl::Attributes::CurrentLevel::Id) && dev->IsReachable(),
+                        Protocols::InteractionModel::Status::Failure);
+
+    // 调用我们之前在Device类中实现的SetLevel方法，更新设备状态。
+    dev->SetLevel(*buffer);
+
+    return Protocols::InteractionModel::Status::Success;
+}
+
 //新增
 // Protocols::InteractionModel::Status HandleReadThermostatAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer,
 //     uint16_t maxReadLength)
@@ -403,6 +511,12 @@ Protocols::InteractionModel::Status emberAfExternalAttributeReadCallback(Endpoin
         {
             return HandleReadOnOffAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
         }
+        // 新增: 在总的属性读取回调中，增加一个分支判断。
+        else if (clusterId == LevelControl::Id)
+        {
+            // 如果请求的Cluster是LevelControl，则将请求分发给我们新写的处理函数。
+            return HandleReadLevelControlAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
+        }
     }
 
     return Protocols::InteractionModel::Status::Failure;
@@ -423,6 +537,12 @@ Protocols::InteractionModel::Status emberAfExternalAttributeWriteCallback(Endpoi
         if ((dev->IsReachable()) && (clusterId == OnOff::Id))
         {
             return HandleWriteOnOffAttribute(dev, attributeMetadata->attributeId, buffer);
+        }
+        // 新增: 在总的属性写入回调中，也增加一个分支判断。
+        else if ((dev->IsReachable()) && (clusterId == LevelControl::Id))
+        {
+            // 如果请求写入的Cluster是LevelControl，则分发到对应的写入处理函数。
+            return HandleWriteLevelControlAttribute(dev, attributeMetadata->attributeId, buffer);
         }
     }
 
@@ -456,6 +576,15 @@ void HandleDeviceStatusChanged(Device * dev, Device::Changed_t itemChangedMask)
         ScheduleReportingCallback(dev, OnOff::Id, OnOff::Attributes::OnOff::Id);
     }
 
+    // 新增: 增加对亮度变化的判断。
+    if (itemChangedMask & Device::kChanged_Level)
+    {
+        // 如果是亮度发生了变化，就调用 ScheduleReportingCallback。
+        // 这个函数会通知Matter SDK，CurrentLevel 属性已经更新，
+        // SDK会自动将新值"报告"给所有订阅了该属性的控制器。
+        ScheduleReportingCallback(dev, LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id);
+    }
+
     if (itemChangedMask & Device::kChanged_Name)
     {
         ScheduleReportingCallback(dev, BridgedDeviceBasicInformation::Id, BridgedDeviceBasicInformation::Attributes::NodeLabel::Id);
@@ -467,6 +596,11 @@ const EmberAfDeviceType gAggregateNodeDeviceTypes[] = { { DEVICE_TYPE_BRIDGE, DE
 
 const EmberAfDeviceType gBridgedOnOffDeviceTypes[] = { { DEVICE_TYPE_LO_ON_OFF_LIGHT, DEVICE_VERSION_DEFAULT },
                                                        { DEVICE_TYPE_BRIDGED_NODE, DEVICE_VERSION_DEFAULT } };
+
+// 新增: 定义一个正式的设备类型列表，用于在Matter协议层面注册设备。
+// 它告诉网络，这个端点既是一个"可调光灯"，也是一个"被桥接的节点"。
+const EmberAfDeviceType gBridgedDimmableDeviceTypes[] = { { DEVICE_TYPE_LO_DIMMABLE_LIGHT, DEVICE_VERSION_DEFAULT },
+                                                          { DEVICE_TYPE_BRIDGED_NODE, DEVICE_VERSION_DEFAULT } };
 
 // 删除
 static void InitServer(intptr_t context)
@@ -507,6 +641,11 @@ static void InitServer(intptr_t context)
     // Re-add Light 2 -- > will be mapped to ZCL endpoint 7
     AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
                       Span<DataVersion>(gLight2DataVersions), 1);
+
+    // 新增: 调用 AddDeviceEndpoint，将我们的可调光灯添加到桥接器。
+    // 注意这里使用了我们新定义的 bridgedDimmableLightEndpoint 模板和 gBridgedDimmableDeviceTypes 设备类型。
+    AddDeviceEndpoint(&gDimmableLight, &bridgedDimmableLightEndpoint, Span<const EmberAfDeviceType>(gBridgedDimmableDeviceTypes),
+                      Span<DataVersion>(gDimmableLightDataVersions), 1);
 }
 
 // 新增
@@ -584,6 +723,8 @@ extern "C" void app_main()
     gLight2.SetReachable(true);
     gLight3.SetReachable(true);
     gLight4.SetReachable(true);
+    // 新增: 在启动时，将我们的可调光灯设置为"可达"状态。
+    gDimmableLight.SetReachable(true);
 
     // 新增
     // gThermostat.SetReachable(true);
@@ -594,6 +735,9 @@ extern "C" void app_main()
     gLight2.SetChangeCallback(&HandleDeviceStatusChanged);
     gLight3.SetChangeCallback(&HandleDeviceStatusChanged);
     gLight4.SetChangeCallback(&HandleDeviceStatusChanged);
+    // 新增: 为可调光灯注册状态变更回调函数。
+    // 这样，当它的状态（开关、亮度等）改变时，HandleDeviceStatusChanged 就会被调用。
+    gDimmableLight.SetChangeCallback(&HandleDeviceStatusChanged);
 
     DeviceLayer::SetDeviceInfoProvider(&gExampleDeviceInfoProvider);
 

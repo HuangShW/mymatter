@@ -31,6 +31,8 @@ Device::Device(const char * szDeviceName, const char * szLocation)
     mReachable  = false;
     mEndpointId = 0;
     mChanged_CB = nullptr;
+    // 新增: 在设备对象被创建时，将其亮度初始化为 0 (最暗)。
+    mLevel      = 0;
 }
 
 bool Device::IsOn() const
@@ -41,6 +43,13 @@ bool Device::IsOn() const
 bool Device::IsReachable() const
 {
     return mReachable;
+}
+
+// 新增: GetLevel 方法的具体实现。
+// 当Matter SDK需要读取设备的当前亮度时，会调用此方法。
+uint8_t Device::GetLevel() const
+{
+    return mLevel;
 }
 
 void Device::SetOnOff(bool aOn)
@@ -63,6 +72,24 @@ void Device::SetOnOff(bool aOn)
     if (changed && mChanged_CB)
     {
         mChanged_CB(this, kChanged_State);
+    }
+}
+
+// 新增: SetLevel 方法的具体实现。
+// 当Matter SDK收到来自控制器的亮度设置请求时，会调用此方法。
+void Device::SetLevel(uint8_t aLevel)
+{
+    // 检查亮度值是否真的发生了变化。
+    bool changed = (mLevel != aLevel);
+    mLevel       = aLevel;
+    ChipLogProgress(DeviceLayer, "Device[%s]: Level=%d", mName, mLevel);
+
+    // 如果亮度值确实改变了，并且已经注册了回调函数，
+    // 则调用该回调，并传入 kChanged_Level 标志。
+    // 这会触发 HandleDeviceStatusChanged 函数，进而通知Matter SDK亮度已更新。
+    if (changed && mChanged_CB)
+    {
+        mChanged_CB(this, kChanged_Level);
     }
 }
 
