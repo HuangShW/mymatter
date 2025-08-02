@@ -15,7 +15,7 @@
  *    limitations under the License.
  */
 
-#include "Device.h"
+#include "include/Device.h"
 #include "DeviceCallbacks.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
@@ -87,12 +87,12 @@ static Device * gDevices[CHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT]; // number o
 
 // 4 Bridged devices
 // 删除
-static Device gLight1("Light 1", "Office");
-static Device gLight2("Light 2", "Office");
-static Device gLight3("Light 3", "Kitchen");
-static Device gLight4("Light 4", "Den");
-// 新增: 创建一个全局的 Device 对象实例，代表我们的可调光灯。
-static Device gDimmableLight("Dimmable Light 1", "Living Room");
+static Device gLight1("Light 1", "Office", Device::kType_On_Off);
+// static Device gLight2("Light 2", "Office");
+// static Device gLight3("Light 3", "Kitchen");
+// static Device gLight4("Light 4", "Den");
+// 新增: 创建一个全局的 Device 对象实例，并明确其类型为可调光灯。
+static Device gDimmableLight("Dimmable Light 1", "Living Room", Device::kType_Dimmable);
 
 // 新增
 // static Device gThermostat("Thermostat", "Office");
@@ -127,12 +127,12 @@ DECLARE_DYNAMIC_ATTRIBUTE(OnOff::Attributes::OnOff::Id, BOOLEAN, 1, 0), /* on/of
 
 // 新增: 声明 LevelControl Cluster (亮度控制集群) 包含的属性。
 DECLARE_DYNAMIC_ATTRIBUTE_LIST_BEGIN(levelControlAttrs)
-    // 声明 CurrentLevel 属性，类型为 uint8_t (INT8U)，只读。
-    // 当控制器需要读取当前亮度时，会读取这个属性。
-    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::CurrentLevel::Id, INT8U, 1, 0), /* Level */
-    // 声明 MinLevel 属性，代表最小亮度。
+    // 声明 CurrentLevel 属性，类型为 uint8_t (INT8U)，可读写。
+    // 当控制器需要读取或写入当前亮度时，会访问这个属性。范围：1-254
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::CurrentLevel::Id, INT8U, 1, ZAP_ATTRIBUTE_MASK(WRITABLE)), /* Level */
+    // 声明 MinLevel 属性，代表最小亮度。固定值：1
     DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::MinLevel::Id, INT8U, 1, 0),   /* MinLevel */
-    // 声明 MaxLevel 属性，代表最大亮度。
+    // 声明 MaxLevel 属性，代表最大亮度。固定值：254
     DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::MaxLevel::Id, INT8U, 1, 0),   /* MaxLevel */
     DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
 
@@ -261,6 +261,16 @@ DataVersion gDimmableLightDataVersions[MATTER_ARRAY_SIZE(bridgedDimmableLightClu
 int AddDeviceEndpoint(Device * dev, EmberAfEndpointType * ep, const Span<const EmberAfDeviceType> & deviceTypeList,
                       const Span<DataVersion> & dataVersionStorage, chip::EndpointId parentEndpointId)
 {
+    ChipLogProgress(DeviceLayer, "AddDeviceEndpoint: Adding device [%s], deviceTypeList.size()=%d", 
+                    dev->GetName(), (int)deviceTypeList.size());
+    
+    // 打印设备类型信息
+    for (size_t i = 0; i < deviceTypeList.size(); i++)
+    {
+        ChipLogProgress(DeviceLayer, "AddDeviceEndpoint: DeviceType[%d] = 0x%04lx, version=%d", 
+                        (int)i, (unsigned long)deviceTypeList.data()[i].deviceId, deviceTypeList.data()[i].deviceVersion);
+    }
+    
     uint8_t index = 0;
     while (index < CHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT)
     {
@@ -271,8 +281,10 @@ int AddDeviceEndpoint(Device * dev, EmberAfEndpointType * ep, const Span<const E
             while (true)
             {
                 dev->SetEndpointId(gCurrentEndpointId);
-                err =
-                    emberAfSetDynamicEndpoint(index, gCurrentEndpointId, ep, dataVersionStorage, deviceTypeList, parentEndpointId);
+                ChipLogProgress(DeviceLayer, "AddDeviceEndpoint: Attempting to set endpoint %d for device [%s]", 
+                                gCurrentEndpointId, dev->GetName());
+                
+                err = emberAfSetDynamicEndpoint(index, gCurrentEndpointId, ep, dataVersionStorage, deviceTypeList, parentEndpointId);
                 if (err == CHIP_NO_ERROR)
                 {
                     ChipLogProgress(DeviceLayer, "Added device %s to dynamic endpoint %d (index=%d)", dev->GetName(),
@@ -281,6 +293,8 @@ int AddDeviceEndpoint(Device * dev, EmberAfEndpointType * ep, const Span<const E
                 }
                 else if (err != CHIP_ERROR_ENDPOINT_EXISTS)
                 {
+                    ChipLogProgress(DeviceLayer, "AddDeviceEndpoint: Failed to add device %s, error: %" CHIP_ERROR_FORMAT, 
+                                    dev->GetName(), err.Format());
                     return -1;
                 }
                 // Handle wrap condition
@@ -342,23 +356,28 @@ Protocols::InteractionModel::Status HandleReadBridgedDeviceBasicAttribute(Device
     return Protocols::InteractionModel::Status::Success;
 }
 
-// 删除
 Protocols::InteractionModel::Status HandleReadOnOffAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer,
                                                              uint16_t maxReadLength)
 {
-    ChipLogProgress(DeviceLayer, "HandleReadOnOffAttribute: attrId=%" PRIu32 ", maxReadLength=%u", attributeId, maxReadLength);
+    ChipLogProgress(DeviceLayer, "HandleReadOnOffAttribute: attrId=%" PRIu32 ", maxReadLength=%u, device state=%s", 
+                    attributeId, maxReadLength, dev->IsOn() ? "ON" : "OFF");
 
     if ((attributeId == OnOff::Attributes::OnOff::Id) && (maxReadLength == 1))
     {
-        *buffer = dev->IsOn() ? 1 : 0;
+        uint8_t onOffValue = dev->IsOn() ? 1 : 0;
+        *buffer = onOffValue;
+        ChipLogProgress(DeviceLayer, "HandleReadOnOffAttribute: returning OnOff value=%d", onOffValue);
     }
     else if ((attributeId == OnOff::Attributes::ClusterRevision::Id) && (maxReadLength == 2))
     {
         uint16_t rev = ZCL_ON_OFF_CLUSTER_REVISION;
         memcpy(buffer, &rev, sizeof(rev));
+        ChipLogProgress(DeviceLayer, "HandleReadOnOffAttribute: returning ClusterRevision=%d", rev);
     }
     else
     {
+        ChipLogProgress(DeviceLayer, "HandleReadOnOffAttribute: Unhandled attrId=%" PRIu32 " or invalid maxReadLength=%u", 
+                        attributeId, maxReadLength);
         return Protocols::InteractionModel::Status::Failure;
     }
 
@@ -375,27 +394,48 @@ Protocols::InteractionModel::Status HandleReadLevelControlAttribute(Device * dev
 
     if ((attributeId == LevelControl::Attributes::CurrentLevel::Id) && (maxReadLength == 1))
     {
-        // 如果请求的是 CurrentLevel，就从我们的 Device 对象中获取亮度值并填充到缓冲区。
-        *buffer = dev->GetLevel();
+        // 修复：确保返回的CurrentLevel符合Matter规范
+        // 当设备关闭时，CurrentLevel应该是null/undefined，但由于我们必须返回一个值，
+        // 我们根据OnOff状态来决定返回什么
+        uint8_t currentLevel = dev->GetLevel();
+        uint8_t returnLevel = currentLevel;
+        
+        if (!dev->IsOn()) {
+            // 当设备关闭时，根据Matter规范，CurrentLevel应该是null
+            // 但由于我们必须返回一个uint8值，我们返回0（表示关闭）
+            returnLevel = 0;
+        } else if (currentLevel == 0) {
+            // 如果设备开启但level为0，这是不一致的状态，修正为最小值1
+            returnLevel = 1;
+        }
+        
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: device level=%d, device state=%s, returning CurrentLevel=%d", 
+                        currentLevel, dev->IsOn() ? "ON" : "OFF", returnLevel);
+        *buffer = returnLevel;
     }
     else if ((attributeId == LevelControl::Attributes::MinLevel::Id) && (maxReadLength == 1))
     {
-        // 返回最小亮度值 (0)
-        *buffer = 0;
+        // 返回最小亮度值 (1) - 符合Matter规范
+        *buffer = 1;
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: returning MinLevel=1");
     }
     else if ((attributeId == LevelControl::Attributes::MaxLevel::Id) && (maxReadLength == 1))
     {
         // 返回最大亮度值 (254)
         *buffer = 254;
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: returning MaxLevel=254");
     }
     else if ((attributeId == LevelControl::Attributes::ClusterRevision::Id) && (maxReadLength == 2))
     {
         // 返回 LevelControl Cluster 的版本号
         uint16_t rev = ZCL_LEVEL_CONTROL_CLUSTER_REVISION;
         memcpy(buffer, &rev, sizeof(rev));
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: returning ClusterRevision=%d", rev);
     }
     else
     {
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: Unhandled attrId=%" PRIu32 " or invalid maxReadLength=%u", 
+                        attributeId, maxReadLength);
         return Protocols::InteractionModel::Status::Failure;
     }
 
@@ -405,28 +445,45 @@ Protocols::InteractionModel::Status HandleReadLevelControlAttribute(Device * dev
 // 删除
 Protocols::InteractionModel::Status HandleWriteOnOffAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer)
 {
-    ChipLogProgress(DeviceLayer, "HandleWriteOnOffAttribute: attrId=%" PRIu32, attributeId);
+    ChipLogProgress(DeviceLayer, "HandleWriteOnOffAttribute: attrId=%" PRIu32 ", buffer value=%d", attributeId, *buffer);
 
     VerifyOrReturnError((attributeId == OnOff::Attributes::OnOff::Id) && dev->IsReachable(),
                         Protocols::InteractionModel::Status::Failure);
-    dev->SetOnOff(*buffer == 1);
+    
+    bool newOnOffState = (*buffer == 1);
+    ChipLogProgress(DeviceLayer, "HandleWriteOnOffAttribute: Setting OnOff to %s (current state: %s)", 
+                    newOnOffState ? "ON" : "OFF", dev->IsOn() ? "ON" : "OFF");
+    
+    dev->SetOnOff(newOnOffState);
     return Protocols::InteractionModel::Status::Success;
 }
 
 // 新增: LevelControl 属性写入处理函数。
-// 当Matter SDK收到写入亮度属性的请求时 (例如，用户在App上拖动了亮度条)，会调用此函数。
+// 参考官方lighting-app的简单处理方式
 Protocols::InteractionModel::Status HandleWriteLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer)
 {
-    ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: attrId=%" PRIu32, attributeId);
+    ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: attrId=%" PRIu32 ", buffer value=%d", attributeId, *buffer);
 
-    // 验证请求是否合法 (写入的是CurrentLevel，且设备在线)。
-    VerifyOrReturnError((attributeId == LevelControl::Attributes::CurrentLevel::Id) && dev->IsReachable(),
-                        Protocols::InteractionModel::Status::Failure);
+    // 验证设备是否在线
+    VerifyOrReturnError(dev->IsReachable(), Protocols::InteractionModel::Status::Failure);
 
-    // 调用我们之前在Device类中实现的SetLevel方法，更新设备状态。
-    dev->SetLevel(*buffer);
+    if (attributeId == LevelControl::Attributes::CurrentLevel::Id)
+    {
+        uint8_t level = *buffer;
+        ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: received level=%d (current level=%d, current state=%s)", 
+                        level, dev->GetLevel(), dev->IsOn() ? "ON" : "OFF");
+        
+        // 🎯 关键简化：参考官方lighting-app，直接设置亮度
+        // 类似于官方例程中的 AppLED.SetBrightness(*value)
+        dev->SetLevel(level);
+        
+        ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: after SetLevel - new level=%d, new state=%s", 
+                        dev->GetLevel(), dev->IsOn() ? "ON" : "OFF");
+        return Protocols::InteractionModel::Status::Success;
+    }
 
-    return Protocols::InteractionModel::Status::Success;
+    ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: Unhandled attributeId=%" PRIu32, attributeId);
+    return Protocols::InteractionModel::Status::Failure;
 }
 
 //新增
@@ -499,28 +556,47 @@ Protocols::InteractionModel::Status emberAfExternalAttributeReadCallback(Endpoin
                                                                          const EmberAfAttributeMetadata * attributeMetadata,
                                                                          uint8_t * buffer, uint16_t maxReadLength)
 {
+    ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: endpoint=%d, clusterId=0x%lx, attrId=0x%lx, maxReadLength=%u", 
+                    endpoint, (unsigned long)clusterId, (unsigned long)attributeMetadata->attributeId, maxReadLength);
+    
     uint16_t endpointIndex = emberAfGetDynamicIndexFromEndpoint(endpoint);
+    ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: endpointIndex=%d, max_count=%d", 
+                    endpointIndex, CHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT);
 
     if ((endpointIndex < CHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT) && (gDevices[endpointIndex] != NULL))
     {
         Device * dev = gDevices[endpointIndex];
+        ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: found device [%s], reachable=%d", 
+                        dev->GetName(), dev->IsReachable());
 
         if (clusterId == BridgedDeviceBasicInformation::Id)
         {
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation");
             return HandleReadBridgedDeviceBasicAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
         }
         else if (clusterId == OnOff::Id)
         {
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: handling OnOff cluster");
             return HandleReadOnOffAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
         }
         // 新增: 在总的属性读取回调中，增加一个分支判断。
         else if (clusterId == LevelControl::Id)
         {
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: handling LevelControl cluster");
             // 如果请求的Cluster是LevelControl，则将请求分发给我们新写的处理函数。
             return HandleReadLevelControlAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
         }
+        else
+        {
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: unhandled clusterId=0x%lx", (unsigned long)clusterId);
+        }
+    }
+    else
+    {
+        ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: invalid endpointIndex=%d or null device", endpointIndex);
     }
 
+    ChipLogProgress(DeviceLayer, "emberAfExternalAttributeReadCallback: returning Failure");
     return Protocols::InteractionModel::Status::Failure;
 }
 
@@ -530,24 +606,41 @@ Protocols::InteractionModel::Status emberAfExternalAttributeWriteCallback(Endpoi
                                                                           const EmberAfAttributeMetadata * attributeMetadata,
                                                                           uint8_t * buffer)
 {
+    ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: endpoint=%d, clusterId=0x%lx, attrId=0x%lx, buffer=0x%02x", 
+                    endpoint, (unsigned long)clusterId, (unsigned long)attributeMetadata->attributeId, *buffer);
+    
     uint16_t endpointIndex = emberAfGetDynamicIndexFromEndpoint(endpoint);
+    ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: endpointIndex=%d", endpointIndex);
 
     if (endpointIndex < CHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT)
     {
         Device * dev = gDevices[endpointIndex];
+        ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: found device [%s], reachable=%d", 
+                        dev->GetName(), dev->IsReachable());
 
         if ((dev->IsReachable()) && (clusterId == OnOff::Id))
         {
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: handling OnOff cluster write");
             return HandleWriteOnOffAttribute(dev, attributeMetadata->attributeId, buffer);
         }
-        // 新增: 在总的属性写入回调中，也增加一个分支判断。
+        // 恢复对LevelControl属性写入的处理
         else if ((dev->IsReachable()) && (clusterId == LevelControl::Id))
         {
-            // 如果请求写入的Cluster是LevelControl，则分发到对应的写入处理函数。
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: handling LevelControl cluster write");
             return HandleWriteLevelControlAttribute(dev, attributeMetadata->attributeId, buffer);
         }
+        else
+        {
+            ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: device not reachable or unhandled clusterId=0x%lx", 
+                            (unsigned long)clusterId);
+        }
+    }
+    else
+    {
+        ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: invalid endpointIndex=%d", endpointIndex);
     }
 
+    ChipLogProgress(DeviceLayer, "emberAfExternalAttributeWriteCallback: returning Failure");
     return Protocols::InteractionModel::Status::Failure;
 }
 
@@ -602,6 +695,21 @@ commandObj->AddStatus(commandPath, Protocols::InteractionModel::Status::NotFound
 return true;
 }
 
+// 移除复杂的命令拦截机制，采用官方lighting-app的简单方式
+// 让SDK正常处理所有命令，我们只在属性变化时响应
+bool emberAfPreCommandReceivedCallback(const app::ConcreteCommandPath & commandPath, chip::TLV::TLVReader & aReader,
+                                       app::CommandHandler * apCommandObj)
+{
+    // 让SDK正常处理所有命令，不进行任何拦截
+    return false;
+}
+
+// const EmberAfDeviceType gRootDeviceTypes[]          = { { DEVICE_TYPE_ROOT_NODE, DEVICE_VERSION_DEFAULT } };
+// const EmberAfDeviceType gAggregateNodeDeviceTypes[] = { { DEVICE_TYPE_BRIDGE, DEVICE_VERSION_DEFAULT } };
+
+// const EmberAfDeviceType gBridgedThermostatDeviceTypes[] = { { DEVICE_TYPE_THERMOSTAT, DEVICE_VERSION_DEFAULT },
+//                                                        { DEVICE_TYPE_BRIDGED_NODE, DEVICE_VERSION_DEFAULT } };
+
 const EmberAfDeviceType gRootDeviceTypes[]          = { { DEVICE_TYPE_ROOT_NODE, DEVICE_VERSION_DEFAULT } };
 const EmberAfDeviceType gAggregateNodeDeviceTypes[] = { { DEVICE_TYPE_BRIDGE, DEVICE_VERSION_DEFAULT } };
 
@@ -637,21 +745,21 @@ static void InitServer(intptr_t context)
     // Add lights 1..3 --> will be mapped to ZCL endpoints 3, 4, 5
     AddDeviceEndpoint(&gLight1, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
                       Span<DataVersion>(gLight1DataVersions), 1);
-    AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight2DataVersions), 1);
-    AddDeviceEndpoint(&gLight3, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight3DataVersions), 1);
+    // AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight2DataVersions), 1);
+    // AddDeviceEndpoint(&gLight3, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight3DataVersions), 1);
 
     // Remove Light 2 -- Lights 1 & 3 will remain mapped to endpoints 3 & 5
-    RemoveDeviceEndpoint(&gLight2);
+    // RemoveDeviceEndpoint(&gLight2);
 
     // Add Light 4 -- > will be mapped to ZCL endpoint 6
-    AddDeviceEndpoint(&gLight4, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight4DataVersions), 1);
+    // AddDeviceEndpoint(&gLight4, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight4DataVersions), 1);
 
     // Re-add Light 2 -- > will be mapped to ZCL endpoint 7
-    AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight2DataVersions), 1);
+    // AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight2DataVersions), 1);
 
     // 新增: 调用 AddDeviceEndpoint，将我们的可调光灯添加到桥接器。
     // 注意这里使用了我们新定义的 bridgedDimmableLightEndpoint 模板和 gBridgedDimmableDeviceTypes 设备类型。
@@ -711,7 +819,7 @@ extern "C" void app_main()
         return;
     }
     err = esp_event_loop_create_default();
-    if (err != ESP_OK)
+    if (err != ESP_OK && err != ESP_ERR_INVALID_STATE)
     {
         ESP_LOGE(TAG, "esp_event_loop_create_default()  failed: %s", esp_err_to_name(err));
         return;
@@ -732,9 +840,9 @@ extern "C" void app_main()
 #endif
     // 删除
     gLight1.SetReachable(true);
-    gLight2.SetReachable(true);
-    gLight3.SetReachable(true);
-    gLight4.SetReachable(true);
+    // gLight2.SetReachable(true);
+    // gLight3.SetReachable(true);
+    // gLight4.SetReachable(true);
     // 新增: 在启动时，将我们的可调光灯设置为"可达"状态。
     gDimmableLight.SetReachable(true);
 
@@ -744,9 +852,9 @@ extern "C" void app_main()
     // Whenever bridged device changes its state
     // 删除
     gLight1.SetChangeCallback(&HandleDeviceStatusChanged);
-    gLight2.SetChangeCallback(&HandleDeviceStatusChanged);
-    gLight3.SetChangeCallback(&HandleDeviceStatusChanged);
-    gLight4.SetChangeCallback(&HandleDeviceStatusChanged);
+    // gLight2.SetChangeCallback(&HandleDeviceStatusChanged);
+    // gLight3.SetChangeCallback(&HandleDeviceStatusChanged);
+    // gLight4.SetChangeCallback(&HandleDeviceStatusChanged);
     // 新增: 为可调光灯注册状态变更回调函数。
     // 这样，当它的状态（开关、亮度等）改变时，HandleDeviceStatusChanged 就会被调用。
     gDimmableLight.SetChangeCallback(&HandleDeviceStatusChanged);

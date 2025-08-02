@@ -24,6 +24,12 @@
 class Device
 {
 public:
+    // 新增: 设备类型枚举，用于区分不同功能的设备
+    enum DeviceType_t
+    {
+        kType_On_Off,
+        kType_Dimmable,
+    };
     static const int kDeviceNameSize     = 32;
     static const int kDeviceLocationSize = 32;
 
@@ -49,17 +55,17 @@ public:
         kChanged_Level     = 0x10,
     } Changed;
 
-    Device(const char * szDeviceName, const char * szLocation);
+    Device(const char * szDeviceName, const char * szLocation, DeviceType_t type = kType_On_Off);
 
     bool IsOn() const;
     bool IsReachable() const;
     // 新增: 获取当前亮度值的公有方法。
-    // 返回类型为 uint8_t，符合Matter规范中LevelControl Cluster的CurrentLevel属性 (0-254)。
+    // 返回类型为 uint8_t，符合Matter规范中LevelControl Cluster的CurrentLevel属性 (1-254)。
     uint8_t GetLevel() const;
     void SetOnOff(bool aOn);
     void SetReachable(bool aReachable);
     // 新增: 设置当前亮度值的公有方法。
-    // 参数 level 的范围应该是 0-254，其中 0 表示最暗，254 表示最亮。
+    // 参数 level 的范围应该是 1-254，其中 1 表示最暗，254 表示最亮。
     void SetLevel(uint8_t level);
     void SetName(const char * szDeviceName);
     void SetLocation(const char * szLocation);
@@ -67,11 +73,14 @@ public:
     inline chip::EndpointId GetEndpointId() { return mEndpointId; };
     inline char * GetName() { return mName; };
     inline char * GetLocation() { return mLocation; };
+    inline DeviceType_t GetType() { return mType; };
 
     using DeviceCallback_fn = std::function<void(Device *, Changed_t)>;
     void SetChangeCallback(DeviceCallback_fn aChanged_CB);
 
 private:
+    // 新增：设备类型
+    DeviceType_t mType;
     // 设备开关状态
     State_t mState;
     // 设备是否在线可达
@@ -79,6 +88,9 @@ private:
     // 新增: 私有成员变量，用于在内存中存储设备的当前亮度值。
     // 类型为 uint8_t，符合Matter规范中LevelControl Cluster的CurrentLevel属性 (0-254)。
     uint8_t mLevel;
+    // 新增: 私有成员变量，用于存储设备关闭前的最后一次亮度值。
+    // 当设备从关闭状态重新打开时，可以恢复到这个亮度。
+    uint8_t mLastLevel;
     char mName[kDeviceNameSize];
     char mLocation[kDeviceLocationSize];
     chip::EndpointId mEndpointId;

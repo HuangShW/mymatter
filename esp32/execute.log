@@ -1,0 +1,1093 @@
+I (30) boot: ESP-IDF v5.4 2nd stage bootloader
+I (30) boot: compile time Aug  1 2025 02:38:23
+I (30) boot: chip revision: v0.4
+I (30) boot: efuse block revision: v1.3
+I (34) boot.esp32c3: SPI Speed      : 80MHz
+I (38) boot.esp32c3: SPI Mode       : DIO
+I (41) boot.esp32c3: SPI Flash Size : 2MB
+I (45) boot: Enabling RNG early entropy source...
+I (50) boot: Partition Table:
+I (52) boot: ## Label            Usage          Type ST Offset   Length
+I (58) boot:  0 nvs              WiFi data        01 02 00009000 0000c000
+I (65) boot:  1 phy_init         RF data          01 01 00015000 00001000
+I (72) boot:  2 factory          factory app      00 00 00020000 001e0000
+I (78) boot: End of partition table
+I (81) esp_image: segment 0: paddr=00020020 vaddr=3c110020 size=2f2dch (193244) map
+I (120) esp_image: segment 1: paddr=0004f304 vaddr=3fc96e00 size=00d14h (  3348) load
+I (120) esp_image: segment 2: paddr=00050020 vaddr=42000020 size=101434h (1053748) map
+I (291) esp_image: segment 3: paddr=0015145c vaddr=3fc97b14 size=030a4h ( 12452) load
+I (294) esp_image: segment 4: paddr=00154508 vaddr=40380000 size=16bfch ( 93180) load
+I (312) esp_image: segment 5: paddr=0016b10c vaddr=50000200 size=0001ch (    28) load
+I (320) boot: Loaded app from partition at offset 0x20000
+I (320) boot: Disabling RNG early entropy source...
+I (330) cpu_start: Unicore app
+I (338) cpu_start: Pro cpu start user code
+I (338) cpu_start: cpu freq: 160000000 Hz
+I (339) app_init: Application information:
+I (339) app_init: Project name:     chip-bridge-app
+I (343) app_init: App version:      v1.0
+I (347) app_init: Compile time:     Aug  1 2025 02:36:13
+I (352) app_init: ELF file SHA256:  6e4b6bdd0...
+I (356) app_init: ESP-IDF:          v5.4
+I (360) efuse_init: Min chip rev:     v0.3
+I (364) efuse_init: Max chip rev:     v1.99 
+I (368) efuse_init: Chip rev:         v0.4
+I (372) heap_init: Initializing. RAM available for dynamic allocation:
+I (378) heap_init: At 3FCAB8C0 len 00014740 (81 KiB): RAM
+I (383) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM
+I (389) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM
+I (395) heap_init: At 5000021C len 00001DCC (7 KiB): RTCRAM
+I (401) spi_flash: detected chip: generic
+I (404) spi_flash: flash io: dio
+W (407) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+I (421) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (425) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (432) coexist: coex firmware version: 49a8cdc
+I (450) coexist: coexist rom version 9387209
+I (451) main_task: Started on CPU0
+I (451) main_task: Calling app_main()
+I (461) pp: pp rom version: 9387209
+I (461) net80211: net80211 rom version: 9387209
+I (481) wifi:wifi driver task: 3fcb5540, prio:23, stack:6656, core=0
+I (481) wifi:wifi firmware version: 48ea317a7
+I (481) wifi:wifi certification version: v7.0
+I (481) wifi:config NVS flash: enabled
+I (481) wifi:config nano formatting: disabled
+I (491) wifi:Init data frame dynamic rx buffer num: 32
+I (491) wifi:Init static rx mgmt buffer num: 5
+I (501) wifi:Init management short buffer num: 32
+I (501) wifi:Init dynamic tx buffer num: 32
+I (501) wifi:Init static tx FG buffer num: 2
+I (511) wifi:Init static rx buffer size: 1600
+I (511) wifi:Init static rx buffer num: 10
+I (521) wifi:Init dynamic rx buffer num: 32
+I (521) wifi_init: rx ba win: 6
+I (521) wifi_init: accept mbox: 6
+I (531) wifi_init: tcpip mbox: 32
+I (531) wifi_init: udp mbox: 6
+I (531) wifi_init: tcp mbox: 6
+I (531) wifi_init: tcp tx win: 5760
+I (541) wifi_init: tcp rx win: 5760
+I (541) wifi_init: tcp mss: 1440
+I (541) wifi_init: WiFi IRAM OP enabled
+I (551) wifi_init: WiFi RX IRAM OP enabled
+I (551) chip[DL]: Device[Light 1]: ONLINE
+I (551) chip[DL]: Device[Dimmable Light 1]: ONLINE
+I (561) chip[DL]: NVS set: chip-counters/reboot-count = 1 (0x1)
+I (571) chip[DL]: NVS set: chip-config/unique-id = "60F7620E451A843C"
+I (571) chip[DL]: Real time clock set to 946684800 (0100/00/01 00:00:00 UTC)
+I (581) BLE_INIT: BT controller compile version [d752dea]
+I (581) main_task: Returned from app_main()
+I (591) BLE_INIT: Bluetooth MAC: 10:20:ba:91:c3:1a
+I (591) phy_init: phy_version 1180,01f2a49,Jun  4 2024,16:34:25
+W (601) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration
+W (641) phy_init: saving new calibration data because of checksum failure, mode(2)
+I (651) NimBLE: GAP procedure initiated: stop advertising.
+
+I (651) CHIP[DL]: BLE host-controller synced
+I (1151) chip[DL]: Starting ESP WiFi layer
+I (1151) wifi:mode : sta (10:20:ba:91:c3:18)
+I (1151) wifi:enable tsf
+I (1151) chip[DL]: Posting ESPSystemEvent: Wifi Event with eventId : 43
+W (1151) wifi:Haven't to connect to a suitable AP now!
+I (1161) chip[DL]: Done driving station state, nothing else to do...
+W (1161) wifi:Haven't to connect to a suitable AP now!
+I (1171) chip[DL]: Done driving station state, nothing else to do...
+I (1171) chip[SVR]: SetupQRCode: [MT:Y.K90-0N02V20648G00]
+I (1181) chip[SVR]: Copy/paste the below URL in a browser to see the QR Code:
+I (1181) chip[SVR]: https://project-chip.github.io/connectedhomeip/qrcode.html?data=MT%3AY.K90-0N02V20648G00
+I (1191) chip[SVR]: Manual pairing code: [11693312331]
+I (1201) chip[SVR]: Initializing subscription resumption storage...
+I (1211) chip[SVR]: Server initializing...
+I (1211) chip[TS]: Last Known Good Time: [unknown]
+I (1211) chip[TS]: Setting Last Known Good Time to firmware build time 2023-10-14T01:16:48
+I (1221) chip[DMG]: AccessControl: initializing
+I (1231) chip[DMG]: Examples::AccessControlDelegate::Init
+I (1231) chip[DMG]: AccessControl: setting
+I (1231) chip[DMG]: DefaultAclStorage: initializing
+I (1241) chip[DMG]: DefaultAclStorage: 0 entries loaded
+I (1191) chip[DL]: Posting ESPSystemEvent: Wifi Event with eventId : 2
+I (1251) chip[ZCL]: Using ZAP configuration...
+I (1261) chip[DMG]: AccessControlCluster: initializing
+I (1261) chip[ZCL]: Initiating Admin Commissioning cluster.
+I (1271) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x2', Attribute ID: '0x0'
+I (1281) bridge-devicecallbacks: Current free heap: 79488
+
+I (1281) chip[DIS]: Updating services using commissioning mode 1
+I (1291) chip[DIS]: CHIP minimal mDNS started advertising.
+I (1291) chip[DIS]: Advertise commission parameter vendorID=65521 productID=32768 discriminator=1498/05 cm=1 cp=0
+I (1301) chip[DIS]: CHIP minimal mDNS configured as 'Commissionable node device'; instance name: D60EA27F0956DA75.
+I (1311) chip[DIS]: mDNS service published: _matterc._udp
+I (1321) chip[IN]: CASE Server enabling CASE session setups
+I (1321) chip[SVR]: Joining Multicast groups
+I (1331) chip[SVR]: Server Listening...
+I (1331) chip[ZCL]: Shuting down on/off server cluster on endpoint 2
+I (1341) chip[ZCL]: Shuting down level control server cluster on endpoint 2
+I (1341) chip[DL]: AddDeviceEndpoint: Adding device [Light 1], deviceTypeList.size()=2
+I (1351) chip[DL]: AddDeviceEndpoint: DeviceType[0] = 0x0100, version=1
+I (1361) chip[DL]: AddDeviceEndpoint: DeviceType[1] = 0x0013, version=1
+I (1361) chip[DL]: AddDeviceEndpoint: Attempting to set endpoint 3 for device [Light 1]
+I (1371) chip[DL]: Added device Light 1 to dynamic endpoint 3 (index=0)
+I (1381) chip[DL]: AddDeviceEndpoint: Adding device [Dimmable Light 1], deviceTypeList.size()=2
+I (1391) chip[DL]: AddDeviceEndpoint: DeviceType[0] = 0x0101, version=1
+I (1391) chip[DL]: AddDeviceEndpoint: DeviceType[1] = 0x0013, version=1
+I (1401) chip[DL]: AddDeviceEndpoint: Attempting to set endpoint 3 for device [Dimmable Light 1]
+I (1411) chip[DL]: AddDeviceEndpoint: Attempting to set endpoint 4 for device [Dimmable Light 1]
+I (1421) chip[DL]: Added device Dimmable Light 1 to dynamic endpoint 4 (index=1)
+I (1421) app-devicecallbacks: Current free heap: 78708
+
+I (1431) chip[DL]: WIFI_EVENT_STA_START
+W (1431) wifi:Haven't to connect to a suitable AP now!
+I (1441) chip[DL]: Done driving station state, nothing else to do...
+I (1441) app-devicecallbacks: Current free heap: 78708
+
+I (1451) chip[DL]: Configuring CHIPoBLE advertising (interval 25 ms, connectable)
+I (1451) NimBLE: GAP procedure initiated: advertise; 
+I (1461) NimBLE: disc_mode=2
+I (1461) NimBLE:  adv_channel_map=0 own_addr_type=1 adv_filter_policy=0 adv_itvl_min=40 adv_itvl_max=40
+I (1471) NimBLE: 
+
+I (1471) chip[DL]: CHIPoBLE advertising started
+I (1481) app-devicecallbacks: Current free heap: 78672
+
+I (7881) chip[DL]: BLE GAP connection established (con 1)
+I (7881) chip[DL]: CHIPoBLE advertising stopped
+I (7881) app-devicecallbacks: Current free heap: 78672
+
+I (8741) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (8741) chip[BLE]: local and remote recv window sizes = 5
+I (8741) chip[BLE]: selected BTP version 4
+I (8751) chip[BLE]: using BTP fragment sizes rx 244 / tx 244.
+I (8951) chip[DL]: Write request/command received for CHIPoBLE TX CCCD characteristic (con 1 ) indicate = 1
+I (8951) chip[DL]: CHIPoBLE subscribe received
+I (8951) NimBLE: GATT procedure initiated: indicate; 
+I (8961) NimBLE: att_handle=18
+
+I (8961) app-devicecallbacks: CHIPoBLE connection established
+I (8971) app-devicecallbacks: Current free heap: 77096
+
+I (9011) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (9011) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (9021) chip[EM]: >>> [E:40551r S:0 M:66751506] (U) Msg RX from 0:0C7F338E1B130478 [0000] to 0000000000000000 --- Type 0000:20 (SecureChannel:PBKDFParamRequest) (B:98)
+I (9031) chip[EM]: <<< [E:40551r S:0 M:94266898] (U) Msg TX from 0000000000000000 to 0:0C7F338E1B130478 [0000] [BLE] --- Type 0000:21 (SecureChannel:PBKDFParamResponse) (B:170)
+I (9051) NimBLE: GATT procedure initiated: indicate; 
+I (9051) NimBLE: att_handle=18
+
+I (9061) chip[SVR]: Commissioning session establishment step started
+I (9101) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (9161) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (9161) chip[EM]: >>> [E:40551r S:0 M:66751507] (U) Msg RX from 0:0C7F338E1B130478 [0000] to 0000000000000000 --- Type 0000:22 (SecureChannel:PASE_Pake1) (B:92)
+I (9761) chip[EM]: <<< [E:40551r S:0 M:94266899] (U) Msg TX from 0000000000000000 to 0:0C7F338E1B130478 [0000] [BLE] --- Type 0000:23 (SecureChannel:PASE_Pake2) (B:127)
+I (9761) NimBLE: GATT procedure initiated: indicate; 
+I (9771) NimBLE: att_handle=18
+
+I (9811) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (9811) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (9821) chip[EM]: >>> [E:40551r S:0 M:66751508] (U) Msg RX from 0:0C7F338E1B130478 [0000] to 0000000000000000 --- Type 0000:24 (SecureChannel:PASE_Pake3) (B:59)
+I (9831) chip[EM]: <<< [E:40551r S:0 M:94266900] (U) Msg TX from 0000000000000000 to 0:0C7F338E1B130478 [0000] [BLE] --- Type 0000:40 (SecureChannel:StatusReport) (B:30)
+I (9851) NimBLE: GATT procedure initiated: indicate; 
+I (9851) NimBLE: att_handle=18
+
+I (9861) chip[SC]: SecureSession[0x3fc9e220, LSID:61600]: State change 'kEstablishing' --> 'kActive'
+I (9861) chip[SVR]: Commissioning completed session establishment step
+I (9871) chip[DIS]: Updating services using commissioning mode 0
+I (9881) chip[DIS]: CHIP minimal mDNS started advertising.
+I (9881) chip[SVR]: Device completed Rendezvous process
+I (9891) app-devicecallbacks: Current free heap: 77764
+
+I (9931) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (9931) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (9941) chip[EM]: >>> [E:40552r S:61600 M:224120856] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (9961) chip[EM]: <<< [E:40552r S:61600 M:207054463] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:72)
+I (9971) NimBLE: GATT procedure initiated: indicate; 
+I (9971) NimBLE: att_handle=18
+
+I (10021) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (10021) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (10031) chip[EM]: >>> [E:40553r S:61600 M:224120857] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (10051) chip[EM]: <<< [E:40553r S:61600 M:207054464] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:102)
+I (10061) NimBLE: GATT procedure initiated: indicate; 
+I (10061) NimBLE: att_handle=18
+
+I (10111) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (10111) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (10121) chip[EM]: >>> [E:40554r S:61600 M:224120858] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:52)
+I (10141) chip[EM]: <<< [E:40554r S:61600 M:207054465] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:67)
+I (10151) NimBLE: GATT procedure initiated: indicate; 
+I (10151) NimBLE: att_handle=18
+
+I (10201) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (10201) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (10211) chip[EM]: >>> [E:40555r S:61600 M:224120859] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (10231) chip[EM]: <<< [E:40555r S:61600 M:207054466] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:66)
+I (10241) NimBLE: GATT procedure initiated: indicate; 
+I (10241) NimBLE: att_handle=18
+
+I (10291) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (10291) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (10301) chip[EM]: >>> [E:40556r S:61600 M:224120860] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (10321) chip[EM]: <<< [E:40556r S:61600 M:207054467] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:66)
+I (10331) NimBLE: GATT procedure initiated: indicate; 
+I (10331) NimBLE: att_handle=18
+
+I (10381) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (10381) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (10391) chip[EM]: >>> [E:40557r S:61600 M:224120861] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (12891) NimBLE: GATT procedure initiated: indicate; 
+I (12891) NimBLE: att_handle=18
+
+I (12961) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15221) chip[DL]: Posting ESPSystemEvent: Wifi Event with eventId : 1
+I (15221) chip[DL]: WIFI_EVENT_SCAN_DONE
+I (15221) app-devicecallbacks: Current free heap: 78908
+
+I (15221) chip[EM]: <<< [E:40557r S:61600 M:207054468] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:210)
+I (15241) NimBLE: GATT procedure initiated: indicate; 
+I (15241) NimBLE: att_handle=18
+
+I (15301) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15301) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (15311) chip[EM]: >>> [E:40558r S:61600 M:224120862] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:52)
+I (15331) chip[EM]: <<< [E:40558r S:61600 M:207054469] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:67)
+I (15341) NimBLE: GATT procedure initiated: indicate; 
+I (15341) NimBLE: att_handle=18
+
+I (15391) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15391) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (15401) chip[EM]: >>> [E:40559r S:61600 M:224120863] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:134)
+I (15421) chip[DL]: NVS set: chip-config/reg-location = 0 (0x0)
+I (15421) chip[EM]: <<< [E:40559r S:61600 M:207054470] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:257)
+I (15431) NimBLE: GATT procedure initiated: indicate; 
+I (15441) NimBLE: att_handle=18
+
+I (15481) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15481) NimBLE: GATT procedure initiated: indicate; 
+I (15491) NimBLE: att_handle=18
+
+I (15541) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15541) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (15551) chip[EM]: >>> [E:40560r S:61600 M:224120864] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:02 (IM:ReadRequest) (B:103)
+E (15571) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0046, attributeId: 0x0000_0002err = 5c3
+E (15571) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0046, attributeId: 0x0000_0001err = 5c3
+E (15591) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0046, attributeId: 0x0000_0000err = 5c3
+E (15601) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0046, attributeId: 0x0000_0007err = 5c3
+E (15611) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0046, attributeId: 0x0000_0006err = 5c3
+I (15621) chip[EM]: <<< [E:40560r S:61600 M:207054471] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:05 (IM:ReportData) (B:181)
+I (15641) NimBLE: GATT procedure initiated: indicate; 
+I (15641) NimBLE: att_handle=18
+
+I (15691) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15691) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (15701) chip[EM]: >>> [E:40561r S:61600 M:224120865] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:65)
+I (15721) chip[FS]: GeneralCommissioning: Received ArmFailSafe (60s)
+I (15721) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (15731) bridge-devicecallbacks: Current free heap: 77740
+
+I (15741) chip[EM]: <<< [E:40561r S:61600 M:207054472] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:66)
+I (15751) NimBLE: GATT procedure initiated: indicate; 
+I (15761) NimBLE: att_handle=18
+
+I (15811) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15811) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (15821) chip[EM]: >>> [E:40562r S:61600 M:224120866] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (15841) chip[DL]: NVS set: chip-config/reg-location = 0 (0x0)
+I (15851) chip[DL]: NVS set: chip-config/country-code = "CN"
+I (15851) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (15861) bridge-devicecallbacks: Current free heap: 77740
+
+I (15861) chip[EM]: <<< [E:40562r S:61600 M:207054473] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:66)
+I (15881) NimBLE: GATT procedure initiated: indicate; 
+I (15881) NimBLE: att_handle=18
+
+I (15931) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (15931) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (15941) chip[EM]: >>> [E:40563r S:61600 M:224120867] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:62)
+I (15961) chip[ZCL]: OpCreds: Certificate Chain request received for PAI
+I (15961) chip[EM]: <<< [E:40563r S:61600 M:207054474] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:527)
+I (15981) NimBLE: GATT procedure initiated: indicate; 
+I (15981) NimBLE: att_handle=18
+
+I (16021) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16021) NimBLE: GATT procedure initiated: indicate; 
+I (16031) NimBLE: att_handle=18
+
+I (16081) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16081) NimBLE: GATT procedure initiated: indicate; 
+I (16091) NimBLE: att_handle=18
+
+I (16141) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16141) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (16151) chip[EM]: >>> [E:40564r S:61600 M:224120868] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:62)
+I (16171) chip[ZCL]: OpCreds: Certificate Chain request received for DAC
+I (16171) chip[EM]: <<< [E:40564r S:61600 M:207054475] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:557)
+I (16191) NimBLE: GATT procedure initiated: indicate; 
+I (16191) NimBLE: att_handle=18
+
+I (16231) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16231) NimBLE: GATT procedure initiated: indicate; 
+I (16241) NimBLE: att_handle=18
+
+I (16291) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16291) NimBLE: GATT procedure initiated: indicate; 
+I (16301) NimBLE: att_handle=18
+
+I (16351) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16351) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (16361) chip[EM]: >>> [E:40565r S:61600 M:224120869] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:94)
+I (16381) chip[ZCL]: OpCreds: Received an AttestationRequest command
+I (16501) chip[ZCL]: OpCreds: AttestationRequest successful.
+I (16511) chip[EM]: <<< [E:40565r S:61600 M:207054476] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:714)
+I (16511) NimBLE: GATT procedure initiated: indicate; 
+I (16521) NimBLE: att_handle=18
+
+I (16561) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16561) NimBLE: GATT procedure initiated: indicate; 
+I (16571) NimBLE: att_handle=18
+
+I (16621) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16621) NimBLE: GATT procedure initiated: indicate; 
+I (16631) NimBLE: att_handle=18
+
+I (16681) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (16681) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (16691) chip[EM]: >>> [E:40566r S:61600 M:224120870] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:65)
+I (16701) chip[FS]: GeneralCommissioning: Received ArmFailSafe (60s)
+I (16711) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (16721) bridge-devicecallbacks: Current free heap: 77740
+
+I (16731) chip[EM]: <<< [E:40566r S:61600 M:207054477] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:66)
+I (16741) NimBLE: GATT procedure initiated: indicate; 
+I (16751) NimBLE: att_handle=18
+
+I (16831) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (17821) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (17831) chip[EM]: >>> [E:40567r S:61600 M:224120871] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:94)
+I (17841) chip[ZCL]: OpCreds: Received a CSRRequest command
+I (18081) chip[ZCL]: OpCreds: AllocatePendingOperationalKey succeeded
+I (18201) chip[ZCL]: OpCreds: CSRRequest successful.
+I (18211) chip[EM]: <<< [E:40567r S:61600 M:207054478] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:374)
+I (18211) NimBLE: GATT procedure initiated: indicate; 
+I (18221) NimBLE: att_handle=18
+
+I (18271) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (18271) NimBLE: GATT procedure initiated: indicate; 
+I (18281) NimBLE: att_handle=18
+
+I (18331) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (18341) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (18391) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (18401) chip[EM]: >>> [E:40568r S:61600 M:224120872] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:308)
+I (18411) chip[ZCL]: OpCreds: Received an AddTrustedRootCertificate command
+I (18651) chip[ZCL]: OpCreds: AddTrustedRootCertificate successful.
+I (18661) chip[EM]: <<< [E:40568r S:61600 M:207054479] (S) Msg TX from 0000000000000000 to 0:FFFFFFFB00000000 [0000] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:63)
+I (18661) NimBLE: GATT procedure initiated: indicate; 
+I (18671) NimBLE: att_handle=18
+
+I (18721) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (18731) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (18781) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (18791) chip[EM]: >>> [E:40569r S:61600 M:224120873] (S) Msg RX from 0:FFFFFFFB00000000 [0000] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:347)
+I (18801) chip[ZCL]: OpCreds: Received an AddNOC command
+I (18801) chip[FP]: Validating NOC chain
+I (19051) chip[FP]: NOC chain validation successful
+I (19051) chip[FP]: Added new fabric at index: 0x1
+I (19051) chip[FP]: Assigned compressed fabric ID: 0x7E316FA3C290693C, node ID: 0x000000003DC8999E
+I (19051) chip[TS]: Last Known Good Time: 2023-10-14T01:16:48
+I (19061) chip[TS]: New proposed Last Known Good Time: 2025-08-02T03:48:56
+I (19071) chip[TS]: Updating pending Last Known Good Time to 2025-08-02T03:48:56
+I (19081) chip[ZCL]: OpCreds: ACL entry created for Fabric index 0x1 CASE Admin Subject 0x00000000BB57ACB2
+I (19081) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (19091) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (19101) chip[DIS]: mDNS service published: _matter._tcp
+I (19111) chip[ZCL]: OpCreds: successfully created fabric index 0x1 via AddNOC
+I (19111) chip[EM]: <<< [E:40569r S:61600 M:207054480] (S) Msg TX from 0000000000000000 to 1:FFFFFFFB00000000 [693C] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:66)
+I (19131) NimBLE: GATT procedure initiated: indicate; 
+I (19131) NimBLE: att_handle=18
+
+I (19171) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (19171) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (19181) chip[EM]: >>> [E:40570r S:61600 M:224120874] (S) Msg RX from 1:FFFFFFFB00000000 [693C] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:87)
+I (19201) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (19201) bridge-devicecallbacks: Current free heap: 73832
+
+I (19211) chip[EM]: <<< [E:40570r S:61600 M:207054481] (S) Msg TX from 0000000000000000 to 1:FFFFFFFB00000000 [693C] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:66)
+I (19231) NimBLE: GATT procedure initiated: indicate; 
+I (19231) NimBLE: att_handle=18
+
+I (19321) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (19321) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (19331) chip[EM]: >>> [E:40571r S:61600 M:224120875] (S) Msg RX from 1:FFFFFFFB00000000 [693C] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:65)
+I (19341) chip[FS]: GeneralCommissioning: Received ArmFailSafe (73s)
+I (19351) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (19361) bridge-devicecallbacks: Current free heap: 75372
+
+I (19371) chip[EM]: <<< [E:40571r S:61600 M:207054482] (S) Msg TX from 0000000000000000 to 1:FFFFFFFB00000000 [693C] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:66)
+I (19381) NimBLE: GATT procedure initiated: indicate; 
+I (19391) NimBLE: att_handle=18
+
+I (19441) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (19441) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (19451) chip[EM]: >>> [E:40572r S:61600 M:224120876] (S) Msg RX from 1:FFFFFFFB00000000 [693C] to 0000000000000000 --- Type 0001:08 (IM:InvokeCommandRequest) (B:76)
+I (19471) chip[NP]: ESP NetworkCommissioningDelegate: SSID: Xiaomi_5475
+W (19471) wifi:Haven't to connect to a suitable AP now!
+I (19481) chip[DL]: WiFi station mode change: Enabled -> Disabled
+W (19481) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+I (19501) chip[DL]: WiFi station mode change: Disabled -> Enabled
+W (19501) wifi:Haven't to connect to a suitable AP now!
+I (19501) chip[DL]: Attempting to connect WiFi station interface
+I (19511) chip[DL]: WiFi station state change: NotConnected -> Connecting
+I (19771) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0
+I (19771) wifi:state: init -> auth (0xb0)
+I (19771) chip[DL]: Done driving station state, nothing else to do...
+I (19771) wifi:state: auth -> assoc (0x0)
+I (19781) chip[DL]: Attempting to connect WiFi station interface
+I (19791) wifi:state: assoc -> init (0x6c0)
+I (19801) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+I (19801) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0
+I (19811) chip[DL]: Done driving station state, nothing else to do...
+W (19811) wifi:Haven't to connect to a suitable AP now!
+I (19821) chip[DL]: Attempting to connect WiFi station interface
+E (19821) wifi:sta is connecting, return error
+E (19831) chip[DL]: esp_wifi_connect() failed: ESP_ERR_WIFI_CONN
+I (19831) chip[DL]: Posting ESPSystemEvent: Wifi Event with eventId : 5
+I (19841) chip[DL]: WIFI_EVENT_STA_DISCONNECTED
+I (19841) chip[DL]: WiFi station state change: Connecting -> Connecting_Failed
+W (19851) wifi:Haven't to connect to a suitable AP now!
+E (19851) chip[DL]: Failed to get configured network when updating network status: Error ESP32:0x0500300F
+W (19861) wifi:Haven't to connect to a suitable AP now!
+I (19871) chip[DL]: WiFi station state change: Connecting_Failed -> NotConnected
+W (19871) wifi:Haven't to connect to a suitable AP now!
+E (19881) chip[DL]: Failed to get configured network when updating network status: Error ESP32:0x0500300F
+I (19891) chip[DL]: Next WiFi station reconnect in 100 ms
+I (19891) chip[DL]: Done driving station state, nothing else to do...
+I (19901) app-devicecallbacks: Current free heap: 76728
+
+W (19991) wifi:Haven't to connect to a suitable AP now!
+I (19991) chip[DL]: Attempting to connect WiFi station interface
+E (19991) wifi:sta is connecting, return error
+E (20001) chip[DL]: esp_wifi_connect() failed: ESP_ERR_WIFI_CONN
+I (21951) NimBLE: GATT procedure initiated: indicate; 
+I (21951) NimBLE: att_handle=18
+
+I (22021) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (24481) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (24621) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+I (24621) chip[DL]: Posting ESPSystemEvent: Wifi Event with eventId : 5
+I (24621) chip[DL]: WIFI_EVENT_STA_DISCONNECTED
+W (24621) wifi:Haven't to connect to a suitable AP now!
+I (24631) chip[DL]: Attempting to connect WiFi station interface
+I (24631) chip[DL]: WiFi station state change: NotConnected -> Connecting
+I (24641) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0
+I (24651) wifi:state: init -> auth (0xb0)
+I (24661) chip[DL]: Done driving station state, nothing else to do...
+I (24661) app-devicecallbacks: Current free heap: 76592
+
+I (24661) wifi:state: auth -> assoc (0x0)
+I (24671) wifi:state: assoc -> run (0x10)
+I (24691) wifi:connected with Xiaomi_5475, aid = 1, channel 1, BW20, bssid = 90:fb:5d:52:36:b0
+I (24691) wifi:security: WPA2-PSK, phy: bgn, rssi: -49
+I (24701) wifi:pm start, type: 1
+
+I (24701) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (24701) wifi:set rx beacon pti, rx_bcn_pti: 14, bcn_timeout: 25000, mt_pti: 14, mt_time: 10000
+I (24711) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+I (24721) chip[DL]: Posting ESPSystemEvent: Wifi Event with eventId : 4
+I (24721) chip[DL]: WIFI_EVENT_STA_CONNECTED
+I (24731) chip[DL]: WiFi station state change: Connecting -> Connecting_Succeeded
+I (24741) chip[DL]: WiFi station state change: Connecting_Succeeded -> Connected
+I (24741) chip[DL]: WiFi station interface connected
+I (24751) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (24761) bridge-devicecallbacks: Current free heap: 73920
+
+I (24761) chip[EM]: <<< [E:40572r S:61600 M:207054483] (S) Msg TX from 0000000000000000 to 1:FFFFFFFB00000000 [693C] [BLE] --- Type 0001:09 (IM:InvokeCommandResponse) (B:65)
+I (24781) NimBLE: GATT procedure initiated: indicate; 
+I (24781) NimBLE: att_handle=18
+
+I (24791) chip[ZCL]: WiFiDiagnosticsDelegate: OnConnectionStatusChanged
+I (24791) chip[DL]: Done driving station state, nothing else to do...
+I (24801) app-devicecallbacks: Current free heap: 74336
+
+I (24801) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (24811) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (24821) chip[DIS]: mDNS service published: _matter._tcp
+I (24831) chip[SVR]: Operational advertising enabled
+I (24831) app-devicecallbacks: Current free heap: 74292
+
+I (24841) chip[DL]: Updating advertising data
+I (24841) app-devicecallbacks: Current free heap: 74292
+
+I (24871) chip[DL]: Confirm received for CHIPoBLE TX characteristic indication (con 1) status= 14 
+I (24931) wifi:<ba-add>idx:0 (ifx:0, 90:fb:5d:52:36:b0), tid:0, ssn:0, winSize:64
+I (25801) esp_netif_handlers: sta ip: 192.168.31.39, mask: 255.255.255.0, gw: 192.168.31.1
+I (25801) chip[DL]: Posting ESPSystemEvent: IP Event with eventId : 0
+I (25801) chip[DL]: IP_EVENT_STA_GOT_IP
+I (25801) chip[DL]: IPv4 address changed on WiFi station interface: 192.168.31.39/255.255.255.0 gateway 192.168.31.1
+I (25811) chip[DL]: IPv4 Internet connectivity ESTABLISHED
+I (25821) app-devicecallbacks: Current free heap: 74116
+
+I (25821) app-devicecallbacks: IPv4 Server ready...
+I (25831) chip[DIS]: Updating services using commissioning mode 0
+I (25831) chip[DIS]: CHIP minimal mDNS started advertising.
+I (25841) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (25851) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (25861) chip[DIS]: mDNS service published: _matter._tcp
+I (25861) app-devicecallbacks: Current free heap: 73244
+
+I (25871) chip[DIS]: Updating services using commissioning mode 0
+I (25871) chip[DIS]: CHIP minimal mDNS started advertising.
+I (25881) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (25891) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (25901) chip[DIS]: mDNS service published: _matter._tcp
+I (25901) app-devicecallbacks: Current free heap: 73244
+
+I (26131) chip[EM]: >>> [E:40573r S:0 M:66751509] (U) Msg RX from 0:53F13455C2F2D2A7 [0000] to 0000000000000000 --- Type 0000:30 (SecureChannel:CASE_Sigma1) (B:196)
+I (26141) chip[IN]: CASE Server received Sigma1 message . Starting handshake. EC 0x3fc9fc50
+I (26151) chip[EM]: <<< [E:40573r S:0 M:94266901 (Ack:66751509)] (U) Msg TX from 0000000000000000 to 0:53F13455C2F2D2A7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26161) chip[SC]: Received Sigma1 msg
+E (26171) chip[SC]: CASE failed to match destination ID with local fabrics
+I (26171) chip[EM]: <<< [E:40573r S:0 M:94266902 (Ack:66751509)] (U) Msg TX from 0000000000000000 to 0:53F13455C2F2D2A7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:40 (SecureChannel:StatusReport) (B:34)
+I (26191) chip[EM]: ??1 [E:40573r S:0 M:94266902] (U) Msg Retransmission to 0:0000000000000000 in 387ms [State:Active II:500 AI:300 AT:4000]
+E (26201) chip[IN]: CASE Session establishment failed: 10
+E (26211) chip[EM]: OnMessageReceived failed, err = 10
+I (26211) chip[EM]: >>> [E:40573r S:0 M:66751509] (U) Msg RX from 0:53F13455C2F2D2A7 [0000] to 0000000000000000 --- Type 0000:30 (SecureChannel:CASE_Sigma1) (B:196)
+I (26231) chip[EM]: <<< [E:40573r S:0 M:94266903 (Ack:66751509)] (U) Msg TX from 0000000000000000 to 0:53F13455C2F2D2A7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26251) chip[EM]: >>> [E:40573r S:0 M:66751509] (U) Msg RX from 0:53F13455C2F2D2A7 [0000] to 0000000000000000 --- Type 0000:30 (SecureChannel:CASE_Sigma1) (B:196)
+I (26261) chip[EM]: <<< [E:40573r S:0 M:94266904 (Ack:66751509)] (U) Msg TX from 0000000000000000 to 0:53F13455C2F2D2A7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26281) chip[EM]: >>> [E:40573r S:0 M:66751509] (U) Msg RX from 0:53F13455C2F2D2A7 [0000] to 0000000000000000 --- Type 0000:30 (SecureChannel:CASE_Sigma1) (B:196)
+I (26291) chip[EM]: <<< [E:40573r S:0 M:94266905 (Ack:66751509)] (U) Msg TX from 0000000000000000 to 0:53F13455C2F2D2A7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26311) chip[EM]: >>> [E:40574r S:0 M:66751510] (U) Msg RX from 0:E237C77C73DA0CC7 [0000] to 0000000000000000 --- Type 0000:30 (SecureChannel:CASE_Sigma1) (B:196)
+I (26331) chip[IN]: CASE Server received Sigma1 message . Starting handshake. EC 0x3fc9fca0
+I (26331) chip[EM]: <<< [E:40574r S:0 M:94266906 (Ack:66751510)] (U) Msg TX from 0000000000000000 to 0:E237C77C73DA0CC7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26351) chip[SC]: Received Sigma1 msg
+I (26361) chip[SC]: CASE matched destination ID: fabricIndex 1, NodeID 0x000000003DC8999E
+I (26731) chip[EM]: <<< [E:40574r S:0 M:94266907 (Ack:66751510)] (U) Msg TX from 0000000000000000 to 0:E237C77C73DA0CC7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:31 (SecureChannel:CASE_Sigma2) (B:529)
+I (26731) chip[EM]: ??1 [E:40574r S:0 M:94266907] (U) Msg Retransmission to 0:0000000000000000 in 403ms [State:Active II:500 AI:300 AT:4000]
+I (26741) chip[SC]: Sent Sigma2 msg
+I (26751) chip[EM]: <<1 [E:40573r S:0 M:94266902] (U) Msg Retransmission to 0:0000000000000000
+I (26761) chip[EM]: ??2 [E:40573r S:0 M:94266902] (U) Msg Retransmission to 0:0000000000000000 in 401ms [State:Active II:500 AI:300 AT:4000]
+I (26771) chip[DL]: Posting ESPSystemEvent: IP Event with eventId : 3
+I (26781) chip[EM]: >>> [E:40573r S:0 M:66751511 (Ack:94266902)] (U) Msg RX from 0:53F13455C2F2D2A7 [0000] to 0000000000000000 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26791) chip[DL]: IP_EVENT_GOT_IP6
+I (26791) chip[DL]: IPv6 addr available. Ready on WIFI_STA_DEF interface: fe80:0000:0000:0000:1220:baff:fe91:c318
+I (26801) app-devicecallbacks: Current free heap: 71000
+
+I (26811) chip[EM]: >>> [E:40574r S:0 M:66751512 (Ack:94266907)] (U) Msg RX from 0:E237C77C73DA0CC7 [0000] to 0000000000000000 --- Type 0000:32 (SecureChannel:CASE_Sigma3) (B:380)
+I (26831) chip[EM]: <<< [E:40574r S:0 M:94266908 (Ack:66751512)] (U) Msg TX from 0000000000000000 to 0:E237C77C73DA0CC7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (26841) chip[SC]: Received Sigma3 msg
+E (26851) chip[SC]: The device does not support GetClock_RealTimeMS() API: 6c.  Falling back to Last Known Good UTC Time
+I (26861) chip[DIS]: Updating services using commissioning mode 0
+I (26861) chip[DIS]: CHIP minimal mDNS started advertising.
+I (26881) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (26881) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (26891) chip[DIS]: mDNS service published: _matter._tcp
+I (26891) app-devicecallbacks: Current free heap: 71540
+
+I (27381) chip[SVR]: Server initialization complete
+I (27381) chip[DIS]: Updating services using commissioning mode 0
+I (27381) chip[DIS]: CHIP minimal mDNS started advertising.
+I (27391) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (27401) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (27411) chip[DIS]: mDNS service published: _matter._tcp
+I (27411) app-devicecallbacks: Current free heap: 71120
+
+I (27421) chip[EM]: <<< [E:40574r S:0 M:94266909 (Ack:66751512)] (U) Msg TX from 0000000000000000 to 0:E237C77C73DA0CC7 [0000] [UDP:192.168.31.20:49870] --- Type 0000:40 (SecureChannel:StatusReport) (B:34)
+I (27431) chip[EM]: ??1 [E:40574r S:0 M:94266909] (U) Msg Retransmission to 0:0000000000000000 in 367ms [State:Active II:500 AI:300 AT:4000]
+I (27451) chip[SC]: SecureSession[0x3fc9e2f8, LSID:61602]: State change 'kEstablishing' --> 'kActive'
+I (27451) chip[IN]: CASE Session established to peer: <00000000BB57ACB2, 1>
+I (27461) chip[IM]: No subscriptions to resume
+I (27471) app-devicecallbacks: Current free heap: 73672
+
+I (27471) app-devicecallbacks: Current free heap: 73672
+
+I (27481) CHIP[DL]: Write request received for CHIPoBLE RX characteristic con 1 16
+I (27491) chip[EM]: >>> [E:40575r S:61602 M:144160257] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (27501) chip[FS]: GeneralCommissioning: Received CommissioningComplete
+I (27511) chip[FP]: Metadata for Fabric 0x1 persisted to storage.
+I (27521) chip[TS]: Committing Last Known Good Time to storage: 2025-08-02T03:48:56
+I (27521) chip[ZCL]: OpCreds: Fabric index 0x1 was committed to storage. Compressed Fabric Id 0x7E316FA3C290693C, FabricId 000000002C7206E7, NodeId 000000003DC8999E, VendorId 0x1349
+I (27541) chip[FS]: GeneralCommissioning: Successfully committed pending fabric data
+I (27541) chip[FS]: Fail-safe cleanly disarmed
+I (27541) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x30', EndPoint ID: '0x0', Attribute ID: '0x0'
+I (27561) bridge-devicecallbacks: Current free heap: 71532
+
+I (27561) chip[EM]: <<< [E:40575r S:61602 M:39607305 (Ack:144160257)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:70)
+I (27581) chip[EM]: ??1 [E:40575r S:61602 M:39607305] (S) Msg Retransmission to 1:00000000BB57ACB2 in 393ms [State:Active II:500 AI:300 AT:4000]
+I (27591) chip[EM]: >>> [E:40574r S:0 M:66751513 (Ack:94266909)] (U) Msg RX from 0:E237C77C73DA0CC7 [0000] to 0000000000000000 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (27611) chip[SVR]: Commissioning completed successfully
+I (27611) chip[DIS]: Updating services using commissioning mode 0
+I (27621) chip[DIS]: CHIP minimal mDNS started advertising.
+I (27631) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (27631) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (27651) chip[DIS]: mDNS service published: _matter._tcp
+I (27651) chip[SC]: SecureSession[0x3fc9e220, LSID:61600]: State change 'kActive' --> 'kPendingEviction'
+I (27661) chip[BLE]: Releasing end point's BLE connection back to application.
+I (27661) chip[DL]: Closing BLE GATT connection (con 1)
+I (27671) NimBLE: GAP procedure initiated: terminate connection; conn_handle=1 hci_reason=19
+
+I (27681) app-devicecallbacks: Commissioning complete
+I (27681) app-devicecallbacks: Current free heap: 71508
+
+I (27691) chip[DL]: Write request/command received for CHIPoBLE TX CCCD characteristic (con 1 ) indicate = 0
+I (27701) NimBLE: GAP procedure initiated: stop advertising.
+
+E (27701) NimBLE: ble_hs_stop: failed to terminate connection; rc=2
+
+I (27711) chip[DL]: CHIPoBLE unsubscribe received
+I (27711) chip[DL]: BLE GAP connection terminated (con 1 reason 0x213)
+I (27721) app-devicecallbacks: CHIPoBLE disconnected
+I (27721) app-devicecallbacks: Current free heap: 127064
+
+I (27731) chip[EM]: >>> [E:40575r S:61602 M:144160258 (Ack:39607305)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (27751) chip[EM]: >>> [E:40576r S:61602 M:144160259] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:06 (IM:WriteRequest) (B:105)
+I (27771) chip[EM]: <<< [E:40576r S:61602 M:39607306 (Ack:144160259)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:07 (IM:WriteResponse) (B:84)
+I (27781) chip[EM]: ??1 [E:40576r S:61602 M:39607306] (S) Msg Retransmission to 1:00000000BB57ACB2 in 349ms [State:Active II:500 AI:300 AT:4000]
+I (27801) chip[EM]: >>> [E:40576r S:61602 M:144160260 (Ack:39607306)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (27811) chip[EM]: >>> [E:40577r S:61602 M:144160261] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:03 (IM:SubscribeRequest) (B:58)
+I (27821) chip[DMG]: Final negotiated min/max parameters: Min = 0s, Max = 600s
+I (27841) chip[EM]: >>> [E:40578r S:61602 M:144160262] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (27861) chip[EM]: <<< [E:40577r S:61602 M:39607307 (Ack:144160261)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1208)
+I (27871) chip[EM]: ??1 [E:40577r S:61602 M:39607307] (S) Msg Retransmission to 1:00000000BB57ACB2 in 365ms [State:Active II:500 AI:300 AT:4000]
+I (27881) chip[EM]: <<< [E:40578r S:61602 M:39607308 (Ack:144160262)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:162)
+I (27901) chip[EM]: ??1 [E:40578r S:61602 M:39607308] (S) Msg Retransmission to 1:00000000BB57ACB2 in 339ms [State:Active II:500 AI:300 AT:4000]
+I (27911) chip[EM]: >>> [E:40577r S:61602 M:144160263 (Ack:39607307)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (27931) chip[IM]: Received status response, status is 0x00
+I (27931) chip[EM]: >>> [E:40578r S:61602 M:144160264 (Ack:39607308)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (27961) chip[EM]: <<< [E:40577r S:61602 M:39607309 (Ack:144160263)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1185)
+I (27971) chip[EM]: ??1 [E:40577r S:61602 M:39607309] (S) Msg Retransmission to 1:00000000BB57ACB2 in 358ms [State:Active II:500 AI:300 AT:4000]
+I (27981) chip[EM]: >>> [E:40577r S:61602 M:144160265 (Ack:39607309)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (27991) chip[IM]: Received status response, status is 0x00
+I (28011) chip[EM]: <<< [E:40577r S:61602 M:39607310 (Ack:144160265)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1199)
+I (28021) chip[EM]: ??1 [E:40577r S:61602 M:39607310] (S) Msg Retransmission to 1:00000000BB57ACB2 in 343ms [State:Active II:500 AI:300 AT:4000]
+I (28031) chip[EM]: >>> [E:40577r S:61602 M:144160266 (Ack:39607310)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (28051) chip[IM]: Received status response, status is 0x00
+E (28051) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0000err = 2d
+E (28061) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0001err = 2d
+E (28071) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0002err = 2d
+E (28091) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0003err = 2d
+E (28101) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0004err = 2d
+E (28111) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0005err = 2d
+E (28121) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0006err = 2d
+E (28131) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0007err = 2d
+E (28141) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0008err = 2d
+E (28151) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0009err = 2d
+E (28171) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_000Aerr = 2d
+E (28181) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_000Berr = 2d
+E (28191) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_000Cerr = 2d
+E (28201) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_000Derr = 2d
+E (28211) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_000Eerr = 2d
+E (28221) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_000Ferr = 2d
+E (28241) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0010err = 2d
+E (28251) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0011err = 2d
+E (28261) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0012err = 2d
+E (28271) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0013err = 2d
+E (28281) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0014err = 2d
+E (28291) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0015err = 2d
+E (28301) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0016err = 2d
+E (28321) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0017err = 2d
+E (28331) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0018err = 2d
+E (28341) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0019err = 2d
+E (28351) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_001Aerr = 2d
+E (28361) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_001Berr = 2d
+E (28371) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_001Cerr = 2d
+E (28391) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_001Derr = 2d
+E (28401) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_001Eerr = 2d
+E (28411) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_001Ferr = 2d
+E (28421) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0020err = 2d
+E (28431) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0021err = 2d
+E (28441) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0022err = 2d
+I (28461) wifi:<ba-add>idx:1 (ifx:0, 90:fb:5d:52:36:b0), tid:6, ssn:0, winSize:64
+I (28471) chip[EM]: <<< [E:40577r S:61602 M:39607311 (Ack:144160266)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1194)
+I (28481) chip[EM]: ??1 [E:40577r S:61602 M:39607311] (S) Msg Retransmission to 1:00000000BB57ACB2 in 396ms [State:Active II:500 AI:300 AT:4000]
+I (28491) chip[EM]: >>> [E:40577r S:61602 M:144160266 (Ack:39607310)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (28511) chip[EM]: <<< [E:40577r S:61602 M:39607312 (Ack:144160266)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (28531) chip[EM]: >>> [E:40577r S:61602 M:144160267 (Ack:39607311)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (28541) chip[IM]: Received status response, status is 0x00
+E (28551) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0022err = 2d
+E (28561) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0023err = 2d
+E (28571) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0024err = 2d
+E (28581) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0025err = 2d
+E (28591) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0026err = 2d
+E (28601) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0027err = 2d
+E (28621) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0028err = 2d
+E (28631) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0029err = 2d
+E (28641) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_002Aerr = 2d
+E (28651) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_002Berr = 2d
+E (28661) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_002Cerr = 2d
+E (28671) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_002Derr = 2d
+E (28691) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_002Eerr = 2d
+E (28701) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_002Ferr = 2d
+E (28711) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0030err = 2d
+E (28721) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0031err = 2d
+E (28731) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0032err = 2d
+E (28741) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0033err = 2d
+E (28751) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0034err = 2d
+E (28771) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0035err = 2d
+E (28781) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0036err = 2d
+E (28791) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0037err = 2d
+E (28801) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0038err = 2d
+E (28811) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_0039err = 2d
+E (28821) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_003Aerr = 2d
+E (28841) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_003Berr = 2d
+E (28851) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_003Cerr = 2d
+E (28861) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_003Derr = 2d
+E (28871) chip[DMG]: Fail to retrieve data, roll back and encode status on clusterId: 0x0000_0035, attributeId: 0x0000_003Eerr = 2d
+I (28881) chip[ZCL]: Node is currently connected to Wi-Fi network with BSSID:
+I (28891) chip[ZCL]: The current type of Wi-Fi security used: 4
+I (28891) chip[ZCL]: The current 802.11 standard version in use by the Node: 3
+I (28901) chip[ZCL]: The channel that Wi-Fi communication is currently operating on is: 1
+I (28911) chip[ZCL]: The current RSSI of the Node’s Wi-Fi radio in dB: -49
+I (28921) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (28921) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (28931) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (28941) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (28951) chip[EM]: <<< [E:40577r S:61602 M:39607313 (Ack:144160267)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1204)
+I (28961) chip[EM]: ??1 [E:40577r S:61602 M:39607313] (S) Msg Retransmission to 1:00000000BB57ACB2 in 407ms [State:Active II:500 AI:300 AT:4000]
+I (28981) chip[EM]: >>> [E:40577r S:61602 M:144160267 (Ack:39607311)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (28991) chip[EM]: <<< [E:40577r S:61602 M:39607314 (Ack:144160267)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (29011) chip[EM]: >>> [E:40577r S:61602 M:144160268 (Ack:39607313)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (29021) chip[IM]: Received status response, status is 0x00
+I (29031) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (29041) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (29041) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (29051) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (29061) chip[ZCL]: The WiFi interface is not currently configured or operational.
+I (29071) chip[ZCL]: The Ethernet interface is not currently configured or operational
+I (29071) chip[ZCL]: The Ethernet interface is not currently configured or operational
+I (29081) chip[ZCL]: The Ethernet interface is not currently configured or operational
+I (29101) chip[EM]: <<< [E:40577r S:61602 M:39607315 (Ack:144160268)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1153)
+I (29111) chip[EM]: ??1 [E:40577r S:61602 M:39607315] (S) Msg Retransmission to 1:00000000BB57ACB2 in 373ms [State:Active II:500 AI:300 AT:4000]
+I (29121) chip[EM]: >>> [E:40577r S:61602 M:144160269 (Ack:39607315)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (29141) chip[IM]: Received status response, status is 0x00
+I (29161) chip[EM]: <<< [E:40577r S:61602 M:39607316 (Ack:144160269)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1184)
+I (29161) chip[EM]: ??1 [E:40577r S:61602 M:39607316] (S) Msg Retransmission to 1:00000000BB57ACB2 in 412ms [State:Active II:500 AI:300 AT:4000]
+I (29181) chip[EM]: >>> [E:40577r S:61602 M:144160270 (Ack:39607316)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (29191) chip[IM]: Received status response, status is 0x00
+I (29201) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=3, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (29211) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=0, max_count=16
+I (29211) chip[DL]: emberAfExternalAttributeReadCallback: found device [Light 1], reachable=1
+I (29221) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (29231) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (29241) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (29241) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=3, clusterId=0x6, attrId=0xfffd, maxReadLength=2
+I (29251) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=0, max_count=16
+I (29261) chip[DL]: emberAfExternalAttributeReadCallback: found device [Light 1], reachable=1
+I (29271) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (29281) chip[DL]: HandleReadOnOffAttribute: attrId=65533, maxReadLength=2, device state=OFF
+I (29281) chip[DL]: HandleReadOnOffAttribute: returning ClusterRevision=4
+I (29301) chip[EM]: <<< [E:40577r S:61602 M:39607317 (Ack:144160270)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1207)
+I (29311) chip[EM]: ??1 [E:40577r S:61602 M:39607317] (S) Msg Retransmission to 1:00000000BB57ACB2 in 410ms [State:Active II:500 AI:300 AT:4000]
+I (29341) chip[EM]: >>> [E:40577r S:61602 M:144160271 (Ack:39607317)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (29341) chip[IM]: Received status response, status is 0x00
+I (29351) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=3, clusterId=0x39, attrId=0x5, maxReadLength=32
+I (29361) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=0, max_count=16
+I (29361) chip[DL]: emberAfExternalAttributeReadCallback: found device [Light 1], reachable=1
+I (29371) chip[DL]: emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation
+I (29381) chip[DL]: HandleReadBridgedDeviceBasicAttribute: attrId=5, maxReadLength=32
+I (29391) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=3, clusterId=0x39, attrId=0x11, maxReadLength=1
+I (29401) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=0, max_count=16
+I (29411) chip[DL]: emberAfExternalAttributeReadCallback: found device [Light 1], reachable=1
+I (29411) chip[DL]: emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation
+I (29421) chip[DL]: HandleReadBridgedDeviceBasicAttribute: attrId=17, maxReadLength=1
+I (29431) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=3, clusterId=0x39, attrId=0xfffd, maxReadLength=2
+I (29441) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=0, max_count=16
+I (29451) chip[DL]: emberAfExternalAttributeReadCallback: found device [Light 1], reachable=1
+I (29461) chip[DL]: emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation
+I (29471) chip[DL]: HandleReadBridgedDeviceBasicAttribute: attrId=65533, maxReadLength=2
+I (29471) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (29481) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29491) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29501) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (29511) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (29511) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (29521) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0xfffd, maxReadLength=2
+I (29531) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29541) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29551) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (29561) chip[DL]: HandleReadOnOffAttribute: attrId=65533, maxReadLength=2, device state=OFF
+I (29561) chip[DL]: HandleReadOnOffAttribute: returning ClusterRevision=4
+I (29571) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (29581) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29591) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29601) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (29601) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (29611) chip[DL]: HandleReadLevelControlAttribute: device level=0, device state=OFF, returning CurrentLevel=0
+I (29621) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x2, maxReadLength=1
+I (29631) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29641) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29651) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (29661) chip[DL]: HandleReadLevelControlAttribute: attrId=2, maxReadLength=1
+I (29661) chip[DL]: HandleReadLevelControlAttribute: returning MinLevel=1
+I (29671) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x3, maxReadLength=1
+I (29681) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29691) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29701) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (29701) chip[DL]: HandleReadLevelControlAttribute: attrId=3, maxReadLength=1
+I (29711) chip[DL]: HandleReadLevelControlAttribute: returning MaxLevel=254
+I (29721) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0xfffd, maxReadLength=2
+I (29731) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29731) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29741) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (29751) chip[DL]: HandleReadLevelControlAttribute: attrId=65533, maxReadLength=2
+I (29761) chip[DL]: HandleReadLevelControlAttribute: returning ClusterRevision=5
+I (29771) chip[EM]: <<< [E:40577r S:61602 M:39607318 (Ack:144160271)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:1196)
+I (29781) chip[EM]: ??1 [E:40577r S:61602 M:39607318] (S) Msg Retransmission to 1:00000000BB57ACB2 in 397ms [State:Active II:500 AI:300 AT:4000]
+I (29801) chip[EM]: >>> [E:40577r S:61602 M:144160271 (Ack:39607317)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (29811) chip[EM]: <<< [E:40577r S:61602 M:39607319 (Ack:144160271)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (29831) chip[DL]: BLE deinit successful and memory reclaimed
+I (29841) app-devicecallbacks: BLE is deinitialized
+I (29841) app-devicecallbacks: Current free heap: 140784
+
+I (29851) chip[EM]: >>> [E:40577r S:61602 M:144160272 (Ack:39607318)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (29861) chip[IM]: Received status response, status is 0x00
+I (29871) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x39, attrId=0x5, maxReadLength=32
+I (29881) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29881) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29891) chip[DL]: emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation
+I (29901) chip[DL]: HandleReadBridgedDeviceBasicAttribute: attrId=5, maxReadLength=32
+I (29911) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x39, attrId=0x11, maxReadLength=1
+I (29921) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29931) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29941) chip[DL]: emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation
+I (29941) chip[DL]: HandleReadBridgedDeviceBasicAttribute: attrId=17, maxReadLength=1
+I (29951) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x39, attrId=0xfffd, maxReadLength=2
+I (29961) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (29971) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (29981) chip[DL]: emberAfExternalAttributeReadCallback: handling BridgedDeviceBasicInformation
+I (29991) chip[DL]: HandleReadBridgedDeviceBasicAttribute: attrId=65533, maxReadLength=2
+I (30001) chip[EM]: <<< [E:40577r S:61602 M:39607320 (Ack:144160272)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:429)
+I (30011) chip[EM]: ??1 [E:40577r S:61602 M:39607320] (S) Msg Retransmission to 1:00000000BB57ACB2 in 353ms [State:Active II:500 AI:300 AT:4000]
+I (30031) chip[EM]: >>> [E:40577r S:61602 M:144160273 (Ack:39607320)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (30041) chip[IM]: Received status response, status is 0x00
+I (30051) chip[EM]: <<< [E:40577r S:61602 M:39607321 (Ack:144160273)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:04 (IM:SubscribeResponse) (B:49)
+I (30061) chip[EM]: ??1 [E:40577r S:61602 M:39607321] (S) Msg Retransmission to 1:00000000BB57ACB2 in 349ms [State:Active II:500 AI:300 AT:4000]
+I (30081) chip[DMG]: Registered a ReadHandler that will schedule a report between system Timestamp: 0x00000000000073F2 and system Timestamp 0x0000000000099BB2.
+I (30091) chip[EM]: >>> [E:40579r S:61602 M:144160274] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (30111) chip[EM]: <<< [E:40579r S:61602 M:39607322 (Ack:144160274)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:162)
+I (30121) chip[EM]: ??1 [E:40579r S:61602 M:39607322] (S) Msg Retransmission to 1:00000000BB57ACB2 in 377ms [State:Active II:500 AI:300 AT:4000]
+I (30141) chip[EM]: >>> [E:40577r S:61602 M:144160275 (Ack:39607321)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30151) chip[EM]: >>> [E:40579r S:61602 M:144160276 (Ack:39607322)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30171) chip[EM]: >>> [E:40580r S:61602 M:144160277] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:65)
+I (30181) chip[FS]: GeneralCommissioning: Received ArmFailSafe (30s)
+I (30191) chip[EM]: <<< [E:40580r S:61602 M:39607323 (Ack:144160277)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:70)
+I (30211) chip[EM]: ??1 [E:40580r S:61602 M:39607323] (S) Msg Retransmission to 1:00000000BB57ACB2 in 388ms [State:Active II:500 AI:300 AT:4000]
+I (30221) chip[EM]: >>> [E:40580r S:61602 M:144160278 (Ack:39607323)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30241) chip[EM]: >>> [E:40581r S:61602 M:144160279] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:94)
+I (30251) chip[ZCL]: OpCreds: Received a CSRRequest command
+I (30261) chip[EM]: <<< [E:40581r S:61602 M:39607324 (Ack:144160279)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30511) chip[ZCL]: OpCreds: AllocatePendingOperationalKey succeeded
+I (30641) chip[ZCL]: OpCreds: CSRRequest successful.
+I (30641) chip[EM]: <<< [E:40581r S:61602 M:39607325 (Ack:144160279)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:376)
+I (30651) chip[EM]: ??1 [E:40581r S:61602 M:39607325] (S) Msg Retransmission to 1:00000000BB57ACB2 in 333ms [State:Active II:500 AI:300 AT:4000]
+I (30671) chip[EM]: >>> [E:40581r S:61602 M:144160280 (Ack:39607325)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30681) chip[EM]: >>> [E:40582r S:61602 M:144160281] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:316)
+I (30701) chip[ZCL]: OpCreds: Received an AddTrustedRootCertificate command
+I (30701) chip[EM]: <<< [E:40582r S:61602 M:39607326 (Ack:144160281)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30961) chip[ZCL]: OpCreds: AddTrustedRootCertificate successful.
+I (30971) chip[EM]: <<< [E:40582r S:61602 M:39607327 (Ack:144160281)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (30981) chip[EM]: ??1 [E:40582r S:61602 M:39607327] (S) Msg Retransmission to 1:00000000BB57ACB2 in 342ms [State:Active II:500 AI:300 AT:4000]
+I (30991) chip[EM]: >>> [E:40582r S:61602 M:144160282 (Ack:39607327)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (31041) chip[EM]: >>> [E:40583r S:61602 M:144160283] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:349)
+I (31051) chip[ZCL]: OpCreds: Received an AddNOC command
+I (31051) chip[EM]: <<< [E:40583r S:61602 M:39607328 (Ack:144160283)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (31071) chip[FP]: Validating NOC chain
+I (31311) chip[FP]: NOC chain validation successful
+I (31321) chip[FP]: Added new fabric at index: 0x2
+I (31321) chip[FP]: Assigned compressed fabric ID: 0x98B30D8231E401CD, node ID: 0x00000000110C4383
+I (31321) chip[TS]: Last Known Good Time: 2025-08-02T03:48:56
+I (31331) chip[TS]: New proposed Last Known Good Time: 2025-08-02T03:49:09
+I (31331) chip[TS]: Updating pending Last Known Good Time to 2025-08-02T03:49:09
+I (31351) chip[ZCL]: OpCreds: ACL entry created for Fabric index 0x2 CASE Admin Subject 0x0000000078C66F30
+I (31361) chip[DIS]: Advertise operational node 7E316FA3C290693C-000000003DC8999E
+I (31361) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 7E316FA3C290693C-000000003DC8999E.
+I (31371) chip[DIS]: mDNS service published: _matter._tcp
+I (31381) chip[DIS]: Advertise operational node 98B30D8231E401CD-00000000110C4383
+I (31381) chip[DIS]: CHIP minimal mDNS configured as 'Operational device'; instance name: 98B30D8231E401CD-00000000110C4383.
+I (31401) chip[DIS]: mDNS service published: _matter._tcp
+I (31401) chip[ZCL]: OpCreds: successfully created fabric index 0x2 via AddNOC
+I (31411) chip[EM]: <<< [E:40583r S:61602 M:39607329 (Ack:144160283)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:70)
+I (31431) chip[EM]: ??1 [E:40583r S:61602 M:39607329] (S) Msg Retransmission to 1:00000000BB57ACB2 in 385ms [State:Active II:500 AI:300 AT:4000]
+I (31441) chip[EM]: <<< [E:24104i S:61602 M:39607330] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:333)
+I (31451) chip[EM]: ??1 [E:24104i S:61602 M:39607330] (S) Msg Retransmission to 1:00000000BB57ACB2 in 371ms [State:Active II:500 AI:300 AT:4000]
+I (31471) chip[EM]: >>> [E:40583r S:61602 M:144160284 (Ack:39607329)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (31481) chip[EM]: >>> [E:24104i S:61602 M:144160285 (Ack:39607330)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (31501) chip[IM]: Received status response, status is 0x00
+I (31501) chip[EM]: <<< [E:24104i S:61602 M:39607331 (Ack:144160285)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (31681) chip[EM]: >>> [E:40584r S:0 M:66751514] (U) Msg RX from 0:C7E80F379D8DDB69 [0000] to 0000000000000000 --- Type 0000:30 (SecureChannel:CASE_Sigma1) (B:196)
+I (31681) chip[IN]: CASE Server received Sigma1 message . Starting handshake. EC 0x3fc9fc50
+I (31691) chip[EM]: <<< [E:40584r S:0 M:94266910 (Ack:66751514)] (U) Msg TX from 0000000000000000 to 0:C7E80F379D8DDB69 [0000] [UDP:[FE80::105C:133F:88A4:4611%st1]:53305] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (31711) chip[SC]: Received Sigma1 msg
+I (31721) chip[SC]: CASE matched destination ID: fabricIndex 2, NodeID 0x00000000110C4383
+I (32081) chip[EM]: <<< [E:40584r S:0 M:94266911 (Ack:66751514)] (U) Msg TX from 0000000000000000 to 0:C7E80F379D8DDB69 [0000] [UDP:[FE80::105C:133F:88A4:4611%st1]:53305] --- Type 0000:31 (SecureChannel:CASE_Sigma2) (B:534)
+I (32091) chip[EM]: ??1 [E:40584r S:0 M:94266911] (U) Msg Retransmission to 0:0000000000000000 in 404ms [State:Active II:500 AI:300 AT:4000]
+I (32101) chip[SC]: Sent Sigma2 msg
+I (32131) chip[EM]: >>> [E:40584r S:0 M:66751515 (Ack:94266911)] (U) Msg RX from 0:C7E80F379D8DDB69 [0000] to 0000000000000000 --- Type 0000:32 (SecureChannel:CASE_Sigma3) (B:378)
+I (32131) chip[EM]: <<< [E:40584r S:0 M:94266912 (Ack:66751515)] (U) Msg TX from 0000000000000000 to 0:C7E80F379D8DDB69 [0000] [UDP:[FE80::105C:133F:88A4:4611%st1]:53305] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (32151) chip[SC]: Received Sigma3 msg
+E (32161) chip[SC]: The device does not support GetClock_RealTimeMS() API: 6c.  Falling back to Last Known Good UTC Time
+I (32661) chip[EM]: <<< [E:40584r S:0 M:94266913 (Ack:66751515)] (U) Msg TX from 0000000000000000 to 0:C7E80F379D8DDB69 [0000] [UDP:[FE80::105C:133F:88A4:4611%st1]:53305] --- Type 0000:40 (SecureChannel:StatusReport) (B:34)
+I (32671) chip[EM]: ??1 [E:40584r S:0 M:94266913] (U) Msg Retransmission to 0:0000000000000000 in 353ms [State:Active II:500 AI:300 AT:4000]
+I (32681) chip[SC]: SecureSession[0x3fc9e3d0, LSID:61603]: State change 'kEstablishing' --> 'kActive'
+I (32691) chip[IN]: CASE Session established to peer: <0000000078C66F30, 2>
+I (32701) app-devicecallbacks: Current free heap: 140124
+
+I (32711) chip[EM]: >>> [E:40585r S:61603 M:194581003] (S) Msg RX from 2:0000000078C66F30 [01CD] to 00000000110C4383 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (32721) chip[FS]: GeneralCommissioning: Received CommissioningComplete
+I (32731) chip[FP]: Metadata for Fabric 0x2 persisted to storage.
+I (32741) chip[TS]: Committing Last Known Good Time to storage: 2025-08-02T03:49:09
+I (32761) chip[ZCL]: OpCreds: Fabric index 0x2 was committed to storage. Compressed Fabric Id 0x98B30D8231E401CD, FabricId 000000002DEC3758, NodeId 00000000110C4383, VendorId 0x1384
+I (32761) chip[FS]: GeneralCommissioning: Successfully committed pending fabric data
+I (32771) chip[FS]: Fail-safe cleanly disarmed
+I (32781) chip[EM]: <<< [E:40585r S:61603 M:38531419 (Ack:194581003)] (S) Msg TX from 00000000110C4383 to 2:0000000078C66F30 [01CD] [UDP:[FE80::105C:133F:88A4:4611%st1]:53305] --- Type 0001:09 (IM:InvokeCommandResponse) (B:70)
+I (32791) chip[EM]: ??1 [E:40585r S:61603 M:38531419] (S) Msg Retransmission to 2:0000000078C66F30 in 351ms [State:Active II:500 AI:300 AT:4000]
+I (32811) chip[EM]: >>> [E:40584r S:0 M:66751516 (Ack:94266913)] (U) Msg RX from 0:C7E80F379D8DDB69 [0000] to 0000000000000000 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:26)
+I (32821) app-devicecallbacks: Commissioning complete
+I (32831) app-devicecallbacks: Current free heap: 138004
+
+I (32831) chip[EM]: >>> [E:40585r S:61603 M:194581004 (Ack:38531419)] (S) Msg RX from 2:0000000078C66F30 [01CD] to 00000000110C4383 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (32851) chip[EM]: >>> [E:40586r S:61603 M:194581005] (S) Msg RX from 2:0000000078C66F30 [01CD] to 00000000110C4383 --- Type 0001:02 (IM:ReadRequest) (B:51)
+I (32871) chip[EM]: <<< [E:40586r S:61603 M:38531420 (Ack:194581005)] (S) Msg TX from 00000000110C4383 to 2:0000000078C66F30 [01CD] [UDP:[FE80::105C:133F:88A4:4611%st1]:53305] --- Type 0001:05 (IM:ReportData) (B:102)
+I (32881) chip[EM]: ??1 [E:40586r S:61603 M:38531420] (S) Msg Retransmission to 2:0000000078C66F30 in 407ms [State:Active II:500 AI:300 AT:4000]
+I (32931) chip[EM]: >>> [E:40586r S:61603 M:194581006 (Ack:38531420)] (S) Msg RX from 2:0000000078C66F30 [01CD] to 00000000110C4383 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (34011) chip[EM]: >>> [E:40587r S:61602 M:144160286] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:71)
+I (34021) chip[ZCL]: OpCreds: Received an UpdateFabricLabel command
+I (34031) chip[FP]: Metadata for Fabric 0x1 persisted to storage.
+I (34031) chip[EM]: <<< [E:40587r S:61602 M:39607332 (Ack:144160286)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:70)
+I (34051) chip[EM]: ??1 [E:40587r S:61602 M:39607332] (S) Msg Retransmission to 1:00000000BB57ACB2 in 367ms [State:Active II:500 AI:300 AT:4000]
+I (34071) chip[EM]: <<< [E:24105i S:61602 M:39607333] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:263)
+I (34081) chip[EM]: ??1 [E:24105i S:61602 M:39607333] (S) Msg Retransmission to 1:00000000BB57ACB2 in 360ms [State:Active II:500 AI:300 AT:4000]
+I (34091) chip[EM]: >>> [E:40587r S:61602 M:144160287 (Ack:39607332)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (34111) chip[EM]: >>> [E:24105i S:61602 M:144160288 (Ack:39607333)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (34121) chip[IM]: Received status response, status is 0x00
+I (34131) chip[EM]: <<< [E:24105i S:61602 M:39607334 (Ack:144160288)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (53161) chip[EM]: >>> [E:40588r S:61602 M:144160289] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (53171) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (53181) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53181) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53191) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (53201) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (53211) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (53211) chip[ZCL]: Toggle ep4 on/off from state 0 to 1
+I (53221) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (53231) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53241) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53251) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (53251) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (53261) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (53271) chip[DL]: emberAfExternalAttributeWriteCallback: endpoint=4, clusterId=0x6, attrId=0x0, buffer=0x01
+I (53281) chip[DL]: emberAfExternalAttributeWriteCallback: endpointIndex=1
+I (53281) chip[DL]: emberAfExternalAttributeWriteCallback: found device [Dimmable Light 1], reachable=1
+I (53291) chip[DL]: emberAfExternalAttributeWriteCallback: handling OnOff cluster write
+I (53301) chip[DL]: HandleWriteOnOffAttribute: attrId=0, buffer value=1
+I (53311) chip[DL]: HandleWriteOnOffAttribute: Setting OnOff to ON (current state: OFF)
+I (53311) chip[DL]: Device[Dimmable Light 1]: SetOnOff called with aOn=ON (current state=OFF, current level=0, type=1)
+I (53331) chip[DL]: Device[Dimmable Light 1]: State changing from OFF to ON
+I (53331) chip[DL]: Device[Dimmable Light 1]: Turning ON - restoring level from 0 to 254
+I (53341) chip[DL]: Device[Dimmable Light 1]: Final state after SetOnOff - state=ON, level=254, lastLevel=254
+I (53351) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (53361) bridge-devicecallbacks: Current free heap: 141508
+
+I (53371) chip[EM]: <<< [E:40588r S:61602 M:39607335 (Ack:144160289)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (53391) chip[EM]: ??1 [E:40588r S:61602 M:39607335] (S) Msg Retransmission to 1:00000000BB57ACB2 in 383ms [State:Active II:500 AI:300 AT:4000]
+I (53401) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (53411) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53411) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53421) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (53431) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=ON
+I (53441) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=1
+I (53441) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (53451) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53461) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53471) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (53481) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (53491) chip[DL]: HandleReadLevelControlAttribute: device level=254, device state=ON, returning CurrentLevel=254
+I (53501) chip[EM]: <<< [E:24106i S:61602 M:39607336] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:95)
+I (53511) chip[EM]: ??1 [E:24106i S:61602 M:39607336] (S) Msg Retransmission to 1:00000000BB57ACB2 in 358ms [State:Active II:500 AI:300 AT:4000]
+I (53531) chip[EM]: >>> [E:40588r S:61602 M:144160290 (Ack:39607335)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (53541) chip[EM]: >>> [E:40589r S:61602 M:144160291] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (53561) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 4f null 0 0
+I (53561) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (53571) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53581) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53591) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (53601) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (53601) chip[DL]: HandleReadLevelControlAttribute: device level=254, device state=ON, returning CurrentLevel=254
+I (53621) chip[EM]: <<< [E:40589r S:61602 M:39607337 (Ack:144160291)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (53631) chip[EM]: ??1 [E:40589r S:61602 M:39607337] (S) Msg Retransmission to 1:00000000BB57ACB2 in 371ms [State:Active II:500 AI:300 AT:4000]
+I (53651) chip[EM]: >>> [E:24106i S:61602 M:144160292 (Ack:39607336)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (53661) chip[IM]: Received status response, status is 0x00
+I (53671) chip[EM]: <<< [E:24106i S:61602 M:39607338 (Ack:144160292)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (53681) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (53691) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53701) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53711) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (53721) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (53721) chip[DL]: HandleReadLevelControlAttribute: device level=254, device state=ON, returning CurrentLevel=254
+I (53731) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (53741) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53751) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53761) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (53771) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (53781) chip[DL]: HandleReadLevelControlAttribute: device level=254, device state=ON, returning CurrentLevel=254
+I (53791) chip[DL]: emberAfExternalAttributeWriteCallback: endpoint=4, clusterId=0x8, attrId=0x0, buffer=0x00
+I (53801) chip[DL]: emberAfExternalAttributeWriteCallback: endpointIndex=1
+I (53801) chip[DL]: emberAfExternalAttributeWriteCallback: found device [Dimmable Light 1], reachable=1
+I (53811) chip[DL]: emberAfExternalAttributeWriteCallback: handling LevelControl cluster write
+I (53821) chip[DL]: HandleWriteLevelControlAttribute: attrId=0, buffer value=0
+I (53831) chip[DL]: HandleWriteLevelControlAttribute: received level=0 (current level=254, current state=ON)
+I (53841) chip[DL]: Device[Dimmable Light 1]: SetLevel called with aLevel=0, mType=1
+I (53841) chip[DL]: Device[Dimmable Light 1]: SetLevel processing - old mLevel=254, new aLevel=0, mState=0
+I (53851) chip[DL]: Device[Dimmable Light 1]: SetLevel turning device OFF (level=0)
+I (53861) chip[DL]: Device[Dimmable Light 1]: SetLevel completed - mLevel=0, mState=1
+I (53871) chip[DL]: HandleWriteLevelControlAttribute: after SetLevel - new level=0, new state=OFF
+I (53881) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (53891) bridge-devicecallbacks: Current free heap: 137964
+
+I (53891) chip[ZCL]: Setting on/off to OFF due to level change
+I (53901) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (53911) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53921) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53921) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (53931) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (53941) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (53951) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (53961) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (53961) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (53971) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (53981) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (53991) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (53991) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (54001) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (54011) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (54021) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (54031) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (54031) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (54041) chip[DL]: HandleReadLevelControlAttribute: device level=0, device state=OFF, returning CurrentLevel=0
+I (54051) chip[EM]: <<< [E:24107i S:61602 M:39607339] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:05 (IM:ReportData) (B:95)
+I (54071) chip[EM]: ??1 [E:24107i S:61602 M:39607339] (S) Msg Retransmission to 1:00000000BB57ACB2 in 398ms [State:Active II:500 AI:300 AT:4000]
+I (54081) chip[EM]: >>> [E:40589r S:61602 M:144160293 (Ack:39607337)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (54101) chip[EM]: >>> [E:40590r S:61602 M:144160294] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (54111) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 9 null 0 0
+I (54121) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x8, attrId=0x0, maxReadLength=1
+I (54131) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (54131) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (54141) chip[DL]: emberAfExternalAttributeReadCallback: handling LevelControl cluster
+I (54151) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (54161) chip[DL]: HandleReadLevelControlAttribute: device level=0, device state=OFF, returning CurrentLevel=0
+I (54171) chip[ZCL]: Setting on/off to OFF due to level change
+I (54171) chip[DL]: emberAfExternalAttributeReadCallback: endpoint=4, clusterId=0x6, attrId=0x0, maxReadLength=1
+I (54181) chip[DL]: emberAfExternalAttributeReadCallback: endpointIndex=1, max_count=16
+I (54191) chip[DL]: emberAfExternalAttributeReadCallback: found device [Dimmable Light 1], reachable=1
+I (54201) chip[DL]: emberAfExternalAttributeReadCallback: handling OnOff cluster
+I (54211) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1, device state=OFF
+I (54221) chip[DL]: HandleReadOnOffAttribute: returning OnOff value=0
+I (54221) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (54231) chip[EM]: <<< [E:40590r S:61602 M:39607340 (Ack:144160294)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (54251) chip[EM]: ??1 [E:40590r S:61602 M:39607340] (S) Msg Retransmission to 1:00000000BB57ACB2 in 379ms [State:Active II:500 AI:300 AT:4000]
+I (54261) chip[EM]: >>> [E:40590r S:61602 M:144160294] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (54271) chip[EM]: <<< [E:40590r S:61602 M:39607341 (Ack:144160294)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (54291) chip[EM]: >>> [E:24107i S:61602 M:144160295 (Ack:39607339)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (54311) chip[IM]: Received status response, status is 0x00
+I (54311) chip[EM]: <<< [E:24107i S:61602 M:39607342 (Ack:144160295)] (S) Msg TX from 000000003DC8999E to 1:00000000BB57ACB2 [693C] [UDP:192.168.31.20:49870] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (54331) chip[EM]: >>> [E:40590r S:61602 M:144160296 (Ack:39607340)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000003DC8999E --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
