@@ -24,10 +24,9 @@
 #include <app/ConcreteAttributePath.h>
 #include <app/clusters/identify-server/identify-server.h>
 #include <app/reporting/reporting.h>
-#include <app/server/OnboardingCodesUtil.h>
 #include <app/util/attribute-storage.h>
 #include <app/util/endpoint-config-api.h>
-// #include <bridged-actions-stub.h>
+#include <bridged-actions-stub.h>
 #include <common/Esp32AppServer.h>
 #include <credentials/DeviceAttestationCredsProvider.h>
 #include <credentials/examples/DeviceAttestationCredsExample.h>
@@ -36,7 +35,7 @@
 #include <lib/support/CHIPMemString.h>
 #include <lib/support/ZclString.h>
 #include <platform/ESP32/ESP32Utils.h>
-// #include <setup_payload/OnboardingCodesUtil.h>
+#include <setup_payload/OnboardingCodesUtil.h>
 
 #include <app/InteractionModelEngine.h>
 #include <app/server/Server.h>
@@ -62,9 +61,8 @@ chip::DeviceLayer::ESP32DeviceInfoProvider gExampleDeviceInfoProvider;
 chip::DeviceLayer::DeviceInfoProviderImpl gExampleDeviceInfoProvider;
 #endif // CONFIG_ENABLE_ESP32_DEVICE_INFO_PROVIDER
 
-// sdk修改
-// std::unique_ptr<chip::app::Clusters::Actions::ActionsDelegateImpl> sActionsDelegateImpl;
-// std::unique_ptr<chip::app::Clusters::Actions::ActionsServer> sActionsServer;
+std::unique_ptr<chip::app::Clusters::Actions::ActionsDelegateImpl> sActionsDelegateImpl;
+std::unique_ptr<chip::app::Clusters::Actions::ActionsServer> sActionsServer;
 } // namespace
 
 extern const char TAG[] = "bridge-app";
@@ -686,15 +684,6 @@ void HandleDeviceStatusChanged(Device * dev, Device::Changed_t itemChangedMask)
     }
 }
 
-// sdk修改
-bool emberAfActionsClusterInstantActionCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
-    const Actions::Commands::InstantAction::DecodableType & commandData)
-{
-// No actions are implemented, just return status NotFound.
-commandObj->AddStatus(commandPath, Protocols::InteractionModel::Status::NotFound);
-return true;
-}
-
 // 移除复杂的命令拦截机制，采用官方lighting-app的简单方式
 // 让SDK正常处理所有命令，我们只在属性变化时响应
 bool emberAfPreCommandReceivedCallback(const app::ConcreteCommandPath & commandPath, chip::TLV::TLVReader & aReader,
@@ -794,20 +783,19 @@ static void InitServer(intptr_t context)
 //                       Span<DataVersion>(gThermostatDataVersions), 1);
 // }
 
-// sdk修改
-// void emberAfActionsClusterInitCallback(EndpointId endpoint)
-// {
-//     VerifyOrReturn(endpoint == 1,
-//                    ChipLogError(Zcl, "Actions cluster delegate is not implemented for endpoint with id %d.", endpoint));
-//     VerifyOrReturn(emberAfContainsServer(endpoint, app::Clusters::Actions::Id) == true,
-//                    ChipLogError(Zcl, "Endpoint %d does not support Actions cluster.", endpoint));
-//     VerifyOrReturn(!sActionsDelegateImpl && !sActionsServer);
+void emberAfActionsClusterInitCallback(EndpointId endpoint)
+{
+    VerifyOrReturn(endpoint == 1,
+                   ChipLogError(Zcl, "Actions cluster delegate is not implemented for endpoint with id %d.", endpoint));
+    VerifyOrReturn(emberAfContainsServer(endpoint, app::Clusters::Actions::Id) == true,
+                   ChipLogError(Zcl, "Endpoint %d does not support Actions cluster.", endpoint));
+    VerifyOrReturn(!sActionsDelegateImpl && !sActionsServer);
 
-//     sActionsDelegateImpl = std::make_unique<app::Clusters::Actions::ActionsDelegateImpl>();
-//     sActionsServer       = std::make_unique<app::Clusters::Actions::ActionsServer>(endpoint, *sActionsDelegateImpl.get());
+    sActionsDelegateImpl = std::make_unique<app::Clusters::Actions::ActionsDelegateImpl>();
+    sActionsServer       = std::make_unique<app::Clusters::Actions::ActionsServer>(endpoint, *sActionsDelegateImpl.get());
 
-//     sActionsServer->Init();
-// }
+    sActionsServer->Init();
+}
 
 extern "C" void app_main()
 {
