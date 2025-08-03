@@ -1111,7 +1111,7 @@ cluster GeneralCommissioning = 48 {
   revision 2;
 
   enum CommissioningErrorEnum : enum8 {
-    kOK = 0 [spec_name = "OK"];
+    kOK = 0;
     kValueOutsideRange = 1;
     kInvalidAuthentication = 2;
     kNoFailSafe = 3;

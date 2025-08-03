@@ -8,7 +8,7 @@ description: Diagnostics component used in ESP Insights, which is a remote diagn
 issues: https://github.com/espressif/esp-insights/issues
 repository: git://github.com/espressif/esp-insights.git
 repository_info:
-  commit_sha: bbe13d1897b8272dc7bc350bd805e8852722e48d
+  commit_sha: b043f72425dadf58095847125404426bc2d4cba8
   path: components/esp_diagnostics
 url: https://github.com/espressif/esp-insights/tree/main/components/esp_diagnostics
-version: 1.2.1
+version: 1.2.3
