@@ -39,6 +39,7 @@ public:
         kChanged_State     = 0x02,
         kChanged_Location  = 0x04,
         kChanged_Name      = 0x08,
+        kChanged_Level     = 0x10,
     } Changed;
 
     Device(const char * szDeviceName, const char * szLocation);
@@ -49,6 +50,10 @@ public:
     void SetReachable(bool aReachable);
     void SetName(const char * szDeviceName);
     void SetLocation(const char * szLocation);
+    void SetLevel(uint8_t aLevel);
+    uint8_t GetCurrentLevel() const;
+    uint8_t GetMinLevel() const;
+    uint8_t GetMaxLevel() const;
     inline void SetEndpointId(chip::EndpointId id) { mEndpointId = id; };
     inline chip::EndpointId GetEndpointId() { return mEndpointId; };
     inline char * GetName() { return mName; };
@@ -63,5 +68,8 @@ private:
     char mName[kDeviceNameSize];
     char mLocation[kDeviceLocationSize];
     chip::EndpointId mEndpointId;
+    uint8_t mCurrentLevel;
+    uint8_t mMinLevel;
+    uint8_t mMaxLevel;
     DeviceCallback_fn mChanged_CB;
 };

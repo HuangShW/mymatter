@@ -30,6 +30,9 @@ Device::Device(const char * szDeviceName, const char * szLocation)
     mState      = kState_Off;
     mReachable  = false;
     mEndpointId = 0;
+    mCurrentLevel = 254; // Full brightness (1-254 range)
+    mMinLevel = 1;       // Minimum level per Matter spec
+    mMaxLevel = 254;     // Maximum level per Matter spec
     mChanged_CB = nullptr;
 }
 
@@ -52,12 +55,36 @@ void Device::SetOnOff(bool aOn)
         changed = (mState != kState_On);
         mState  = kState_On;
         ChipLogProgress(DeviceLayer, "Device[%s]: ON", mName);
+        
+        // According to Matter spec, when turning ON, if current level is too low,
+        // we should set it to a reasonable level. This implements OnOff/Level sync.
+        if (changed && mCurrentLevel == 0)
+        {
+            // If level is 0 (which shouldn't happen in our 1-254 range, but just in case)
+            // or if we want to ensure a minimum brightness when turning on
+            uint8_t onLevel = 254; // Default to full brightness
+            if (mCurrentLevel != onLevel)
+            {
+                mCurrentLevel = onLevel;
+                ChipLogProgress(DeviceLayer, "Device[%s]: Level synced to %d on ON", mName, onLevel);
+                
+                // Trigger Level change callback with both State and Level changed
+                if (mChanged_CB)
+                {
+                    mChanged_CB(this, static_cast<Changed_t>(Device::kChanged_State | Device::kChanged_Level));
+                    return; // Early return since we already called the callback
+                }
+            }
+        }
     }
     else
     {
         changed = (mState != kState_Off);
         mState  = kState_Off;
         ChipLogProgress(DeviceLayer, "Device[%s]: OFF", mName);
+        
+        // When turning OFF, we keep the current level value
+        // This allows resuming to the same brightness when turned back on
     }
 
     if (changed && mChanged_CB)
@@ -118,4 +145,42 @@ void Device::SetLocation(const char * szLocation)
 void Device::SetChangeCallback(DeviceCallback_fn aChanged_CB)
 {
     mChanged_CB = aChanged_CB;
+}
+
+void Device::SetLevel(uint8_t aLevel)
+{
+    // Clamp level to valid range (1-254)
+    if (aLevel < mMinLevel)
+    {
+        aLevel = mMinLevel;
+    }
+    else if (aLevel > mMaxLevel)
+    {
+        aLevel = mMaxLevel;
+    }
+
+    bool changed = (mCurrentLevel != aLevel);
+    mCurrentLevel = aLevel;
+
+    ChipLogProgress(DeviceLayer, "Device[%s]: Level=%d", mName, aLevel);
+
+    if (changed && mChanged_CB)
+    {
+        mChanged_CB(this, Device::kChanged_Level);
+    }
+}
+
+uint8_t Device::GetCurrentLevel() const
+{
+    return mCurrentLevel;
+}
+
+uint8_t Device::GetMinLevel() const
+{
+    return mMinLevel;
+}
+
+uint8_t Device::GetMaxLevel() const
+{
+    return mMaxLevel;
 }

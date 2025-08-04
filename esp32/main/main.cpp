@@ -86,13 +86,16 @@ static Device * gDevices[CHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT]; // number o
 // 4 Bridged devices
 static Device gLight1("Light 1", "Office");
 static Device gLight2("Light 2", "Office");
-static Device gLight3("Light 3", "Kitchen");
-static Device gLight4("Light 4", "Den");
+// static Device gLight3("Light 3", "Kitchen");
+// static Device gLight4("Light 4", "Den");
 
 // (taken from chip-devices.xml)
 #define DEVICE_TYPE_BRIDGED_NODE 0x0013
 // (taken from lo-devices.xml)
 #define DEVICE_TYPE_LO_ON_OFF_LIGHT 0x0100
+
+// (taken from chip-devices.xml)
+#define DEVICE_TYPE_DIMMABLE_LIGHT 0x0101
 
 // (taken from chip-devices.xml)
 #define DEVICE_TYPE_ROOT_NODE 0x0016
@@ -127,6 +130,17 @@ DECLARE_DYNAMIC_ATTRIBUTE(BridgedDeviceBasicInformation::Attributes::NodeLabel::
     DECLARE_DYNAMIC_ATTRIBUTE(BridgedDeviceBasicInformation::Attributes::Reachable::Id, BOOLEAN, 1, 0),              /* Reachable */
     DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
 
+// Declare Level Control cluster attributes
+DECLARE_DYNAMIC_ATTRIBUTE_LIST_BEGIN(levelControlAttrs)
+DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::CurrentLevel::Id, INT8U, 1, 0),         /* current level */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::RemainingTime::Id, INT16U, 1, 0),       /* remaining time */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::MinLevel::Id, INT8U, 1, 0),             /* min level */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::MaxLevel::Id, INT8U, 1, 0),             /* max level */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::Options::Id, BITMAP8, 1, 0),            /* options */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::OnOffTransitionTime::Id, INT16U, 1, 0), /* on/off transition time */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::OnLevel::Id, INT8U, 1, 0),              /* on level */
+    DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
+
 // Declare Cluster List for Bridged Light endpoint
 // TODO: It's not clear whether it would be better to get the command lists from
 // the ZAP config on our last fixed endpoint instead.
@@ -140,8 +154,21 @@ constexpr CommandId onOffIncomingCommands[] = {
     kInvalidCommandId,
 };
 
+constexpr CommandId levelControlIncomingCommands[] = {
+    app::Clusters::LevelControl::Commands::MoveToLevel::Id,
+    app::Clusters::LevelControl::Commands::Move::Id,
+    app::Clusters::LevelControl::Commands::Step::Id,
+    app::Clusters::LevelControl::Commands::Stop::Id,
+    app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Id,
+    app::Clusters::LevelControl::Commands::MoveWithOnOff::Id,
+    app::Clusters::LevelControl::Commands::StepWithOnOff::Id,
+    app::Clusters::LevelControl::Commands::StopWithOnOff::Id,
+    kInvalidCommandId,
+};
+
 DECLARE_DYNAMIC_CLUSTER_LIST_BEGIN(bridgedLightClusters)
 DECLARE_DYNAMIC_CLUSTER(OnOff::Id, onOffAttrs, ZAP_CLUSTER_MASK(SERVER), onOffIncomingCommands, nullptr),
+    DECLARE_DYNAMIC_CLUSTER(LevelControl::Id, levelControlAttrs, ZAP_CLUSTER_MASK(SERVER), levelControlIncomingCommands, nullptr),
     DECLARE_DYNAMIC_CLUSTER(Descriptor::Id, descriptorAttrs, ZAP_CLUSTER_MASK(SERVER), nullptr, nullptr),
     DECLARE_DYNAMIC_CLUSTER(BridgedDeviceBasicInformation::Id, bridgedDeviceBasicAttrs, ZAP_CLUSTER_MASK(SERVER), nullptr,
                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
@@ -151,8 +178,8 @@ DECLARE_DYNAMIC_ENDPOINT(bridgedLightEndpoint, bridgedLightClusters);
 
 DataVersion gLight1DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
 DataVersion gLight2DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
-DataVersion gLight3DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
-DataVersion gLight4DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
+// DataVersion gLight3DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
+// DataVersion gLight4DataVersions[MATTER_ARRAY_SIZE(bridgedLightClusters)];
 
 /* REVISION definitions:
  */
@@ -278,6 +305,104 @@ Protocols::InteractionModel::Status HandleWriteOnOffAttribute(Device * dev, chip
     return Protocols::InteractionModel::Status::Success;
 }
 
+Protocols::InteractionModel::Status HandleReadLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer,
+                                                                   uint16_t maxReadLength)
+{
+    using namespace LevelControl::Attributes;
+    ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: attrId=%" PRIu32 ", maxReadLength=%u", attributeId, maxReadLength);
+
+    if ((attributeId == CurrentLevel::Id) && (maxReadLength >= 1))
+    {
+        // CurrentLevel is nullable uint8, but we'll always return a valid value
+        *buffer = dev->GetCurrentLevel();
+    }
+    else if ((attributeId == RemainingTime::Id) && (maxReadLength >= 2))
+    {
+        // RemainingTime - we don't support transitions, so always 0
+        uint16_t remainingTime = 0;
+        memcpy(buffer, &remainingTime, sizeof(remainingTime));
+    }
+    else if ((attributeId == MinLevel::Id) && (maxReadLength >= 1))
+    {
+        *buffer = dev->GetMinLevel();
+    }
+    else if ((attributeId == MaxLevel::Id) && (maxReadLength >= 1))
+    {
+        *buffer = dev->GetMaxLevel();
+    }
+    else if ((attributeId == Options::Id) && (maxReadLength >= 1))
+    {
+        // Options bitmap - no special options supported
+        *buffer = 0;
+    }
+    else if ((attributeId == OnOffTransitionTime::Id) && (maxReadLength >= 2))
+    {
+        // OnOffTransitionTime - no transition supported, so 0
+        uint16_t transitionTime = 0;
+        memcpy(buffer, &transitionTime, sizeof(transitionTime));
+    }
+    else if ((attributeId == OnLevel::Id) && (maxReadLength >= 1))
+    {
+        // OnLevel - level to use when turning on, null means use previous level
+        // We'll return null (0xFF) to indicate using previous level
+        *buffer = 0xFF;
+    }
+    else if ((attributeId == StartUpCurrentLevel::Id) && (maxReadLength >= 1))
+    {
+        // StartUpCurrentLevel - null means use previous level on startup
+        *buffer = 0xFF;
+    }
+    else if ((attributeId == ClusterRevision::Id) && (maxReadLength >= 2))
+    {
+        uint16_t rev = 6; // Level Control cluster revision 6
+        memcpy(buffer, &rev, sizeof(rev));
+    }
+    else
+    {
+        return Protocols::InteractionModel::Status::Failure;
+    }
+
+    return Protocols::InteractionModel::Status::Success;
+}
+
+Protocols::InteractionModel::Status HandleWriteLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer)
+{
+    using namespace LevelControl::Attributes;
+    ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: attrId=%" PRIu32, attributeId);
+
+    VerifyOrReturnError(dev->IsReachable(), Protocols::InteractionModel::Status::Failure);
+    
+    if (attributeId == CurrentLevel::Id)
+    {
+        uint8_t level = *buffer;
+        // Validate level range (1-254, 0 is reserved for "level undefined")
+        if (level == 0 || level > 254)
+        {
+            return Protocols::InteractionModel::Status::ConstraintError;
+        }
+        dev->SetLevel(level);
+        return Protocols::InteractionModel::Status::Success;
+    }
+    else if (attributeId == Options::Id)
+    {
+        // Options attribute is writable but we don't support any options
+        return Protocols::InteractionModel::Status::Success;
+    }
+    else if (attributeId == OnOffTransitionTime::Id)
+    {
+        // OnOffTransitionTime is writable but we don't support transitions
+        return Protocols::InteractionModel::Status::Success;
+    }
+    else if (attributeId == OnLevel::Id)
+    {
+        // OnLevel is writable, store the value for potential future use
+        // For now, we'll just accept it without storing
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    return Protocols::InteractionModel::Status::Failure;
+}
+
 Protocols::InteractionModel::Status emberAfExternalAttributeReadCallback(EndpointId endpoint, ClusterId clusterId,
                                                                          const EmberAfAttributeMetadata * attributeMetadata,
                                                                          uint8_t * buffer, uint16_t maxReadLength)
@@ -295,6 +420,10 @@ Protocols::InteractionModel::Status emberAfExternalAttributeReadCallback(Endpoin
         else if (clusterId == OnOff::Id)
         {
             return HandleReadOnOffAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
+        }
+        else if (clusterId == LevelControl::Id)
+        {
+            return HandleReadLevelControlAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
         }
     }
 
@@ -314,6 +443,10 @@ Protocols::InteractionModel::Status emberAfExternalAttributeWriteCallback(Endpoi
         if ((dev->IsReachable()) && (clusterId == OnOff::Id))
         {
             return HandleWriteOnOffAttribute(dev, attributeMetadata->attributeId, buffer);
+        }
+        else if ((dev->IsReachable()) && (clusterId == LevelControl::Id))
+        {
+            return HandleWriteLevelControlAttribute(dev, attributeMetadata->attributeId, buffer);
         }
     }
 
@@ -347,6 +480,28 @@ void HandleDeviceStatusChanged(Device * dev, Device::Changed_t itemChangedMask)
         ScheduleReportingCallback(dev, OnOff::Id, OnOff::Attributes::OnOff::Id);
     }
 
+    if (itemChangedMask & Device::kChanged_Level)
+    {
+        ScheduleReportingCallback(dev, LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id);
+        
+        // Implement OnOff and Level Control state synchronization
+        // According to Matter spec, when Level > 0, OnOff should be true
+        // When Level = 0 (should not happen as our range is 1-254), but if it did, OnOff should be false
+        uint8_t currentLevel = dev->GetCurrentLevel();
+        bool shouldBeOn = (currentLevel > 0);
+        
+        // Only update OnOff state if it differs from what Level suggests, to avoid circular updates
+        if (dev->IsOn() != shouldBeOn)
+        {
+            // Temporarily set a flag to prevent recursive callbacks during sync
+            // Note: We use the Changed_t mask to detect if this is already a sync operation
+            if (!(itemChangedMask & Device::kChanged_State))
+            {
+                dev->SetOnOff(shouldBeOn);
+            }
+        }
+    }
+
     if (itemChangedMask & Device::kChanged_Name)
     {
         ScheduleReportingCallback(dev, BridgedDeviceBasicInformation::Id, BridgedDeviceBasicInformation::Attributes::NodeLabel::Id);
@@ -358,6 +513,9 @@ const EmberAfDeviceType gAggregateNodeDeviceTypes[] = { { DEVICE_TYPE_BRIDGE, DE
 
 const EmberAfDeviceType gBridgedOnOffDeviceTypes[] = { { DEVICE_TYPE_LO_ON_OFF_LIGHT, DEVICE_VERSION_DEFAULT },
                                                        { DEVICE_TYPE_BRIDGED_NODE, DEVICE_VERSION_DEFAULT } };
+
+const EmberAfDeviceType gBridgedDimmableLightDeviceTypes[] = { { DEVICE_TYPE_DIMMABLE_LIGHT, DEVICE_VERSION_DEFAULT }, // DEVICE_TYPE_DIMMABLE_LIGHT
+                                                              { DEVICE_TYPE_BRIDGED_NODE, DEVICE_VERSION_DEFAULT } };
 
 static void InitServer(intptr_t context)
 {
@@ -382,21 +540,21 @@ static void InitServer(intptr_t context)
     // Add lights 1..3 --> will be mapped to ZCL endpoints 3, 4, 5
     AddDeviceEndpoint(&gLight1, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
                       Span<DataVersion>(gLight1DataVersions), 1);
-    AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedDimmableLightDeviceTypes),
                       Span<DataVersion>(gLight2DataVersions), 1);
-    AddDeviceEndpoint(&gLight3, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight3DataVersions), 1);
+    // AddDeviceEndpoint(&gLight3, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight3DataVersions), 1);
 
-    // Remove Light 2 -- Lights 1 & 3 will remain mapped to endpoints 3 & 5
-    RemoveDeviceEndpoint(&gLight2);
+    // // Remove Light 2 -- Lights 1 & 3 will remain mapped to endpoints 3 & 5
+    // RemoveDeviceEndpoint(&gLight2);
 
-    // Add Light 4 -- > will be mapped to ZCL endpoint 6
-    AddDeviceEndpoint(&gLight4, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight4DataVersions), 1);
+    // // Add Light 4 -- > will be mapped to ZCL endpoint 6
+    // AddDeviceEndpoint(&gLight4, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight4DataVersions), 1);
 
-    // Re-add Light 2 -- > will be mapped to ZCL endpoint 7
-    AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
-                      Span<DataVersion>(gLight2DataVersions), 1);
+    // // Re-add Light 2 -- > will be mapped to ZCL endpoint 7
+    // AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
+    //                   Span<DataVersion>(gLight2DataVersions), 1);
 }
 
 void emberAfActionsClusterInitCallback(EndpointId endpoint)
@@ -445,14 +603,20 @@ extern "C" void app_main()
 
     gLight1.SetReachable(true);
     gLight2.SetReachable(true);
-    gLight3.SetReachable(true);
-    gLight4.SetReachable(true);
+    // gLight3.SetReachable(true);
+    // gLight4.SetReachable(true);
+
+    // Set initial Level values for dimmable lights (254 = full brightness)
+    // gLight1.SetLevel(254);
+    gLight2.SetLevel(254);
+    // gLight3.SetLevel(254);
+    // gLight4.SetLevel(254);
 
     // Whenever bridged device changes its state
     gLight1.SetChangeCallback(&HandleDeviceStatusChanged);
     gLight2.SetChangeCallback(&HandleDeviceStatusChanged);
-    gLight3.SetChangeCallback(&HandleDeviceStatusChanged);
-    gLight4.SetChangeCallback(&HandleDeviceStatusChanged);
+    // gLight3.SetChangeCallback(&HandleDeviceStatusChanged);
+    // gLight4.SetChangeCallback(&HandleDeviceStatusChanged);
 
     DeviceLayer::SetDeviceInfoProvider(&gExampleDeviceInfoProvider);
 
