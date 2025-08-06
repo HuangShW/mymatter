@@ -42,7 +42,13 @@ public:
         kChanged_Level     = 0x10,
     } Changed;
 
-    Device(const char * szDeviceName, const char * szLocation);
+    enum DeviceType_t
+    {
+        kDeviceType_OnOffLight = 0,
+        kDeviceType_DimmableLight = 1,
+    };
+
+    Device(const char * szDeviceName, const char * szLocation, DeviceType_t deviceType = kDeviceType_OnOffLight);
 
     bool IsOn() const;
     bool IsReachable() const;
@@ -54,6 +60,7 @@ public:
     uint8_t GetCurrentLevel() const;
     uint8_t GetMinLevel() const;
     uint8_t GetMaxLevel() const;
+    bool SupportsLevelControl() const;
     inline void SetEndpointId(chip::EndpointId id) { mEndpointId = id; };
     inline chip::EndpointId GetEndpointId() { return mEndpointId; };
     inline char * GetName() { return mName; };
@@ -68,6 +75,7 @@ private:
     char mName[kDeviceNameSize];
     char mLocation[kDeviceLocationSize];
     chip::EndpointId mEndpointId;
+    DeviceType_t mDeviceType;
     uint8_t mCurrentLevel;
     uint8_t mMinLevel;
     uint8_t mMaxLevel;

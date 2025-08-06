@@ -23,13 +23,14 @@
 
 using namespace ::chip::Platform;
 
-Device::Device(const char * szDeviceName, const char * szLocation)
+Device::Device(const char * szDeviceName, const char * szLocation, DeviceType_t deviceType)
 {
     CopyString(mName, sizeof(mName), szDeviceName);
     CopyString(mLocation, sizeof(mLocation), szLocation);
     mState      = kState_Off;
     mReachable  = false;
     mEndpointId = 0;
+    mDeviceType = deviceType;
     mCurrentLevel = 254; // Full brightness (1-254 range)
     mMinLevel = 1;       // Minimum level per Matter spec
     mMaxLevel = 254;     // Maximum level per Matter spec
@@ -48,41 +49,35 @@ bool Device::IsReachable() const
 
 void Device::SetOnOff(bool aOn)
 {
-    bool changed;
+    bool changed = (mState != (aOn ? kState_On : kState_Off));
+    mState = aOn ? kState_On : kState_Off;
+    
+    ChipLogProgress(DeviceLayer, "Device[%s]: %s", mName, aOn ? "ON" : "OFF");
 
-    if (aOn)
+    // For dimmable lights, implement OnOff/Level Control synchronization
+    if (SupportsLevelControl() && changed)
     {
-        changed = (mState != kState_On);
-        mState  = kState_On;
-        ChipLogProgress(DeviceLayer, "Device[%s]: ON", mName);
-        
-        // According to Matter spec, when turning ON, if current level is too low,
-        // we should set it to a reasonable level. This implements OnOff/Level sync.
-        if (changed && mCurrentLevel == 0)
+        if (aOn)
         {
-            // If level is 0 (which shouldn't happen in our 1-254 range, but just in case)
-            // or if we want to ensure a minimum brightness when turning on
-            uint8_t onLevel = 254; // Default to full brightness
-            if (mCurrentLevel != onLevel)
+            // When turning ON, if current level is at minimum (which means effectively off),
+            // restore to a reasonable level
+            if (mCurrentLevel <= mMinLevel)
             {
-                mCurrentLevel = onLevel;
-                ChipLogProgress(DeviceLayer, "Device[%s]: Level synced to %d on ON", mName, onLevel);
-                
-                // Trigger Level change callback with both State and Level changed
-                if (mChanged_CB)
+                uint8_t onLevel = mMaxLevel; // Default to full brightness
+                if (mCurrentLevel != onLevel)
                 {
-                    mChanged_CB(this, static_cast<Changed_t>(Device::kChanged_State | Device::kChanged_Level));
-                    return; // Early return since we already called the callback
+                    mCurrentLevel = onLevel;
+                    ChipLogProgress(DeviceLayer, "Device[%s]: Level restored to %d on ON", mName, onLevel);
+                    
+                    // Trigger both State and Level change callbacks
+                    if (mChanged_CB)
+                    {
+                        mChanged_CB(this, static_cast<Changed_t>(kChanged_State | kChanged_Level));
+                        return; // Early return since we already called the callback
+                    }
                 }
             }
         }
-    }
-    else
-    {
-        changed = (mState != kState_Off);
-        mState  = kState_Off;
-        ChipLogProgress(DeviceLayer, "Device[%s]: OFF", mName);
-        
         // When turning OFF, we keep the current level value
         // This allows resuming to the same brightness when turned back on
     }
@@ -183,4 +178,9 @@ uint8_t Device::GetMinLevel() const
 uint8_t Device::GetMaxLevel() const
 {
     return mMaxLevel;
+}
+
+bool Device::SupportsLevelControl() const
+{
+    return mDeviceType == kDeviceType_DimmableLight;
 }
