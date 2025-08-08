@@ -40,6 +40,7 @@
 #include <app/InteractionModelEngine.h>
 #include <app/server/Server.h>
 #include <app/clusters/level-control/level-control.h>
+#include <app/clusters/on-off-server/on-off-server.h>
 
 #if CONFIG_ENABLE_ESP32_FACTORY_DATA_PROVIDER
 #include <platform/ESP32/ESP32FactoryDataProvider.h>
@@ -115,6 +116,7 @@ static Device gLight2("Light 2", "Office", Device::kDeviceType_DimmableLight);
 // Declare On/Off cluster attributes
 DECLARE_DYNAMIC_ATTRIBUTE_LIST_BEGIN(onOffAttrs)
 DECLARE_DYNAMIC_ATTRIBUTE(OnOff::Attributes::OnOff::Id, BOOLEAN, 1, 0), /* on/off */
+DECLARE_DYNAMIC_ATTRIBUTE(OnOff::Attributes::ClusterRevision::Id, INT16U, 2, 0), // 集群修订版本（只读）
     DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
 
 // Declare Descriptor cluster attributes
@@ -140,7 +142,9 @@ DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::CurrentLevel::Id, INT8U, 1, 
     DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::Options::Id, BITMAP8, 1, MATTER_ATTRIBUTE_FLAG_WRITABLE),            /* options */
     DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::OnOffTransitionTime::Id, INT16U, 2, MATTER_ATTRIBUTE_FLAG_WRITABLE), /* on/off transition time */
     DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::OnLevel::Id, INT8U, 1, MATTER_ATTRIBUTE_FLAG_WRITABLE),              /* on level */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::StartUpCurrentLevel::Id, INT8U, 1, MATTER_ATTRIBUTE_FLAG_WRITABLE),  /* 启动亮度（可为空），可写 */
     DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::FeatureMap::Id, BITMAP32, 4, 0),        /* feature map */
+    DECLARE_DYNAMIC_ATTRIBUTE(LevelControl::Attributes::ClusterRevision::Id, INT16U, 2, 0),     /* 集群修订版本（只读） */
     DECLARE_DYNAMIC_ATTRIBUTE_LIST_END();
 
 // Declare Cluster List for Bridged Light endpoint
@@ -201,6 +205,7 @@ DataVersion gLight2DataVersions[MATTER_ARRAY_SIZE(bridgedDimmableLightClusters)]
 #define ZCL_BRIDGED_DEVICE_BASIC_INFORMATION_CLUSTER_REVISION (2u)
 #define ZCL_FIXED_LABEL_CLUSTER_REVISION (1u)
 #define ZCL_ON_OFF_CLUSTER_REVISION (4u)
+#define ZCL_LEVEL_CONTROL_CLUSTER_REVISION (6u) // Level Control 集群修订版本（与规范保持一致）
 
 int AddDeviceEndpoint(Device * dev, EmberAfEndpointType * ep, const Span<const EmberAfDeviceType> & deviceTypeList,
                       const Span<DataVersion> & dataVersionStorage, chip::EndpointId parentEndpointId)
@@ -222,12 +227,11 @@ int AddDeviceEndpoint(Device * dev, EmberAfEndpointType * ep, const Span<const E
                     ChipLogProgress(DeviceLayer, "Added device %s to dynamic endpoint %d (index=%d)", dev->GetName(),
                                     gCurrentEndpointId, index);
 
-                    // CRITICAL FIX: Manually initialize Level Control cluster for dynamic endpoints
-                    if (dev->SupportsLevelControl())
-                    {
-                        ChipLogProgress(DeviceLayer, "Manually initializing Level Control for dynamic endpoint %d", gCurrentEndpointId);
-                        emberAfLevelControlClusterServerInitCallback(gCurrentEndpointId);
-                    }
+                    // 取消在此处直接初始化 Level Control，改为统一集中初始化
+                    // if (dev->SupportsLevelControl())
+                    // {
+                    //     emberAfPluginLevelControlClusterServerPostInitCallback(gCurrentEndpointId);
+                    // }
 
                     return index;
                 }
@@ -299,11 +303,11 @@ Protocols::InteractionModel::Status HandleReadOnOffAttribute(Device * dev, chip:
 {
     ChipLogProgress(DeviceLayer, "HandleReadOnOffAttribute: attrId=%" PRIu32 ", maxReadLength=%u", attributeId, maxReadLength);
 
-    if ((attributeId == OnOff::Attributes::OnOff::Id) && (maxReadLength == 1))
+    if ((attributeId == OnOff::Attributes::OnOff::Id) && (maxReadLength >= 1))
     {
         *buffer = dev->IsOn() ? 1 : 0;
     }
-    else if ((attributeId == OnOff::Attributes::ClusterRevision::Id) && (maxReadLength == 2))
+    else if ((attributeId == OnOff::Attributes::ClusterRevision::Id) && (maxReadLength >= 2))
     {
         uint16_t rev = ZCL_ON_OFF_CLUSTER_REVISION;
         memcpy(buffer, &rev, sizeof(rev));
@@ -322,120 +326,137 @@ Protocols::InteractionModel::Status HandleWriteOnOffAttribute(Device * dev, chip
 
     VerifyOrReturnError((attributeId == OnOff::Attributes::OnOff::Id) && dev->IsReachable(),
                         Protocols::InteractionModel::Status::Failure);
-    dev->SetOnOff(*buffer == 1);
+
+    bool turnOn = (*buffer == 1);
+    // 先同步业务设备状态，确保外部读取一致
+    dev->SetOnOff(turnOn);
+    // 同步到 OnOff Server（触发集群语义联动/上报）
+    ::OnOffServer::Instance().setOnOffValue(
+        dev->GetEndpointId(),
+        turnOn ? chip::app::Clusters::OnOff::Commands::On::Id : chip::app::Clusters::OnOff::Commands::Off::Id,
+        /* initiatedByLevelChange */ false);
+
     return Protocols::InteractionModel::Status::Success;
 }
 
+// 读取 Level Control 属性：使用 switch-case 简化分支，严格遵循 Matter Level Control 语义
 Protocols::InteractionModel::Status HandleReadLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer,
                                                                    uint16_t maxReadLength)
 {
+    // 每个 case 覆盖一个标准属性；若缓冲区长度不足则返回 Failure；未知属性返回 UnsupportedAttribute
     using namespace LevelControl::Attributes;
     ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: attrId=%" PRIu32 ", maxReadLength=%u", attributeId, maxReadLength);
 
-    if (attributeId == FeatureMap::Id)
+    switch (attributeId)
     {
-        if (maxReadLength >= 4)
+    case FeatureMap::Id: {
+        if (maxReadLength < sizeof(uint32_t))
         {
-            // Set FeatureMap for Lighting devices: kOnOff (0x01) + kLighting (0x02) = 0x03
-            uint32_t featureMap = static_cast<uint32_t>(LevelControl::Feature::kOnOff) |
-                                  static_cast<uint32_t>(LevelControl::Feature::kLighting);
-            memcpy(buffer, &featureMap, sizeof(featureMap));
-            return Protocols::InteractionModel::Status::Success;
+            return Protocols::InteractionModel::Status::Failure;
         }
-    }
-    if (attributeId == CurrentLevel::Id)
-    {
-        if (maxReadLength >= 1)
-        {
-            // CurrentLevel is nullable uint8, but we'll always return a valid value
-            uint8_t currentLevel = dev->GetCurrentLevel();
-            *buffer = currentLevel;
-            ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: CurrentLevel=%d", currentLevel);
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == RemainingTime::Id)
-    {
-        if (maxReadLength >= 2)
-        {
-            // RemainingTime - we don't support transitions, so always 0
-            uint16_t remainingTime = 0;
-            memcpy(buffer, &remainingTime, sizeof(remainingTime));
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == MinLevel::Id)
-    {
-        if (maxReadLength >= 1)
-        {
-            *buffer = dev->GetMinLevel();
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == MaxLevel::Id)
-    {
-        if (maxReadLength >= 1)
-        {
-            *buffer = dev->GetMaxLevel();
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == Options::Id)
-    {
-        if (maxReadLength >= 1)
-        {
-            // Options bitmap - no special options supported
-            *buffer = 0;
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == OnOffTransitionTime::Id)
-    {
-        if (maxReadLength >= 2)
-        {
-            // OnOffTransitionTime - no transition supported, so 0
-            uint16_t transitionTime = 0;
-            memcpy(buffer, &transitionTime, sizeof(transitionTime));
-            ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: OnOffTransitionTime=0");
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == OnLevel::Id)
-    {
-        if (maxReadLength >= 1)
-        {
-            // OnLevel - level to use when turning on, null means use previous level
-            // We'll return null (0xFF) to indicate using previous level
-            *buffer = 0xFF;
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == StartUpCurrentLevel::Id)
-    {
-        if (maxReadLength >= 1)
-        {
-            // StartUpCurrentLevel - null means use previous level on startup
-            *buffer = 0xFF;
-            return Protocols::InteractionModel::Status::Success;
-        }
-    }
-    else if (attributeId == ClusterRevision::Id)
-    {
-        if (maxReadLength >= 2)
-        {
-            uint16_t rev = 6; // Level Control cluster revision 6
-            memcpy(buffer, &rev, sizeof(rev));
-            return Protocols::InteractionModel::Status::Success;
-        }
+        uint32_t featureMap = static_cast<uint32_t>(LevelControl::Feature::kOnOff) |
+                               static_cast<uint32_t>(LevelControl::Feature::kLighting);
+        memcpy(buffer, &featureMap, sizeof(featureMap));
+        return Protocols::InteractionModel::Status::Success;
     }
 
-    ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: Unsupported attribute %" PRIu32, attributeId);
-    return Protocols::InteractionModel::Status::UnsupportedAttribute;
+    case CurrentLevel::Id: {
+        if (maxReadLength < 1)
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        uint8_t currentLevel = dev->GetCurrentLevel();
+        *buffer              = currentLevel;
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: CurrentLevel=%d", currentLevel);
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case RemainingTime::Id: {
+        if (maxReadLength < sizeof(uint16_t))
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        uint16_t remainingTime = 0; // No transitions supported
+        memcpy(buffer, &remainingTime, sizeof(remainingTime));
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case MinLevel::Id: {
+        if (maxReadLength < 1)
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        *buffer = dev->GetMinLevel();
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case MaxLevel::Id: {
+        if (maxReadLength < 1)
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        *buffer = dev->GetMaxLevel();
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case Options::Id: {
+        if (maxReadLength < 1)
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        *buffer = 0; // No special options supported
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case OnOffTransitionTime::Id: {
+        if (maxReadLength < sizeof(uint16_t))
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        uint16_t transitionTime = 0; // No transition supported
+        memcpy(buffer, &transitionTime, sizeof(transitionTime));
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: OnOffTransitionTime=0");
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case OnLevel::Id: {
+        if (maxReadLength < 1)
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        *buffer = 0xFF; // null => use previous level
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case StartUpCurrentLevel::Id: {
+        if (maxReadLength < 1)
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        *buffer = 0xFF; // null => use previous level on startup
+        return Protocols::InteractionModel::Status::Success;
+    }
+
+    case ClusterRevision::Id: {
+        if (maxReadLength < sizeof(uint16_t))
+        {
+            return Protocols::InteractionModel::Status::Failure;
+        }
+        uint16_t rev = ZCL_LEVEL_CONTROL_CLUSTER_REVISION;
+        memcpy(buffer, &rev, sizeof(rev));
+        return Protocols::InteractionModel::Status::Success;
+    }
+    default:
+        ChipLogProgress(DeviceLayer, "HandleReadLevelControlAttribute: Unsupported attribute %" PRIu32, attributeId);
+        return Protocols::InteractionModel::Status::UnsupportedAttribute;
+    }
 }
 
+// 写入 Level Control 属性：支持 CurrentLevel/Options/OnOffTransitionTime/OnLevel/StartUpCurrentLevel 的写入
 Protocols::InteractionModel::Status HandleWriteLevelControlAttribute(Device * dev, chip::AttributeId attributeId, uint8_t * buffer)
 {
     using namespace LevelControl::Attributes;
+    // 设备需可达；CurrentLevel 会在 [1,254] 内由设备层最终钳制；其余写入目前接受但未持久化
     ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: attrId=%" PRIu32, attributeId);
 
     VerifyOrReturnError(dev->IsReachable(), Protocols::InteractionModel::Status::Failure);
@@ -445,16 +466,6 @@ Protocols::InteractionModel::Status HandleWriteLevelControlAttribute(Device * de
         uint8_t level = *buffer;
         ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: Received level %d", level);
 
-        // Handle special case: 0 means "undefined level", map to minimum level
-        // This happens when SDK's range checking limits the level to 0 due to incorrect min/max values
-        // if (level == 0)
-        // {
-        //     level = dev->GetMinLevel();
-        //     ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: Mapped level 0 to minimum %d", level);
-        //     ChipLogProgress(DeviceLayer, "Note: This suggests SDK Level Control state may not be properly initialized");
-        // }
-
-        // Validate level range (1-254)
         if (level > 254)
         {
             ChipLogProgress(DeviceLayer, "HandleWriteLevelControlAttribute: Invalid level %d", level);
@@ -477,8 +488,10 @@ Protocols::InteractionModel::Status HandleWriteLevelControlAttribute(Device * de
     }
     else if (attributeId == OnLevel::Id)
     {
-        // OnLevel is writable, store the value for potential future use
-        // For now, we'll just accept it without storing
+        return Protocols::InteractionModel::Status::Success;
+    }
+    else if (attributeId == StartUpCurrentLevel::Id)
+    {
         return Protocols::InteractionModel::Status::Success;
     }
 
@@ -505,19 +518,9 @@ Protocols::InteractionModel::Status emberAfExternalAttributeReadCallback(Endpoin
         }
         else if (clusterId == LevelControl::Id)
         {
-            // Only handle Level Control attributes for devices that support it
-            if (dev->SupportsLevelControl())
-            {
-                return HandleReadLevelControlAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
-            }
-            else
-            {
-                // For on/off only devices, return failure for Level Control attributes
-                return Protocols::InteractionModel::Status::UnsupportedAttribute;
-            }
+            return HandleReadLevelControlAttribute(dev, attributeMetadata->attributeId, buffer, maxReadLength);
         }
     }
-
     return Protocols::InteractionModel::Status::Failure;
 }
 
@@ -537,16 +540,7 @@ Protocols::InteractionModel::Status emberAfExternalAttributeWriteCallback(Endpoi
         }
         else if ((dev->IsReachable()) && (clusterId == LevelControl::Id))
         {
-            // Only handle Level Control attributes for devices that support it
-            if (dev->SupportsLevelControl())
-            {
-                return HandleWriteLevelControlAttribute(dev, attributeMetadata->attributeId, buffer);
-            }
-            else
-            {
-                // For on/off only devices, return failure for Level Control attributes
-                return Protocols::InteractionModel::Status::UnsupportedAttribute;
-            }
+            return HandleWriteLevelControlAttribute(dev, attributeMetadata->attributeId, buffer);
         }
     }
 
@@ -559,6 +553,20 @@ void CallReportingCallback(intptr_t closure)
     auto path = reinterpret_cast<app::ConcreteAttributePath *>(closure);
     MatterReportingAttributeChangeCallback(*path);
     Platform::Delete(path);
+}
+
+// 统一集中初始化：对包含 Level Control 集群的端点执行插件后置初始化并设置必要的属性
+static void PostInitClustersForEndpoint(EndpointId endpoint)
+{
+    using namespace chip::app::Clusters;
+
+    // Level Control
+    if (emberAfContainsServer(endpoint, LevelControl::Id))
+    {
+        ChipLogProgress(DeviceLayer, "PostInit: Level Control on ep=%d", endpoint);
+        emberAfPluginLevelControlClusterServerPostInitCallback(endpoint);
+        // 其余属性默认值由 ZAP/插件负责，无需在此写入
+    }
 }
 
 void ScheduleReportingCallback(Device * dev, ClusterId cluster, AttributeId attribute)
@@ -582,32 +590,8 @@ void HandleDeviceStatusChanged(Device * dev, Device::Changed_t itemChangedMask)
 
     if (itemChangedMask & Device::kChanged_Level)
     {
-        // Only handle Level Control changes for devices that support it
-        if (dev->SupportsLevelControl())
-        {
-            ScheduleReportingCallback(dev, LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id);
-            
-            // Implement OnOff and Level Control state synchronization
-            // According to Matter spec:
-            // - When Level reaches minimum level, OnOff should be false
-            // - When Level is above minimum level, OnOff should be true
-            uint8_t currentLevel = dev->GetCurrentLevel();
-            // uint8_t minLevel = dev->GetMinLevel();
-            // bool shouldBeOn = (currentLevel > minLevel);
-            
-            // // Only update OnOff state if it differs from what Level suggests, to avoid circular updates
-            // if (dev->IsOn() != shouldBeOn)
-            // {
-            //     // Prevent recursive callbacks during sync by checking if this is already a combined update
-            //     if (!(itemChangedMask & Device::kChanged_State))
-            //     {
-            //         ChipLogProgress(DeviceLayer, "Syncing OnOff to %s due to level change to %d", 
-            //                       shouldBeOn ? "ON" : "OFF", currentLevel);
-            //         dev->SetOnOff(shouldBeOn);
-            //     }
-            // }
-        }
-        // For on/off only devices, ignore Level Control changes
+        ScheduleReportingCallback(dev, LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id);
+        // uint8_t currentLevel = dev->GetCurrentLevel();
     }
 
     if (itemChangedMask & Device::kChanged_Name)
@@ -653,7 +637,6 @@ static void InitServer(intptr_t context)
                       Span<DataVersion>(gLight2DataVersions), 1);
     // AddDeviceEndpoint(&gLight3, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
     //                   Span<DataVersion>(gLight3DataVersions), 1);
-
     // // Remove Light 2 -- Lights 1 & 3 will remain mapped to endpoints 3 & 5
     // RemoveDeviceEndpoint(&gLight2);
 
@@ -664,6 +647,9 @@ static void InitServer(intptr_t context)
     // // Re-add Light 2 -- > will be mapped to ZCL endpoint 7
     // AddDeviceEndpoint(&gLight2, &bridgedLightEndpoint, Span<const EmberAfDeviceType>(gBridgedOnOffDeviceTypes),
     //                   Span<DataVersion>(gLight2DataVersions), 1);
+                      // 集中 PostInit：对已添加端点执行必要的集群初始化
+    PostInitClustersForEndpoint(gLight1.GetEndpointId());
+    PostInitClustersForEndpoint(gLight2.GetEndpointId());
 }
 
 void emberAfActionsClusterInitCallback(EndpointId endpoint)

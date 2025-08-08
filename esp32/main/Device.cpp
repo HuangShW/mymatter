@@ -31,9 +31,9 @@ Device::Device(const char * szDeviceName, const char * szLocation, DeviceType_t 
     mReachable  = false;
     mEndpointId = 0;
     mDeviceType = deviceType;
-    mCurrentLevel = 254; // Full brightness (1-254 range)
-    mMinLevel = 1;       // Minimum level per Matter spec
-    mMaxLevel = 254;     // Maximum level per Matter spec
+    mCurrentLevel = 254; // 默认满亮度（1-254 范围）
+    mMinLevel = 1;       // 最小亮度，符合 Matter 规范
+    mMaxLevel = 254;     // 最大亮度，符合 Matter 规范
     mChanged_CB = nullptr;
 }
 
@@ -54,33 +54,7 @@ void Device::SetOnOff(bool aOn)
     
     ChipLogProgress(DeviceLayer, "Device[%s]: %s", mName, aOn ? "ON" : "OFF");
 
-    // For dimmable lights, implement OnOff/Level Control synchronization
-    if (SupportsLevelControl() && changed)
-    {
-        if (aOn)
-        {
-            // When turning ON, if current level is at minimum (which means effectively off),
-            // restore to a reasonable level
-            if (mCurrentLevel <= mMinLevel)
-            {
-                uint8_t onLevel = mMaxLevel; // Default to full brightness
-                if (mCurrentLevel != onLevel)
-                {
-                    mCurrentLevel = onLevel;
-                    ChipLogProgress(DeviceLayer, "Device[%s]: Level restored to %d on ON", mName, onLevel);
-                    
-                    // Trigger both State and Level change callbacks
-                    if (mChanged_CB)
-                    {
-                        mChanged_CB(this, static_cast<Changed_t>(kChanged_State | kChanged_Level));
-                        return; // Early return since we already called the callback
-                    }
-                }
-            }
-        }
-        // When turning OFF, we keep the current level value
-        // This allows resuming to the same brightness when turned back on
-    }
+    // 移除与 Level 的联动，交由 OnOff/LevelControl 插件处理
 
     if (changed && mChanged_CB)
     {
@@ -182,5 +156,5 @@ uint8_t Device::GetMaxLevel() const
 
 bool Device::SupportsLevelControl() const
 {
-    return mDeviceType == kDeviceType_DimmableLight;
+    return mDeviceType == kDeviceType_DimmableLight; // 仅可调光灯支持 Level Control
 }
