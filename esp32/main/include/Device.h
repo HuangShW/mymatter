@@ -35,17 +35,18 @@ public:
 
     enum Changed_t
     {
-        kChanged_Reachable = 0x01, // 可达性变化
-        kChanged_State     = 0x02, // 开关状态变化
-        kChanged_Location  = 0x04, // 位置标签变化
-        kChanged_Name      = 0x08, // 名称变化
-        kChanged_Level     = 0x10, // 亮度变化（Level Control）
+        kChanged_Reachable       = 0x01, // 可达性变化
+        kChanged_State           = 0x02, // 开关状态变化
+        kChanged_Location        = 0x04, // 位置标签变化
+        kChanged_Name            = 0x08, // 名称变化
+        kChanged_Level           = 0x10, // 亮度变化（Level Control）
+        kChanged_ColorTemperature = 0x20, // 色温变化（Color Control - CT）
     } Changed;
 
     enum DeviceType_t
     {
-        kDeviceType_OnOffLight = 0,     // 开关型灯，不支持调光
-        kDeviceType_DimmableLight = 1,  // 可调光灯，支持 Level Control
+        kDeviceType_OnOffLight    = 0, // 开关型灯，不支持调光
+        kDeviceType_DimmableLight = 1, // 可调光灯，支持 Level Control
     };
 
     Device(const char * szDeviceName, const char * szLocation, DeviceType_t deviceType = kDeviceType_OnOffLight);
@@ -68,6 +69,12 @@ public:
     // 是否支持 Level Control（由设备类型决定）
     bool SupportsLevelControl() const;
 
+    // 色温（mireds）接口：仅当设备包含 Color Control 集群时会被使用
+    void SetColorTemperatureMireds(uint16_t mireds);
+    uint16_t GetColorTemperatureMireds() const;
+    uint16_t GetMinColorTemperatureMireds() const;
+    uint16_t GetMaxColorTemperatureMireds() const;
+
     inline void SetEndpointId(chip::EndpointId id) { mEndpointId = id; };
     inline chip::EndpointId GetEndpointId() { return mEndpointId; };
     inline char * GetName() { return mName; };
@@ -86,5 +93,11 @@ private:
     uint8_t mCurrentLevel;    // 当前亮度（1-254）
     uint8_t mMinLevel;        // 最小亮度（默认 1）
     uint8_t mMaxLevel;        // 最大亮度（默认 254）
+
+    // 色温状态（mireds）：CT-only 设备使用（默认范围 153-500，对应约 6500K-2000K）
+    uint16_t mCurrentColorTempMireds; // 当前色温（默认 370 ≈ 2700K）
+    uint16_t mMinColorTempMireds;     // 物理最小（默认 153）
+    uint16_t mMaxColorTempMireds;     // 物理最大（默认 500）
+
     DeviceCallback_fn mChanged_CB;
 };

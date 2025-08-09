@@ -1,109 +1,1006 @@
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip
-Executing action: all (aliases: build)
-Running ninja in directory /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build
-Executing "ninja all"...
-[1/1] cd /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedho...tedhomeip/examples/mymatter/esp32/build/bootloader/bootloader.bin
-Bootloader binary size 0x5160 bytes. 0x2ea0 bytes (36%) free.
-[5/13] Performing build step for 'chip_gn'
-ninja: no work to do.
-[8/13] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj
-FAILED: [code=1] esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj 
-/home/hsw/.espressif/tools/riscv32-esp-elf/esp-14.2.0_20241119/riscv32-esp-elf/bin/riscv32-esp-elf-g++ -DESP_MDNS_VERSION_NUMBER=\"1.8.2\" -DESP_PLATFORM -DIDF_VER=\"v5.4.2-270-gf10ac3eec2\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DMD5_ENABLED=1 -DSERIAL_FLASHER_BOOT_HOLD_TIME_MS=50 -DSERIAL_FLASHER_RESET_HOLD_TIME_MS=100 -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -DUNITY_INCLUDE_CONFIG_H -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/config -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/providers -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/bridge-common/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/gen/__idf_main-codegen/cpp-app -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/gen/__idf_main-zapgen/zapgen/app-templates -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/zzz_generated -I/home/hsw/esp/idf/esp-idf/components/newlib/platform_include -I/home/hsw/esp/idf/esp-idf/components/freertos/config/include -I/home/hsw/esp/idf/esp-idf/components/freertos/config/include/freertos -I/home/hsw/esp/idf/esp-idf/components/freertos/config/riscv/include -I/home/hsw/esp/idf/esp-idf/components/freertos/FreeRTOS-Kernel/include -I/home/hsw/esp/idf/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include -I/home/hsw/esp/idf/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos -I/home/hsw/esp/idf/esp-idf/components/freertos/esp_additions/include -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/include -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/include/soc -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/include/soc/esp32c3 -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/dma/include -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/ldo/include -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/debug_probe/include -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/port/esp32c3/. -I/home/hsw/esp/idf/esp-idf/components/esp_hw_support/port/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/heap/include -I/home/hsw/esp/idf/esp-idf/components/heap/tlsf -I/home/hsw/esp/idf/esp-idf/components/log/include -I/home/hsw/esp/idf/esp-idf/components/soc/include -I/home/hsw/esp/idf/esp-idf/components/soc/esp32c3 -I/home/hsw/esp/idf/esp-idf/components/soc/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/soc/esp32c3/register -I/home/hsw/esp/idf/esp-idf/components/hal/platform_port/include -I/home/hsw/esp/idf/esp-idf/components/hal/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/hal/include -I/home/hsw/esp/idf/esp-idf/components/esp_rom/include -I/home/hsw/esp/idf/esp-idf/components/esp_rom/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/esp_rom/esp32c3/include/esp32c3 -I/home/hsw/esp/idf/esp-idf/components/esp_rom/esp32c3 -I/home/hsw/esp/idf/esp-idf/components/esp_common/include -I/home/hsw/esp/idf/esp-idf/components/esp_system/include -I/home/hsw/esp/idf/esp-idf/components/esp_system/port/soc -I/home/hsw/esp/idf/esp-idf/components/esp_system/port/include/riscv -I/home/hsw/esp/idf/esp-idf/components/esp_system/port/include/private -I/home/hsw/esp/idf/esp-idf/components/riscv/include -I/home/hsw/esp/idf/esp-idf/components/lwip/include -I/home/hsw/esp/idf/esp-idf/components/lwip/include/apps -I/home/hsw/esp/idf/esp-idf/components/lwip/include/apps/sntp -I/home/hsw/esp/idf/esp-idf/components/lwip/lwip/src/include -I/home/hsw/esp/idf/esp-idf/components/lwip/port/include -I/home/hsw/esp/idf/esp-idf/components/lwip/port/freertos/include -I/home/hsw/esp/idf/esp-idf/components/lwip/port/esp32xx/include -I/home/hsw/esp/idf/esp-idf/components/lwip/port/esp32xx/include/arch -I/home/hsw/esp/idf/esp-idf/components/lwip/port/esp32xx/include/sys -I/home/hsw/esp/idf/esp-idf/components/esp_driver_gpio/include -I/home/hsw/esp/idf/esp-idf/components/esp_pm/include -I/home/hsw/esp/idf/esp-idf/components/mbedtls/port/include -I/home/hsw/esp/idf/esp-idf/components/mbedtls/mbedtls/include -I/home/hsw/esp/idf/esp-idf/components/mbedtls/mbedtls/library -I/home/hsw/esp/idf/esp-idf/components/mbedtls/esp_crt_bundle/include -I/home/hsw/esp/idf/esp-idf/components/mbedtls/mbedtls/3rdparty/everest/include -I/home/hsw/esp/idf/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m -I/home/hsw/esp/idf/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m/p256-m -I/home/hsw/esp/idf/esp-idf/components/esp_app_format/include -I/home/hsw/esp/idf/esp-idf/components/esp_bootloader_format/include -I/home/hsw/esp/idf/esp-idf/components/app_update/include -I/home/hsw/esp/idf/esp-idf/components/bootloader_support/include -I/home/hsw/esp/idf/esp-idf/components/bootloader_support/bootloader_flash/include -I/home/hsw/esp/idf/esp-idf/components/esp_partition/include -I/home/hsw/esp/idf/esp-idf/components/efuse/include -I/home/hsw/esp/idf/esp-idf/components/efuse/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/esp_mm/include -I/home/hsw/esp/idf/esp-idf/components/spi_flash/include -I/home/hsw/esp/idf/esp-idf/components/esp_security/include -I/home/hsw/esp/idf/esp-idf/components/pthread/include -I/home/hsw/esp/idf/esp-idf/components/esp_timer/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_gptimer/include -I/home/hsw/esp/idf/esp-idf/components/esp_ringbuf/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_uart/include -I/home/hsw/esp/idf/esp-idf/components/vfs/include -I/home/hsw/esp/idf/esp-idf/components/app_trace/include -I/home/hsw/esp/idf/esp-idf/components/esp_event/include -I/home/hsw/esp/idf/esp-idf/components/nvs_flash/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_pcnt/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_spi/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_mcpwm/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_ana_cmpr/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_i2s/include -I/home/hsw/esp/idf/esp-idf/components/sdmmc/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_sdmmc/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_sdspi/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_sdio/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_dac/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_rmt/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_tsens/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_sdm/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_i2c/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_ledc/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_parlio/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_usb_serial_jtag/include -I/home/hsw/esp/idf/esp-idf/components/driver/deprecated -I/home/hsw/esp/idf/esp-idf/components/driver/i2c/include -I/home/hsw/esp/idf/esp-idf/components/driver/touch_sensor/include -I/home/hsw/esp/idf/esp-idf/components/driver/twai/include -I/home/hsw/esp/idf/esp-idf/components/esp_phy/include -I/home/hsw/esp/idf/esp-idf/components/esp_phy/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/esp_vfs_console/include -I/home/hsw/esp/idf/esp-idf/components/esp_netif/include -I/home/hsw/esp/idf/esp-idf/components/wpa_supplicant/include -I/home/hsw/esp/idf/esp-idf/components/wpa_supplicant/port/include -I/home/hsw/esp/idf/esp-idf/components/wpa_supplicant/esp_supplicant/include -I/home/hsw/esp/idf/esp-idf/components/esp_coex/include -I/home/hsw/esp/idf/esp-idf/components/esp_wifi/include -I/home/hsw/esp/idf/esp-idf/components/esp_wifi/include/local -I/home/hsw/esp/idf/esp-idf/components/esp_wifi/wifi_apps/include -I/home/hsw/esp/idf/esp-idf/components/esp_wifi/wifi_apps/nan_app/include -I/home/hsw/esp/idf/esp-idf/components/esp_gdbstub/include -I/home/hsw/esp/idf/esp-idf/components/bt/include/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/bt/common/osi/include -I/home/hsw/esp/idf/esp-idf/components/bt/common/api/include/api -I/home/hsw/esp/idf/esp-idf/components/bt/common/btc/profile/esp/blufi/include -I/home/hsw/esp/idf/esp-idf/components/bt/common/btc/profile/esp/include -I/home/hsw/esp/idf/esp-idf/components/bt/common/hci_log/include -I/home/hsw/esp/idf/esp-idf/components/bt/common/ble_log/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/ans/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/bas/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/dis/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/gap/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/gatt/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/hr/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/htp/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/ias/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/ipss/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/lls/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/prox/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/cts/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/tps/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/hid/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/sps/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/services/cte/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/util/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/store/ram/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/host/store/config/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/porting/nimble/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/port/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/nimble/transport/include -I/home/hsw/esp/idf/esp-idf/components/bt/porting/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/nimble/porting/npl/freertos/include -I/home/hsw/esp/idf/esp-idf/components/bt/host/nimble/esp-hci/include -I/home/hsw/esp/idf/esp-idf/components/unity/include -I/home/hsw/esp/idf/esp-idf/components/unity/unity/src -I/home/hsw/esp/idf/esp-idf/components/cmock/CMock/src -I/home/hsw/esp/idf/esp-idf/components/console -I/home/hsw/esp/idf/esp-idf/components/http_parser -I/home/hsw/esp/idf/esp-idf/components/esp-tls -I/home/hsw/esp/idf/esp-idf/components/esp-tls/esp-tls-crypto -I/home/hsw/esp/idf/esp-idf/components/esp_adc/include -I/home/hsw/esp/idf/esp-idf/components/esp_adc/interface -I/home/hsw/esp/idf/esp-idf/components/esp_adc/esp32c3/include -I/home/hsw/esp/idf/esp-idf/components/esp_adc/deprecated/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_isp/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_cam/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_cam/interface -I/home/hsw/esp/idf/esp-idf/components/esp_psram/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_jpeg/include -I/home/hsw/esp/idf/esp-idf/components/esp_driver_ppa/include -I/home/hsw/esp/idf/esp-idf/components/esp_eth/include -I/home/hsw/esp/idf/esp-idf/components/esp_hid/include -I/home/hsw/esp/idf/esp-idf/components/tcp_transport/include -I/home/hsw/esp/idf/esp-idf/components/esp_http_client/include -I/home/hsw/esp/idf/esp-idf/components/esp_http_server/include -I/home/hsw/esp/idf/esp-idf/components/esp_https_ota/include -I/home/hsw/esp/idf/esp-idf/components/esp_https_server/include -I/home/hsw/esp/idf/esp-idf/components/esp_lcd/include -I/home/hsw/esp/idf/esp-idf/components/esp_lcd/interface -I/home/hsw/esp/idf/esp-idf/components/protobuf-c/protobuf-c -I/home/hsw/esp/idf/esp-idf/components/protocomm/include/common -I/home/hsw/esp/idf/esp-idf/components/protocomm/include/security -I/home/hsw/esp/idf/esp-idf/components/protocomm/include/transports -I/home/hsw/esp/idf/esp-idf/components/protocomm/include/crypto/srp6a -I/home/hsw/esp/idf/esp-idf/components/protocomm/proto-c -I/home/hsw/esp/idf/esp-idf/components/esp_local_ctrl/include -I/home/hsw/esp/idf/esp-idf/components/espcoredump/include -I/home/hsw/esp/idf/esp-idf/components/espcoredump/include/port/riscv -I/home/hsw/esp/idf/esp-idf/components/wear_levelling/include -I/home/hsw/esp/idf/esp-idf/components/fatfs/diskio -I/home/hsw/esp/idf/esp-idf/components/fatfs/src -I/home/hsw/esp/idf/esp-idf/components/fatfs/vfs -I/home/hsw/esp/idf/esp-idf/components/idf_test/include -I/home/hsw/esp/idf/esp-idf/components/idf_test/include/esp32c3 -I/home/hsw/esp/idf/esp-idf/components/ieee802154/include -I/home/hsw/esp/idf/esp-idf/components/json/cJSON -I/home/hsw/esp/idf/esp-idf/components/mqtt/esp-mqtt/include -I/home/hsw/esp/idf/esp-idf/components/nvs_sec_provider/include -I/home/hsw/esp/idf/esp-idf/components/rt/include -I/home/hsw/esp/idf/esp-idf/components/spiffs/include -I/home/hsw/esp/idf/esp-idf/components/wifi_provisioning/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_delta_ota/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_encrypted_img/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__rmaker_common/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_diagnostics/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__cbor/port/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_diag_data_store/src/rtc_store -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_diag_data_store/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_insights/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__mdns/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp-serial-flasher/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp-serial-flasher/port -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_rcp_update/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/managed_components/espressif__esp_secure_cert_mgr/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/platform/ESP32 -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/platform/OpenThread -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/lib -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/zzz_generated/app-common -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/platform/esp32 -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/third_party/nlassert/repo/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/third_party/nlio/repo/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/esp-idf/chip/src/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/esp-idf/chip/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/esp-idf/chip/gen/include -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/config/esp32 -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/config/esp32/../.. -I/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/third_party/connectedhomeip/examples/common/QRCode/repo/c -march=rv32imc_zicsr_zifencei  -std=gnu++17 -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-error=extra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -nostartfiles -Og -fno-shrink-wrap -fmacro-prefix-map=/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32=. -fmacro-prefix-map=/home/hsw/esp/idf/esp-idf=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -Wno-format-nonliteral -Wno-format-security -Wno-error=maybe-uninitialized -std=gnu++2b -fno-exceptions -fno-rtti -fuse-cxa-atexit -std=gnu++17 -Os -DCHIP_HAVE_CONFIG_H -DCHIP_DEVICE_CONFIG_DYNAMIC_ENDPOINT_COUNT=16 "-DCHIP_ADDRESS_RESOLVE_IMPL_INCLUDE_HEADER=<lib/address_resolve/AddressResolve_DefaultImpl.h>" -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj -MF esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj -c /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp
-In file included from /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/include/Device.h:19,
-                 from /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:18:
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:180:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  180 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:180:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  180 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:180:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  180 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:180:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  180 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:180:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  180 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:180:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  180 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventList' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/src/app/util/attribute-storage.h:52:42: warning: missing initializer for member 'EmberAfCluster::eventCount' [-Wmissing-field-initializers]
-   52 | #define DECLARE_DYNAMIC_CLUSTER_LIST_END }
-      |                                          ^
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:188:38: note: in expansion of macro 'DECLARE_DYNAMIC_CLUSTER_LIST_END'
-  188 |                             nullptr) DECLARE_DYNAMIC_CLUSTER_LIST_END;
-      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp: In function 'chip::Protocols::InteractionModel::Status HandleReadOnOffAttribute(Device*, chip::AttributeId, uint8_t*, uint16_t)':
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:309:66: error: 'Get' is not a member of 'chip::app::Clusters::OnOff::Attributes::OnOff'
-  309 |         auto st = chip::app::Clusters::OnOff::Attributes::OnOff::Get(dev->GetEndpointId(), &on);
-      |                                                                  ^~~
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:309:66: note: maximum limit of 1000 namespaces searched for 'Get'
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp: In function 'chip::Protocols::InteractionModel::Status HandleWriteOnOffAttribute(Device*, chip::AttributeId, uint8_t*)':
-/home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/main/main.cpp:334:33: error: 'chip::app::Clusters::OnOff::OnOffServer' has not been declared
-  334 |     chip::app::Clusters::OnOff::OnOffServer::Instance().setOnOffValue(
-      |                                 ^~~~~~~~~~~
-ninja: build stopped: subcommand failed.
-ninja failed with exit code 1, output of the command is in the /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/log/idf_py_stderr_output_7906 and /home/hsw/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32/build/log/idf_py_stdout_output_7906
-hsw@ubuntu:~/esp/idf/esp-matter/connectedhomeip/connectedhomeip/examples/mymatter/esp32$ 
+I (26801) chip[EM]: >>> [E:57666r S:50195 M:231859425] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (26811) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (26811) chip[ZCL]: Toggle ep3 on/off from state 0 to 1
+I (26821) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (26821) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (26831) chip[DL]: Device[Light 1]: ON
+I (26831) chip[DL]: MetricChanged ep=3 name="Light 1" onoff=1
+I (26841) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (26841) chip[ZCL]: Endpoint 3 On/off already set to new value
+I (26851) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x3', Attribute ID: '0x0'
+I (26861) bridge-devicecallbacks: Current free heap: 134640
+
+I (26871) chip[EM]: <<< [E:57666r S:50195 M:28092651 (Ack:231859425)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (26891) chip[EM]: ??1 [E:57666r S:50195 M:28092651] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 343ms from now [State:Active II:500 AI:300 AT:4000]
+I (27231) chip[EM]: <<1 [E:57666r S:50195 M:28092651] (S) Msg Retransmission to 1:00000000BB57ACB2
+I (27231) chip[EM]: ??2 [E:57666r S:50195 M:28092651] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 350ms from now [State:Active II:500 AI:300 AT:4000]
+I (27511) chip[EM]: >>> [E:57666r S:50195 M:231859425] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (27511) chip[EM]: <<< [E:57666r S:50195 M:28092652 (Ack:231859425)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (27531) chip[EM]: >>> [E:57666r S:50195 M:231859426 (Ack:28092651)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (27551) chip[EM]: >>> [E:57666r S:50195 M:231859427 (Ack:28092651)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (29651) chip[EM]: >>> [E:57667r S:50195 M:231859428] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (29651) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (29661) chip[ZCL]: Toggle ep3 on/off from state 1 to 0
+I (29661) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (29671) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (29671) chip[DL]: Device[Light 1]: OFF
+I (29681) chip[DL]: MetricChanged ep=3 name="Light 1" onoff=0
+I (29681) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (29691) chip[ZCL]: Endpoint 3 On/off already set to new value
+I (29691) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x3', Attribute ID: '0x0'
+I (29701) bridge-devicecallbacks: Current free heap: 134640
+
+I (29711) chip[EM]: <<< [E:57667r S:50195 M:28092653 (Ack:231859428)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (29731) chip[EM]: ??1 [E:57667r S:50195 M:28092653] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 383ms from now [State:Active II:500 AI:300 AT:4000]
+I (30061) chip[EM]: >>> [E:57667r S:50195 M:231859428] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (30061) chip[EM]: <<< [E:57667r S:50195 M:28092654 (Ack:231859428)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30111) chip[EM]: <<1 [E:57667r S:50195 M:28092653] (S) Msg Retransmission to 1:00000000BB57ACB2
+I (30111) chip[EM]: ??2 [E:57667r S:50195 M:28092653] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 369ms from now [State:Active II:500 AI:300 AT:4000]
+I (30481) chip[EM]: <<2 [E:57667r S:50195 M:28092653] (S) Msg Retransmission to 1:00000000BB57ACB2
+I (30481) chip[EM]: ??3 [E:57667r S:50195 M:28092653] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 609ms from now [State:Active II:500 AI:300 AT:4000]
+I (30501) chip[EM]: >>> [E:57667r S:50195 M:231859428] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (30511) chip[EM]: <<< [E:57667r S:50195 M:28092655 (Ack:231859428)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (30531) chip[EM]: >>> [E:57667r S:50195 M:231859429 (Ack:28092653)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (31901) chip[EM]: >>> [E:57667r S:50195 M:231859430 (Ack:28092653)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (31911) chip[EM]: >>> [E:57668r S:50195 M:231859431] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (31921) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (31931) chip[ZCL]: Toggle ep4 on/off from state 0 to 1
+I (31931) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (31941) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (31941) chip[DL]: Device[Light 2]: ON
+I (31951) chip[DL]: MetricChanged ep=4 name="Light 2" onoff=1
+I (31951) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (31961) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (31961) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (31971) bridge-devicecallbacks: Current free heap: 132832
+
+I (31981) chip[DL]: HandleReadLevelControlAttribute: attrId=65532, maxReadLength=4
+I (31991) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (32001) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (32011) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (32011) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (32021) chip[DL]: HandleReadLevelControlAttribute: attrId=17, maxReadLength=1
+I (32031) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (32031) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (32041) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (32051) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (32051) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (32061) chip[DL]: HandleWriteLevelControlAttribute: Received level 1
+I (32061) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 1
+I (32071) chip[DL]: Device[Light 2]: Level=1
+I (32071) chip[DL]: MetricChanged ep=4 name="Light 2" level=1
+I (32081) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (32091) bridge-devicecallbacks: Current free heap: 132816
+
+I (32101) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=254) START ===
+I (32101) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (32111) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (32121) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (32131) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (32141) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (32141) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (32151) chip[ZCL]: moveToLevelHandler: Clamped to maxLevel 254
+I (32151) chip[ZCL]: moveToLevelHandler: Target level set to 254
+I (32161) chip[EM]: <<< [E:57668r S:50195 M:28092656 (Ack:231859431)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (32181) chip[EM]: ??1 [E:57668r S:50195 M:28092656] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 378ms from now [State:Active II:500 AI:300 AT:4000]
+I (32201) chip[EM]: >>> [E:57667r S:50195 M:231859432 (Ack:28092653)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (32211) chip[EM]: >>> [E:57668r S:50195 M:231859431] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (32231) chip[EM]: <<< [E:57668r S:50195 M:28092657 (Ack:231859431)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (32251) chip[EM]: >>> [E:57668r S:50195 M:231859433 (Ack:28092656)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (32261) chip[EM]: >>> [E:57669r S:50195 M:231859434] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (32281) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF fe null 0 0
+I (32281) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=254) START ===
+I (32291) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (32301) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (32311) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (32311) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (32321) chip[ZCL]: moveToLevelHandler: Clamped to maxLevel 254
+I (32331) chip[ZCL]: moveToLevelHandler: Target level set to 254
+I (32331) chip[ZCL]: Setting on/off to ON due to level change
+I (32341) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (32341) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (32351) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (32361) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (32371) chip[EM]: <<< [E:57669r S:50195 M:28092658 (Ack:231859434)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (32381) chip[EM]: ??1 [E:57669r S:50195 M:28092658] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 344ms from now [State:Active II:500 AI:300 AT:4000]
+I (32401) chip[EM]: >>> [E:57669r S:50195 M:231859435 (Ack:28092658)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (32411) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (32421) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (32431) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (32441) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (32451) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (32451) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (32461) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (32461) chip[DL]: HandleWriteLevelControlAttribute: Received level 254
+I (32471) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 254
+I (32481) chip[DL]: Device[Light 2]: Level=254
+I (32481) chip[DL]: MetricChanged ep=4 name="Light 2" level=254
+I (32491) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (32501) bridge-devicecallbacks: Current free heap: 136236
+
+I (32501) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (32511) chip[ZCL]: Setting on/off to ON due to level change
+I (32521) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (32521) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (32531) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (32541) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (32551) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (33431) chip[EM]: >>> [E:57670r S:50195 M:231859436] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (33441) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (33451) chip[ZCL]: Toggle ep4 on/off from state 1 to 0
+I (33451) chip[DL]: HandleReadLevelControlAttribute: attrId=65532, maxReadLength=4
+I (33461) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (33471) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (33481) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (33481) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (33491) chip[DL]: HandleReadLevelControlAttribute: attrId=17, maxReadLength=1
+I (33501) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (33501) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (33511) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=1) START ===
+I (33521) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (33531) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (33541) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (33541) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (33551) chip[ZCL]: moveToLevelHandler: Clamped to minLevel 1
+I (33551) chip[ZCL]: moveToLevelHandler: Target level set to 1
+I (33561) chip[EM]: <<< [E:57670r S:50195 M:28092659 (Ack:231859436)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (33581) chip[EM]: ??1 [E:57670r S:50195 M:28092659] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 398ms from now [State:Active II:500 AI:300 AT:4000]
+I (33591) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (33601) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (33611) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (33621) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (33631) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (33631) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (33641) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (33641) chip[DL]: HandleWriteLevelControlAttribute: Received level 1
+I (33651) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 1
+I (33661) chip[DL]: Device[Light 2]: Level=1
+I (33661) chip[DL]: MetricChanged ep=4 name="Light 2" level=1
+I (33671) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (33681) bridge-devicecallbacks: Current free heap: 134696
+
+I (33681) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (33691) chip[ZCL]: Setting on/off to OFF due to level change
+I (33701) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (33701) chip[ZCL]: Toggle ep4 on/off from state 1 to 0
+I (33711) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (33711) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (33721) chip[DL]: Device[Light 2]: OFF
+I (33721) chip[DL]: MetricChanged ep=4 name="Light 2" onoff=0
+I (33731) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (33731) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (33741) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (33751) bridge-devicecallbacks: Current free heap: 132824
+
+I (33761) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (33761) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (33771) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (33771) chip[DL]: HandleWriteLevelControlAttribute: Received level 254
+I (33781) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 254
+I (33791) chip[DL]: Device[Light 2]: Level=254
+I (33791) chip[DL]: MetricChanged ep=4 name="Light 2" level=254
+I (33801) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (33811) bridge-devicecallbacks: Current free heap: 132832
+
+I (33811) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (33821) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (33831) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (33841) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (33851) chip[EM]: >>> [E:57670r S:50195 M:231859437 (Ack:28092659)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (34901) chip[EM]: >>> [E:57671r S:50195 M:231859438] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (34911) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (34911) chip[ZCL]: Toggle ep5 on/off from state 0 to 1
+I (34921) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (34921) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (34931) chip[DL]: Device[Light 3]: ON
+I (34931) chip[DL]: MetricChanged ep=5 name="Light 3" onoff=1
+I (34941) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (34951) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (34951) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (34961) bridge-devicecallbacks: Current free heap: 134640
+
+I (34971) chip[DL]: HandleReadLevelControlAttribute: attrId=65532, maxReadLength=4
+I (34971) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (34991) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (34991) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (35001) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (35011) chip[DL]: HandleReadLevelControlAttribute: attrId=17, maxReadLength=1
+I (35011) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (35021) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (35031) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (35031) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (35041) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (35051) chip[DL]: HandleWriteLevelControlAttribute: Received level 1
+I (35051) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 1
+I (35061) chip[DL]: Device[Light 3]: Level=1
+I (35061) chip[DL]: MetricChanged ep=5 name="Light 3" level=1
+I (35071) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (35081) bridge-devicecallbacks: Current free heap: 134624
+
+I (35081) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=254) START ===
+I (35091) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (35101) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (35111) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (35121) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (35121) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (35131) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (35141) chip[ZCL]: moveToLevelHandler: Clamped to maxLevel 254
+I (35141) chip[ZCL]: moveToLevelHandler: Target level set to 254
+I (35151) chip[EM]: <<< [E:57671r S:50195 M:28092660 (Ack:231859438)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (35171) chip[EM]: ??1 [E:57671r S:50195 M:28092660] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 383ms from now [State:Active II:500 AI:300 AT:4000]
+I (35181) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (35191) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (35201) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (35211) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (35211) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (35221) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (35231) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (35231) chip[DL]: HandleWriteLevelControlAttribute: Received level 254
+I (35241) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 254
+I (35241) chip[DL]: Device[Light 3]: Level=254
+I (35251) chip[DL]: MetricChanged ep=5 name="Light 3" level=254
+I (35251) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (35271) bridge-devicecallbacks: Current free heap: 134696
+
+I (35271) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (35281) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (35291) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (35301) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (35381) chip[EM]: >>> [E:57671r S:50195 M:231859438] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (35391) chip[EM]: <<< [E:57671r S:50195 M:28092661 (Ack:231859438)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (35411) chip[EM]: >>> [E:57671r S:50195 M:231859439 (Ack:28092660)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (36511) chip[EM]: >>> [E:57672r S:50195 M:231859440] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (36511) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (36521) chip[ZCL]: Toggle ep5 on/off from state 1 to 0
+I (36521) chip[DL]: HandleReadLevelControlAttribute: attrId=65532, maxReadLength=4
+I (36531) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (36541) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (36551) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (36561) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (36561) chip[DL]: HandleReadLevelControlAttribute: attrId=17, maxReadLength=1
+I (36571) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (36581) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (36581) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=1) START ===
+I (36591) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (36601) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (36611) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (36611) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (36621) chip[ZCL]: moveToLevelHandler: Clamped to minLevel 1
+I (36631) chip[ZCL]: moveToLevelHandler: Target level set to 1
+I (36631) chip[EM]: <<< [E:57672r S:50195 M:28092662 (Ack:231859440)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (36651) chip[EM]: ??1 [E:57672r S:50195 M:28092662] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 348ms from now [State:Active II:500 AI:300 AT:4000]
+I (36671) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (36681) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (36691) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (36691) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (36701) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (36711) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (36711) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (36721) chip[DL]: HandleWriteLevelControlAttribute: Received level 1
+I (36721) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 1
+I (36731) chip[DL]: Device[Light 3]: Level=1
+I (36731) chip[DL]: MetricChanged ep=5 name="Light 3" level=1
+I (36741) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (36751) bridge-devicecallbacks: Current free heap: 134640
+
+I (36761) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (36761) chip[ZCL]: Setting on/off to OFF due to level change
+I (36771) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (36771) chip[ZCL]: Toggle ep5 on/off from state 1 to 0
+I (36781) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (36791) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (36791) chip[DL]: Device[Light 3]: OFF
+I (36791) chip[DL]: MetricChanged ep=5 name="Light 3" onoff=0
+I (36801) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (36811) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (36811) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (36821) bridge-devicecallbacks: Current free heap: 131008
+
+I (36831) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (36831) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (36841) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (36851) chip[DL]: HandleWriteLevelControlAttribute: Received level 254
+I (36851) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 254
+I (36861) chip[DL]: Device[Light 3]: Level=254
+I (36861) chip[DL]: MetricChanged ep=5 name="Light 3" level=254
+I (36871) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (36881) bridge-devicecallbacks: Current free heap: 131036
+
+I (36891) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (36891) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (36901) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (36911) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (36921) chip[EM]: >>> [E:57672r S:50195 M:231859440] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (36931) chip[EM]: <<< [E:57672r S:50195 M:28092663 (Ack:231859440)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (36961) chip[EM]: >>> [E:57672r S:50195 M:231859441 (Ack:28092662)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+E (36971) chip[DIS]: Timeout waiting for mDNS resolution.
+I (39581) chip[EM]: >>> [E:57673r S:50195 M:231859442] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (39591) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (39591) chip[ZCL]: Toggle ep4 on/off from state 0 to 1
+I (39601) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (39601) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (39611) chip[DL]: Device[Light 2]: ON
+I (39611) chip[DL]: MetricChanged ep=4 name="Light 2" onoff=1
+I (39621) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (39621) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (39631) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (39641) bridge-devicecallbacks: Current free heap: 134640
+
+I (39641) chip[DL]: HandleReadLevelControlAttribute: attrId=65532, maxReadLength=4
+I (39651) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (39661) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (39671) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (39681) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (39681) chip[DL]: HandleReadLevelControlAttribute: attrId=17, maxReadLength=1
+I (39691) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (39701) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (39701) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (39711) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (39721) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (39721) chip[DL]: HandleWriteLevelControlAttribute: Received level 1
+I (39731) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 1
+I (39741) chip[DL]: Device[Light 2]: Level=1
+I (39741) chip[DL]: MetricChanged ep=4 name="Light 2" level=1
+I (39741) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (39761) bridge-devicecallbacks: Current free heap: 134580
+
+I (39761) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=254) START ===
+I (39771) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (39781) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (39791) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (39791) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (39801) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (39811) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (39811) chip[ZCL]: moveToLevelHandler: Clamped to maxLevel 254
+I (39821) chip[ZCL]: moveToLevelHandler: Target level set to 254
+I (39831) chip[EM]: <<< [E:57673r S:50195 M:28092664 (Ack:231859442)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (39851) chip[EM]: ??1 [E:57673r S:50195 M:28092664] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 382ms from now [State:Active II:500 AI:300 AT:4000]
+I (39861) chip[EM]: >>> [E:57673r S:50195 M:231859442] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (39871) chip[EM]: <<< [E:57673r S:50195 M:28092665 (Ack:231859442)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (39901) chip[EM]: >>> [E:57673r S:50195 M:231859443 (Ack:28092664)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (39911) chip[EM]: >>> [E:57674r S:50195 M:231859444] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (39931) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 78 null 0 0
+I (39931) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=120) START ===
+I (39941) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (39951) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (39961) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (39961) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (39971) chip[ZCL]: moveToLevelHandler: Set to target level 120
+I (39971) chip[ZCL]: moveToLevelHandler: Target level set to 120
+I (39981) chip[ZCL]: Setting on/off to ON due to level change
+I (39991) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (39991) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (40001) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (40011) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (40011) chip[EM]: <<< [E:57674r S:50195 M:28092666 (Ack:231859444)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (40031) chip[EM]: ??1 [E:57674r S:50195 M:28092666] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 344ms from now [State:Active II:500 AI:300 AT:4000]
+I (40051) chip[EM]: >>> [E:57674r S:50195 M:231859445 (Ack:28092666)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (40061) chip[EM]: >>> [E:57675r S:50195 M:231859446] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (40081) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF e null 0 0
+I (40081) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=14) START ===
+I (40091) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (40101) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (40111) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (40121) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (40121) chip[ZCL]: moveToLevelHandler: Set to target level 14
+I (40131) chip[ZCL]: moveToLevelHandler: Target level set to 14
+I (40131) chip[ZCL]: Setting on/off to ON due to level change
+I (40141) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (40141) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (40151) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (40161) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (40171) chip[EM]: <<< [E:57675r S:50195 M:28092667 (Ack:231859446)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (40191) chip[EM]: ??1 [E:57675r S:50195 M:28092667] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 374ms from now [State:Active II:500 AI:300 AT:4000]
+I (40201) chip[EM]: >>> [E:57675r S:50195 M:231859447 (Ack:28092667)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (40221) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (40231) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (40231) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (40241) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (40251) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (40251) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (40261) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (40261) chip[DL]: HandleWriteLevelControlAttribute: Received level 14
+I (40271) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 14
+I (40281) chip[DL]: Device[Light 2]: Level=14
+I (40281) chip[DL]: MetricChanged ep=4 name="Light 2" level=14
+I (40291) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (40301) bridge-devicecallbacks: Current free heap: 136236
+
+I (40301) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (40311) chip[ZCL]: Setting on/off to ON due to level change
+I (40321) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (40321) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (40331) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (40341) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (40351) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (41931) chip[EM]: >>> [E:57676r S:50195 M:231859448] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (41941) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF b null 0 0
+I (41941) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=11) START ===
+I (41951) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (41961) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (41971) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (41981) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (41981) chip[ZCL]: moveToLevelHandler: Set to target level 11
+I (41991) chip[ZCL]: moveToLevelHandler: Target level set to 11
+I (41991) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (42001) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (42011) chip[EM]: <<< [E:57676r S:50195 M:28092668 (Ack:231859448)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (42031) chip[EM]: ??1 [E:57676r S:50195 M:28092668] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 357ms from now [State:Active II:500 AI:300 AT:4000]
+I (42041) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (42051) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (42061) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (42071) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (42071) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (42081) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=254
+I (42091) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (42091) chip[DL]: HandleWriteLevelControlAttribute: Received level 11
+I (42101) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 11
+I (42111) chip[DL]: Device[Light 3]: Level=11
+I (42111) chip[DL]: MetricChanged ep=5 name="Light 3" level=11
+I (42121) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (42131) bridge-devicecallbacks: Current free heap: 134640
+
+I (42131) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (42141) chip[ZCL]: Setting on/off to ON due to level change
+I (42141) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (42151) chip[ZCL]: Toggle ep5 on/off from state 0 to 1
+I (42161) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (42161) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (42171) chip[DL]: Device[Light 3]: ON
+I (42171) chip[DL]: MetricChanged ep=5 name="Light 3" onoff=1
+I (42181) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (42181) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (42191) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (42201) bridge-devicecallbacks: Current free heap: 134668
+
+I (42201) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (42221) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (42221) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (42241) chip[EM]: >>> [E:57676r S:50195 M:231859448] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (42251) chip[EM]: <<< [E:57676r S:50195 M:28092669 (Ack:231859448)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (42271) chip[EM]: >>> [E:57676r S:50195 M:231859449 (Ack:28092668)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (42281) chip[EM]: >>> [E:57677r S:50195 M:231859450] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (42301) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 52 null 0 0
+I (42301) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=82) START ===
+I (42311) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (42321) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (42331) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (42341) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=11
+I (42341) chip[ZCL]: moveToLevelHandler: Set to target level 82
+I (42351) chip[ZCL]: moveToLevelHandler: Target level set to 82
+I (42351) chip[ZCL]: Setting on/off to ON due to level change
+I (42361) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (42361) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (42371) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (42381) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (42391) chip[EM]: <<< [E:57677r S:50195 M:28092670 (Ack:231859450)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (42411) chip[EM]: ??1 [E:57677r S:50195 M:28092670] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 359ms from now [State:Active II:500 AI:300 AT:4000]
+I (42421) chip[EM]: >>> [E:57677r S:50195 M:231859451 (Ack:28092670)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (42441) chip[EM]: >>> [E:57678r S:50195 M:231859452] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (42451) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (42461) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (42461) chip[EM]: <<< [E:57678r S:50195 M:28092671 (Ack:231859452)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (42481) chip[EM]: ??1 [E:57678r S:50195 M:28092671] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 370ms from now [State:Active II:500 AI:300 AT:4000]
+I (42501) chip[EM]: >>> [E:57678r S:50195 M:231859453 (Ack:28092671)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (42511) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (42521) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (42531) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (42541) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=11
+I (42541) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (42551) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=11
+I (42561) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (42561) chip[DL]: HandleWriteLevelControlAttribute: Received level 82
+I (42571) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 82
+I (42571) chip[DL]: Device[Light 3]: Level=82
+I (42581) chip[DL]: MetricChanged ep=5 name="Light 3" level=82
+I (42581) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (42601) bridge-devicecallbacks: Current free heap: 136236
+
+I (254821) chip[EM]: >>> [E:57728r S:50195 M:231859589] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (254831) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (254831) chip[ZCL]: Toggle ep4 on/off from state 0 to 1
+I (254841) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (254841) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (254851) chip[DL]: Device[Light 2]: ON
+I (254851) chip[DL]: MetricChanged ep=4 name="Light 2" onoff=1
+I (254861) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (254861) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (254871) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (254881) bridge-devicecallbacks: Current free heap: 134788
+
+I (254891) chip[DL]: HandleReadLevelControlAttribute: attrId=65532, maxReadLength=4
+I (254891) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (254901) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (254911) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (254921) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=165
+I (254931) chip[DL]: HandleReadLevelControlAttribute: attrId=17, maxReadLength=1
+I (254931) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (254941) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (254951) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (254951) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=165
+I (254961) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (254971) chip[DL]: HandleWriteLevelControlAttribute: Received level 1
+I (254971) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 1
+I (254981) chip[DL]: Device[Light 2]: Level=1
+I (254981) chip[DL]: MetricChanged ep=4 name="Light 2" level=1
+I (254991) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (255001) bridge-devicecallbacks: Current free heap: 134760
+
+I (255011) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=165) START ===
+I (255011) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (255021) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (255031) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (255041) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (255041) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255051) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (255061) chip[ZCL]: moveToLevelHandler: Set to target level 165
+I (255061) chip[ZCL]: moveToLevelHandler: Target level set to 165
+I (255071) chip[EM]: <<< [E:57728r S:50195 M:28092796 (Ack:231859589)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (255091) chip[EM]: ??1 [E:57728r S:50195 M:28092796] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 339ms from now [State:Active II:500 AI:300 AT:4000]
+I (255111) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (255111) chip[EM]: <<< [E:60007i S:50195 M:28092797] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:69)
+I (255131) chip[EM]: ??1 [E:60007i S:50195 M:28092797] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 387ms from now [State:Active II:500 AI:300 AT:4000]
+I (255141) chip[EM]: >>> [E:57728r S:50195 M:231859590 (Ack:28092796)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (255161) chip[EM]: >>> [E:57729r S:50195 M:231859591] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (255171) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 8a null 0 0
+I (255181) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=138) START ===
+I (255191) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (255201) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (255211) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255211) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (255221) chip[ZCL]: moveToLevelHandler: Set to target level 138
+I (255221) chip[ZCL]: moveToLevelHandler: Target level set to 138
+I (255231) chip[ZCL]: Setting on/off to ON due to level change
+I (255241) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (255241) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (255251) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (255261) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (255261) chip[EM]: <<< [E:57729r S:50195 M:28092798 (Ack:231859591)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (255281) chip[EM]: ??1 [E:57729r S:50195 M:28092798] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 378ms from now [State:Active II:500 AI:300 AT:4000]
+I (255301) chip[EM]: >>> [E:60007i S:50195 M:231859592 (Ack:28092797)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (255311) chip[IM]: Received status response, status is 0x00
+I (255321) chip[EM]: <<< [E:60007i S:50195 M:28092799 (Ack:231859592)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (255341) chip[EM]: >>> [E:57729r S:50195 M:231859593 (Ack:28092798)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (255361) chip[EM]: >>> [E:57730r S:50195 M:231859594] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (255371) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 18 null 0 0
+I (255381) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=24) START ===
+I (255381) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (255391) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (255401) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255411) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (255411) chip[ZCL]: moveToLevelHandler: Set to target level 24
+I (255421) chip[ZCL]: moveToLevelHandler: Target level set to 24
+I (255431) chip[ZCL]: Setting on/off to ON due to level change
+I (255431) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (255441) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (255441) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (255451) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (255461) chip[EM]: <<< [E:57730r S:50195 M:28092800 (Ack:231859594)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (255481) chip[EM]: ??1 [E:57730r S:50195 M:28092800] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 380ms from now [State:Active II:500 AI:300 AT:4000]
+I (255491) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255501) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (255511) chip[EM]: <<< [E:60008i S:50195 M:28092801] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (255521) chip[EM]: ??1 [E:60008i S:50195 M:28092801] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 336ms from now [State:Active II:500 AI:300 AT:4000]
+I (255541) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (255551) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (255561) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255561) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (255571) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255581) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=1
+I (255581) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (255591) chip[DL]: HandleWriteLevelControlAttribute: Received level 24
+I (255591) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 24
+I (255601) chip[DL]: Device[Light 2]: Level=24
+I (255601) chip[DL]: MetricChanged ep=4 name="Light 2" level=24
+I (255611) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (255621) bridge-devicecallbacks: Current free heap: 129676
+
+I (255631) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (255631) chip[ZCL]: Setting on/off to ON due to level change
+I (255641) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (255651) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (255651) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (255661) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (255671) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (255681) chip[EM]: >>> [E:57730r S:50195 M:231859595 (Ack:28092800)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (255701) chip[EM]: >>> [E:60008i S:50195 M:231859596 (Ack:28092801)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (255711) chip[IM]: Received status response, status is 0x00
+I (255721) chip[EM]: <<< [E:60008i S:50195 M:28092802 (Ack:231859596)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (255741) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (255741) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=24
+I (255751) chip[EM]: <<< [E:60009i S:50195 M:28092803] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (255771) chip[EM]: ??1 [E:60009i S:50195 M:28092803] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 400ms from now [State:Active II:500 AI:300 AT:4000]
+I (255951) chip[EM]: >>> [E:60009i S:50195 M:231859597 (Ack:28092803)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (255951) chip[IM]: Received status response, status is 0x00
+I (255961) chip[EM]: <<< [E:60009i S:50195 M:28092804 (Ack:231859597)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (257381) chip[EM]: >>> [E:57731r S:50195 M:231859598] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (257391) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF e null 0 0
+I (257391) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=14) START ===
+I (257401) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (257411) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (257421) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257431) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=74
+I (257431) chip[ZCL]: moveToLevelHandler: Set to target level 14
+I (257441) chip[ZCL]: moveToLevelHandler: Target level set to 14
+I (257441) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (257451) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (257461) chip[EM]: <<< [E:57731r S:50195 M:28092805 (Ack:231859598)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (257481) chip[EM]: ??1 [E:57731r S:50195 M:28092805] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 341ms from now [State:Active II:500 AI:300 AT:4000]
+I (257491) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (257501) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (257511) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257521) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=74
+I (257521) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257531) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=74
+I (257541) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (257541) chip[DL]: HandleWriteLevelControlAttribute: Received level 14
+I (257551) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 14
+I (257561) chip[DL]: Device[Light 3]: Level=14
+I (257561) chip[DL]: MetricChanged ep=5 name="Light 3" level=14
+I (257571) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (257581) bridge-devicecallbacks: Current free heap: 134844
+
+I (257581) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (257591) chip[ZCL]: Setting on/off to ON due to level change
+I (257591) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (257601) chip[ZCL]: Toggle ep5 on/off from state 0 to 1
+I (257611) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (257611) chip[DL]: HandleWriteOnOffAttribute: attrId=0
+I (257621) chip[DL]: Device[Light 3]: ON
+I (257621) chip[DL]: MetricChanged ep=5 name="Light 3" onoff=1
+I (257631) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (257631) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (257641) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x6', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (257651) bridge-devicecallbacks: Current free heap: 134816
+
+I (257661) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (257671) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (257671) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (257681) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (257691) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257691) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=14
+I (257701) chip[EM]: <<< [E:60010i S:50195 M:28092806] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:95)
+I (257721) chip[EM]: ??1 [E:60010i S:50195 M:28092806] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 403ms from now [State:Active II:500 AI:300 AT:4000]
+I (257731) chip[EM]: >>> [E:57731r S:50195 M:231859599 (Ack:28092805)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (257751) chip[EM]: >>> [E:57732r S:50195 M:231859600] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (257771) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 8a null 0 0
+I (257771) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=138) START ===
+I (257781) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (257791) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (257801) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257801) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=14
+I (257811) chip[ZCL]: moveToLevelHandler: Set to target level 138
+I (257821) chip[ZCL]: moveToLevelHandler: Target level set to 138
+I (257821) chip[ZCL]: Setting on/off to ON due to level change
+I (257831) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (257831) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (257841) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (257851) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (257861) chip[EM]: <<< [E:57732r S:50195 M:28092807 (Ack:231859600)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (257871) chip[EM]: ??1 [E:57732r S:50195 M:28092807] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 407ms from now [State:Active II:500 AI:300 AT:4000]
+I (257891) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (257901) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (257911) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257911) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=14
+I (257921) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (257931) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=14
+I (257931) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (257941) chip[DL]: HandleWriteLevelControlAttribute: Received level 138
+I (257941) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 138
+I (257951) chip[DL]: Device[Light 3]: Level=138
+I (257961) chip[DL]: MetricChanged ep=5 name="Light 3" level=138
+I (257961) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (257971) bridge-devicecallbacks: Current free heap: 127812
+
+I (257981) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (257991) chip[ZCL]: Setting on/off to ON due to level change
+I (257991) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (258001) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (258001) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (258011) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (258021) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (258031) chip[EM]: >>> [E:60010i S:50195 M:231859601 (Ack:28092806)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (258041) chip[IM]: Received status response, status is 0x00
+I (258051) chip[EM]: <<< [E:60010i S:50195 M:28092808 (Ack:231859601)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (258071) chip[EM]: >>> [E:57732r S:50195 M:231859602 (Ack:28092807)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (258091) chip[EM]: >>> [E:57733r S:50195 M:231859603] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:59)
+I (258101) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (258111) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (258121) chip[EM]: <<< [E:57733r S:50195 M:28092809 (Ack:231859603)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (258131) chip[EM]: ??1 [E:57733r S:50195 M:28092809] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 339ms from now [State:Active II:500 AI:300 AT:4000]
+I (258151) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (258151) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (258161) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=138
+I (258171) chip[EM]: <<< [E:60011i S:50195 M:28092810] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:95)
+I (258191) chip[EM]: ??1 [E:60011i S:50195 M:28092810] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 397ms from now [State:Active II:500 AI:300 AT:4000]
+I (258201) chip[EM]: >>> [E:57733r S:50195 M:231859604 (Ack:28092809)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (258221) chip[EM]: >>> [E:60011i S:50195 M:231859605 (Ack:28092810)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (258231) chip[IM]: Received status response, status is 0x00
+I (258241) chip[EM]: <<< [E:60011i S:50195 M:28092811 (Ack:231859605)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (274591) chip[EM]: >>> [E:57734r S:50195 M:231859606] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (274591) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 24 null 0 0
+I (274601) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=36) START ===
+I (274601) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (274611) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (274621) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (274631) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=24
+I (274641) chip[ZCL]: moveToLevelHandler: Set to target level 36
+I (274641) chip[ZCL]: moveToLevelHandler: Target level set to 36
+I (274651) chip[ZCL]: Setting on/off to ON due to level change
+I (274651) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (274661) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (274661) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (274671) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (274681) chip[EM]: <<< [E:57734r S:50195 M:28092812 (Ack:231859606)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (274701) chip[EM]: ??1 [E:57734r S:50195 M:28092812] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 347ms from now [State:Active II:500 AI:300 AT:4000]
+I (274711) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (274721) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (274731) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (274741) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=24
+I (274741) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (274751) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=24
+I (274761) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (274761) chip[DL]: HandleWriteLevelControlAttribute: Received level 36
+I (274771) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 36
+I (274781) chip[DL]: Device[Light 2]: Level=36
+I (274781) chip[DL]: MetricChanged ep=4 name="Light 2" level=36
+I (274791) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (274801) bridge-devicecallbacks: Current free heap: 134844
+
+I (274801) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (274811) chip[ZCL]: Setting on/off to ON due to level change
+I (274821) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (274821) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (274831) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (274841) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (274851) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (274861) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (274861) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=36
+I (274871) chip[EM]: <<< [E:60012i S:50195 M:28092813] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (274891) chip[EM]: ??1 [E:60012i S:50195 M:28092813] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 369ms from now [State:Active II:500 AI:300 AT:4000]
+I (275051) chip[EM]: <<1 [E:57734r S:50195 M:28092812] (S) Msg Retransmission to 1:00000000BB57ACB2
+I (275051) chip[EM]: ??2 [E:57734r S:50195 M:28092812] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 367ms from now [State:Active II:500 AI:300 AT:4000]
+I (275061) chip[EM]: >>> [E:57734r S:50195 M:231859607 (Ack:28092812)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (275081) chip[EM]: >>> [E:57735r S:50195 M:231859608] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (275091) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 78 null 0 0
+I (275101) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=120) START ===
+I (275101) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (275111) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (275121) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (275131) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=36
+I (275141) chip[ZCL]: moveToLevelHandler: Set to target level 120
+I (275141) chip[ZCL]: moveToLevelHandler: Target level set to 120
+I (275151) chip[ZCL]: Setting on/off to ON due to level change
+I (275151) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (275161) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (275161) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (275171) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (275181) chip[EM]: <<< [E:57735r S:50195 M:28092814 (Ack:231859608)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (275201) chip[EM]: ??1 [E:57735r S:50195 M:28092814] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 386ms from now [State:Active II:500 AI:300 AT:4000]
+I (275211) chip[EM]: >>> [E:60012i S:50195 M:231859609 (Ack:28092813)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (275231) chip[IM]: Received status response, status is 0x00
+I (275241) chip[EM]: <<< [E:60012i S:50195 M:28092815 (Ack:231859609)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (275261) chip[EM]: >>> [E:57734r S:50195 M:231859610 (Ack:28092812)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (275271) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (275281) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (275291) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (275301) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=36
+I (275301) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (275311) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=36
+I (275321) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (275321) chip[DL]: HandleWriteLevelControlAttribute: Received level 120
+I (275331) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 120
+I (275331) chip[DL]: Device[Light 2]: Level=120
+I (275341) chip[DL]: MetricChanged ep=4 name="Light 2" level=120
+I (275341) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (275361) bridge-devicecallbacks: Current free heap: 132924
+
+I (275361) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (275371) chip[ZCL]: Setting on/off to ON due to level change
+I (275371) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (275381) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (275391) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (275401) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (275401) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (275411) chip[EM]: >>> [E:57735r S:50195 M:231859611 (Ack:28092814)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (275431) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (275431) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=120
+I (275441) chip[EM]: <<< [E:60013i S:50195 M:28092816] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (275461) chip[EM]: ??1 [E:60013i S:50195 M:28092816] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 405ms from now [State:Active II:500 AI:300 AT:4000]
+I (275611) chip[EM]: >>> [E:60013i S:50195 M:231859612 (Ack:28092816)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (275621) chip[IM]: Received status response, status is 0x00
+I (275621) chip[EM]: <<< [E:60013i S:50195 M:28092817 (Ack:231859612)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (281141) chip[EM]: >>> [E:57736r S:50195 M:231859613] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (281141) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 73 null 0 0
+I (281151) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=115) START ===
+I (281161) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (281171) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (281181) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281181) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=120
+I (281191) chip[ZCL]: moveToLevelHandler: Set to target level 115
+I (281191) chip[ZCL]: moveToLevelHandler: Target level set to 115
+I (281201) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (281211) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (281221) chip[EM]: <<< [E:57736r S:50195 M:28092818 (Ack:231859613)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (281241) chip[EM]: ??1 [E:57736r S:50195 M:28092818] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 404ms from now [State:Active II:500 AI:300 AT:4000]
+I (281251) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (281261) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (281271) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281271) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=120
+I (281281) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281291) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=120
+I (281291) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (281301) chip[DL]: HandleWriteLevelControlAttribute: Received level 115
+I (281311) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 115
+I (281311) chip[DL]: Device[Light 2]: Level=115
+I (281321) chip[DL]: MetricChanged ep=4 name="Light 2" level=115
+I (281321) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (281331) bridge-devicecallbacks: Current free heap: 134844
+
+I (281341) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (281351) chip[ZCL]: Setting on/off to ON due to level change
+I (281351) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (281361) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (281361) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (281381) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (281381) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (281391) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281401) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=115
+I (281411) chip[EM]: <<< [E:60014i S:50195 M:28092819] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (281421) chip[EM]: ??1 [E:60014i S:50195 M:28092819] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 406ms from now [State:Active II:500 AI:300 AT:4000]
+I (281441) chip[EM]: >>> [E:57736r S:50195 M:231859614 (Ack:28092818)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (281451) chip[EM]: >>> [E:57737r S:50195 M:231859615] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (281471) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 4f null 0 0
+I (281471) chip[ZCL]: === moveToLevelHandler(endpoint=4, level=79) START ===
+I (281481) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (281491) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (281501) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281511) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=115
+I (281511) chip[ZCL]: moveToLevelHandler: Set to target level 79
+I (281521) chip[ZCL]: moveToLevelHandler: Target level set to 79
+I (281521) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (281531) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (281541) chip[EM]: <<< [E:57737r S:50195 M:28092820 (Ack:231859615)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (281561) chip[EM]: ??1 [E:57737r S:50195 M:28092820] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 357ms from now [State:Active II:500 AI:300 AT:4000]
+I (281571) chip[EM]: >>> [E:60014i S:50195 M:231859616 (Ack:28092819)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (281591) chip[IM]: Received status response, status is 0x00
+I (281591) chip[EM]: <<< [E:60014i S:50195 M:28092821 (Ack:231859616)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (281621) chip[EM]: >>> [E:57737r S:50195 M:231859617 (Ack:28092820)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (281631) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (281641) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (281651) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281661) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=115
+I (281661) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281671) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=115
+I (281681) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (281681) chip[DL]: HandleWriteLevelControlAttribute: Received level 79
+I (281691) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 79
+I (281691) chip[DL]: Device[Light 2]: Level=79
+I (281701) chip[DL]: MetricChanged ep=4 name="Light 2" level=79
+I (281701) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x4', Attribute ID: '0x0'
+I (281711) bridge-devicecallbacks: Current free heap: 136384
+
+I (281721) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (281731) chip[ZCL]: Setting on/off to ON due to level change
+I (281731) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (281741) chip[ZCL]: Endpoint 4 On/off already set to new value
+I (281741) chip[ZCL]: getState(endpoint=4): emberAfGetClusterServerEndpointIndex returned 2, kLevelControlStateTableSize=17
+I (281761) chip[ZCL]: getState(endpoint=4): Found state at index 2, minLevel=1, maxLevel=254
+I (281761) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (281771) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (281781) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=79
+I (281791) chip[EM]: <<< [E:60015i S:50195 M:28092822] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (281801) chip[EM]: ??1 [E:60015i S:50195 M:28092822] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 378ms from now [State:Active II:500 AI:300 AT:4000]
+I (281821) chip[EM]: >>> [E:60015i S:50195 M:231859618 (Ack:28092822)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (281831) chip[IM]: Received status response, status is 0x00
+I (281841) chip[EM]: <<< [E:60015i S:50195 M:28092823 (Ack:231859618)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (283901) chip[EM]: >>> [E:57738r S:50195 M:231859619] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:73)
+I (283911) chip[DL]: Device[Light 3]: ColorTemp(mireds)=400
+I (283911) chip[DL]: MetricChanged ep=5 name="Light 3" color_temp_mireds=400
+I (283921) chip[EM]: <<< [E:57738r S:50195 M:28092824 (Ack:231859619)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:68)
+I (283941) chip[EM]: ??1 [E:57738r S:50195 M:28092824] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 369ms from now [State:Active II:500 AI:300 AT:4000]
+I (283961) chip[DL]: HandleReadColorControlAttribute: attrId=7, maxReadLength=2
+I (283971) chip[EM]: <<< [E:60016i S:50195 M:28092825] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:72)
+I (283981) chip[EM]: ??1 [E:60016i S:50195 M:28092825] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 349ms from now [State:Active II:500 AI:300 AT:4000]
+I (284011) chip[EM]: >>> [E:57738r S:50195 M:231859620 (Ack:28092824)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (284021) chip[EM]: >>> [E:60016i S:50195 M:231859621 (Ack:28092825)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (284031) chip[IM]: Received status response, status is 0x00
+I (284041) chip[EM]: <<< [E:60016i S:50195 M:28092826 (Ack:231859621)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (285541) chip[EM]: >>> [E:57739r S:50195 M:231859622] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:72)
+I (285551) chip[DL]: Device[Light 3]: ColorTemp(mireds)=172
+I (285551) chip[DL]: MetricChanged ep=5 name="Light 3" color_temp_mireds=172
+I (285561) chip[EM]: <<< [E:57739r S:50195 M:28092827 (Ack:231859622)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:68)
+I (285581) chip[EM]: ??1 [E:57739r S:50195 M:28092827] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 407ms from now [State:Active II:500 AI:300 AT:4000]
+I (285601) chip[DL]: HandleReadColorControlAttribute: attrId=7, maxReadLength=2
+I (285601) chip[EM]: <<< [E:60017i S:50195 M:28092828] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:71)
+I (285621) chip[EM]: ??1 [E:60017i S:50195 M:28092828] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 346ms from now [State:Active II:500 AI:300 AT:4000]
+I (285651) chip[EM]: >>> [E:57739r S:50195 M:231859623 (Ack:28092827)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (285661) chip[EM]: >>> [E:60017i S:50195 M:231859624 (Ack:28092828)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (285671) chip[IM]: Received status response, status is 0x00
+I (285681) chip[EM]: <<< [E:60017i S:50195 M:28092829 (Ack:231859624)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (288611) chip[EM]: >>> [E:57740r S:50195 M:231859625] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (288621) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 80 null 0 0
+I (288631) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=128) START ===
+I (288631) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (288641) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (288651) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (288661) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=138
+I (288661) chip[ZCL]: moveToLevelHandler: Set to target level 128
+I (288671) chip[ZCL]: moveToLevelHandler: Target level set to 128
+I (288681) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (288681) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (288691) chip[EM]: <<< [E:57740r S:50195 M:28092830 (Ack:231859625)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (288711) chip[EM]: ??1 [E:57740r S:50195 M:28092830] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 330ms from now [State:Active II:500 AI:300 AT:4000]
+I (288721) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (288741) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (288741) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (288751) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=138
+I (288761) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (288761) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=138
+I (288771) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (288781) chip[DL]: HandleWriteLevelControlAttribute: Received level 128
+I (288781) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 128
+I (288791) chip[DL]: Device[Light 3]: Level=128
+I (288791) chip[DL]: MetricChanged ep=5 name="Light 3" level=128
+I (288801) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (288811) bridge-devicecallbacks: Current free heap: 134844
+
+I (288821) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (288821) chip[ZCL]: Setting on/off to ON due to level change
+I (288831) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (288831) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (288841) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (288851) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (288861) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (288871) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (288871) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=128
+I (288881) chip[EM]: <<< [E:60018i S:50195 M:28092831] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (288901) chip[EM]: ??1 [E:60018i S:50195 M:28092831] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 345ms from now [State:Active II:500 AI:300 AT:4000]
+I (288911) chip[EM]: >>> [E:57740r S:50195 M:231859626 (Ack:28092830)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (288931) chip[EM]: >>> [E:57741r S:50195 M:231859627] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (288941) chip[ZCL]: RX level-control: MOVE_TO_LEVEL_WITH_ON_OFF 52 null 0 0
+I (288951) chip[ZCL]: === moveToLevelHandler(endpoint=5, level=82) START ===
+I (288961) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (288971) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (288981) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (288981) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=128
+I (288991) chip[ZCL]: moveToLevelHandler: Set to target level 82
+I (288991) chip[ZCL]: moveToLevelHandler: Target level set to 82
+I (289001) chip[DL]: HandleReadLevelControlAttribute: attrId=16, maxReadLength=2
+I (289011) chip[DL]: HandleReadLevelControlAttribute: OnOffTransitionTime=0
+I (289021) chip[EM]: <<< [E:57741r S:50195 M:28092832 (Ack:231859627)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:09 (IM:InvokeCommandResponse) (B:67)
+I (289031) chip[EM]: ??1 [E:57741r S:50195 M:28092832] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 377ms from now [State:Active II:500 AI:300 AT:4000]
+I (289051) chip[EM]: >>> [E:60018i S:50195 M:231859628 (Ack:28092831)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (289061) chip[IM]: Received status response, status is 0x00
+I (289071) chip[EM]: <<< [E:60018i S:50195 M:28092833 (Ack:231859628)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (289091) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (289101) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (289111) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (289111) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=128
+I (289121) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (289131) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=128
+I (289131) chip[DL]: HandleWriteLevelControlAttribute: attrId=0
+I (289141) chip[DL]: HandleWriteLevelControlAttribute: Received level 82
+I (289151) chip[DL]: HandleWriteLevelControlAttribute: Setting level to 82
+I (289151) chip[DL]: Device[Light 3]: Level=82
+I (289161) chip[DL]: MetricChanged ep=5 name="Light 3" level=82
+I (289161) bridge-devicecallbacks: PostAttributeChangeCallback - Cluster ID: '0x8', EndPoint ID: '0x5', Attribute ID: '0x0'
+I (289171) bridge-devicecallbacks: Current free heap: 134844
+
+I (289181) chip[DL]: HandleReadLevelControlAttribute: attrId=15, maxReadLength=1
+I (289191) chip[ZCL]: Setting on/off to ON due to level change
+I (289191) chip[DL]: HandleReadOnOffAttribute: attrId=0, maxReadLength=1
+I (289201) chip[ZCL]: Endpoint 5 On/off already set to new value
+I (289201) chip[ZCL]: getState(endpoint=5): emberAfGetClusterServerEndpointIndex returned 3, kLevelControlStateTableSize=17
+I (289221) chip[ZCL]: getState(endpoint=5): Found state at index 3, minLevel=1, maxLevel=254
+I (289221) chip[DL]: HandleReadLevelControlAttribute: attrId=1, maxReadLength=2
+I (289231) chip[DL]: HandleReadLevelControlAttribute: attrId=0, maxReadLength=1
+I (289241) chip[DL]: HandleReadLevelControlAttribute: CurrentLevel=82
+I (289251) chip[EM]: <<< [E:60019i S:50195 M:28092834] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0001:05 (IM:ReportData) (B:70)
+I (289261) chip[EM]: ??1 [E:60019i S:50195 M:28092834] (S) Msg Retransmission to 1:00000000BB57ACB2 scheduled for 347ms from now [State:Active II:500 AI:300 AT:4000]
+I (289281) chip[EM]: >>> [E:57741r S:50195 M:231859627] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:08 (IM:InvokeCommandRequest) (B:70)
+I (289291) chip[EM]: <<< [E:57741r S:50195 M:28092835 (Ack:231859627)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (289311) chip[EM]: >>> [E:57741r S:50195 M:231859629 (Ack:28092832)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)
+I (289331) chip[EM]: >>> [E:60019i S:50195 M:231859630 (Ack:28092834)] (S) Msg RX from 1:00000000BB57ACB2 [693C] to 000000005A6C1690 --- Type 0001:01 (IM:StatusResponse) (B:42)
+I (289341) chip[IM]: Received status response, status is 0x00
+I (289351) chip[EM]: <<< [E:60019i S:50195 M:28092836 (Ack:231859630)] (S) Msg TX from 000000005A6C1690 to 1:00000000BB57ACB2 [693C] [UDP:[FE80::105C:133F:88A4:4611%st1]:65477] --- Type 0000:10 (SecureChannel:StandaloneAck) (B:34)

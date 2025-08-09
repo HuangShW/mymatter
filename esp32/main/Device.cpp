@@ -34,6 +34,12 @@ Device::Device(const char * szDeviceName, const char * szLocation, DeviceType_t 
     mCurrentLevel = 254; // 默认满亮度（1-254 范围）
     mMinLevel = 1;       // 最小亮度，符合 Matter 规范
     mMaxLevel = 254;     // 最大亮度，符合 Matter 规范
+
+    // 色温默认值（mireds）
+    mCurrentColorTempMireds = 370; // 约 2700K
+    mMinColorTempMireds     = 153; // 约 6500K（冷）
+    mMaxColorTempMireds     = 500; // 约 2000K（暖）
+
     mChanged_CB = nullptr;
 }
 
@@ -157,4 +163,42 @@ uint8_t Device::GetMaxLevel() const
 bool Device::SupportsLevelControl() const
 {
     return mDeviceType == kDeviceType_DimmableLight; // 仅可调光灯支持 Level Control
+}
+
+void Device::SetColorTemperatureMireds(uint16_t mireds)
+{
+    // 钳制到物理范围
+    if (mireds < mMinColorTempMireds)
+    {
+        mireds = mMinColorTempMireds;
+    }
+    else if (mireds > mMaxColorTempMireds)
+    {
+        mireds = mMaxColorTempMireds;
+    }
+
+    bool changed = (mCurrentColorTempMireds != mireds);
+    mCurrentColorTempMireds = mireds;
+
+    ChipLogProgress(DeviceLayer, "Device[%s]: ColorTemp(mireds)=%u", mName, static_cast<unsigned>(mireds));
+
+    if (changed && mChanged_CB)
+    {
+        mChanged_CB(this, Device::kChanged_ColorTemperature);
+    }
+}
+
+uint16_t Device::GetColorTemperatureMireds() const
+{
+    return mCurrentColorTempMireds;
+}
+
+uint16_t Device::GetMinColorTemperatureMireds() const
+{
+    return mMinColorTempMireds;
+}
+
+uint16_t Device::GetMaxColorTemperatureMireds() const
+{
+    return mMaxColorTempMireds;
 }
